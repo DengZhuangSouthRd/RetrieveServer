@@ -4,13 +4,13 @@
     "SERIALIZETIME" : "600",
     "LOGPATH": "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/data/log/loginfo.log",
     "FUSION": {
-        "ISUSE": "TRUE",
+        "ISUSE": "FALASE",
         "FUSIONIDENTITY": "WISEFUSION",
         "FUSIONSerializePath" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/data/serialize/fusiontask.json",
         "FUSIONSerializePathBak" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/data/serialize/fusiontask_backup.json"
     },
     "RETRIEVE": {
-        "ISUSE" : "FALSE",
+        "ISUSE" : "TRUE",
         "RETRIEVEIDENTITY" : "WISERETRIEVE",
         "RETRIEVEPG_NAME" : "testdb",
         "RETRIEVEPG_HOST" : "10.2.3.119",
@@ -24,7 +24,7 @@
         "RETRIEVESerializePathBak" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/data/serialize/retrievetask_backup.json"
     },
     "QUALITY" : {
-        "ISUSE" : "TRUE",
+        "ISUSE" : "FALSE",
         "QUALITYIDENTITY" : "WISEQUALITY",
         "QUALTYSerializePath" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/data/serialize/qualitytask.json",
         "QUALTYSerializePathBak" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/data/serialize/qualitytask_backup.json"

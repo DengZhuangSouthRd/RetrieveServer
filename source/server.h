@@ -11,6 +11,7 @@
 
 #include <Ice/Ice.h>
 #include "utils/log.h"
+#include "retrieveserver.h"
 
 using namespace std;
 

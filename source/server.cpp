@@ -20,16 +20,10 @@ void Server::initRpc(int argc, char** argv, string conn) {
     try {
         ic = Ice::initialize(argc,argv);
         adapter = ic->createObjectAdapterWithEndpoints("AlgorithmRpcAdapter",connParam);
-        if(g_ConfMap.count("FUSIONISUSE") != 0 && g_ConfMap["FUSIONISUSE"] == "TRUE") {
-            Ice::ObjectPtr object = new ImageFusion();
-            adapter->add(object,ic->stringToIdentity(g_ConfMap["FUSIONIDENTITY"]));
+        if(g_ConfMap.count("RETRIEVEISUSE") != 0 && g_ConfMap["RETRIEVEISUSE"] == "TRUE") {
+            Ice::ObjectPtr object = new RetrieveServer();
+            adapter->add(object,ic->stringToIdentity(g_ConfMap["RETRIEVEIDENTITY"]));
         }
-
-        if(g_ConfMap.count("QUALITYISUSE") != 0 && g_ConfMap["QUALITYISUSE"] == "TRUE") {
-            Ice::ObjectPtr object = new ImageQuality();
-            adapter->add(object,ic->stringToIdentity(g_ConfMap["QUALITYIDENTITY"]));
-        }
-
         adapter->activate();
         ic->waitForShutdown();
     } catch (const Ice::Exception& e) {
