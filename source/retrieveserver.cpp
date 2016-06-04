@@ -5,10 +5,28 @@
 #include "retrieveserver.h"
 
 RetrieveServer::RetrieveServer() {
-
+    p_threadPool = NULL;
+    p_threadPool = ThreadPool::getSingleInstance();
 }
 
 RetrieveServer::~RetrieveServer() {
+    p_threadPool->revokeSingleInstance();
+    p_threadPool = NULL;
+}
+
+void RetrieveServer::log_InputParameters(const DictStr2Str &mapArg) {
+
+}
+
+void RetrieveServer::log_OutputResult(const WordWiki &wiki) {
+
+}
+
+void RetrieveServer::log_OutputResult(const WordRes &wordres) {
+
+}
+
+void RetrieveServer::log_OutputResult(const ImgRes &imgres) {
 
 }
 

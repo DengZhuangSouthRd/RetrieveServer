@@ -25,6 +25,12 @@ public:
     ~RetrieveServer();
 
 public:
+    void log_InputParameters(const DictStr2Str& mapArg);
+    void log_OutputResult(const WordWiki& wiki);
+    void log_OutputResult(const WordRes& wordres);
+    void log_OutputResult(const ImgRes& imgres);
+
+public:
     virtual WordWiki wordGetKnowledge(const string& word, const Ice::Current&);
     virtual WordRes wordSearch(const DictStr2Str& mapArg, const Ice::Current&);
     virtual ImgRes wordSearchImg(const DictStr2Str& mapArg, const Ice::Current&);
