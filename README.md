@@ -20,4 +20,3 @@ when you complie, you should -lhiredis
 sudo apt-get install libpqxx-dev
 在编译时使用，-lpqxx -lpq
 ```
-
