@@ -4,27 +4,14 @@
 // Copyright (C) 2006-2008 Benoit Jacob <jacob.benoit.1@gmail.com>
 // Copyright (C) 2008 Gael Guennebaud <gael.guennebaud@inria.fr>
 //
-// Eigen is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 3 of the License, or (at your option) any later version.
-//
-// Alternatively, you can redistribute it and/or
-// modify it under the terms of the GNU General Public License as
-// published by the Free Software Foundation; either version 2 of
-// the License, or (at your option) any later version.
-//
-// Eigen is distributed in the hope that it will be useful, but WITHOUT ANY
-// WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-// FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License or the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License and a copy of the GNU General Public License along with
-// Eigen. If not, see <http://www.gnu.org/licenses/>.
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #ifndef EIGEN_IO_H
 #define EIGEN_IO_H
+
+namespace Eigen { 
 
 enum { DontAlignCols = 1 };
 enum { StreamPrecision = -1,
@@ -43,7 +30,7 @@ std::ostream & print_matrix(std::ostream & s, const Derived& _m, const IOFormat&
   * List of available parameters:
   *  - \b precision number of digits for floating point values, or one of the special constants \c StreamPrecision and \c FullPrecision.
   *                 The default is the special value \c StreamPrecision which means to use the
-  *                 stream's own precision setting, as set for instance using çout.precision(3). The other special value
+  *                 stream's own precision setting, as set for instance using \c cout.precision(3). The other special value
   *                 \c FullPrecision means that the number of digits will be computed to match the full precision of each floating-point
   *                 type.
   *  - \b flags an OR-ed combination of flags, the default value is 0, the only currently available flag is \c DontAlignCols which
@@ -62,15 +49,18 @@ std::ostream & print_matrix(std::ostream & s, const Derived& _m, const IOFormat&
   */
 struct IOFormat
 {
-  /** Default contructor, see class IOFormat for the meaning of the parameters */
+  /** Default constructor, see class IOFormat for the meaning of the parameters */
   IOFormat(int _precision = StreamPrecision, int _flags = 0,
     const std::string& _coeffSeparator = " ",
     const std::string& _rowSeparator = "\n", const std::string& _rowPrefix="", const std::string& _rowSuffix="",
     const std::string& _matPrefix="", const std::string& _matSuffix="")
   : matPrefix(_matPrefix), matSuffix(_matSuffix), rowPrefix(_rowPrefix), rowSuffix(_rowSuffix), rowSeparator(_rowSeparator),
-    coeffSeparator(_coeffSeparator), precision(_precision), flags(_flags)
+    rowSpacer(""), coeffSeparator(_coeffSeparator), precision(_precision), flags(_flags)
   {
-    rowSpacer = "";
+    // TODO check if rowPrefix, rowSuffix or rowSeparator contains a newline
+    // don't add rowSpacer if columns are not to be aligned
+    if((flags & DontAlignCols))
+      return;
     int i = int(matSuffix.length())-1;
     while (i>=0 && matSuffix[i]!='\n')
     {
@@ -141,7 +131,9 @@ struct significant_decimals_default_impl
   typedef typename NumTraits<Scalar>::Real RealScalar;
   static inline int run()
   {
-    return cast<RealScalar,int>(std::ceil(-log(NumTraits<RealScalar>::epsilon())/log(RealScalar(10))));
+    using std::ceil;
+    using std::log;
+    return cast<RealScalar,int>(ceil(-log(NumTraits<RealScalar>::epsilon())/log(RealScalar(10))));
   }
 };
 
@@ -170,9 +162,8 @@ std::ostream & print_matrix(std::ostream & s, const Derived& _m, const IOFormat&
     return s;
   }
   
-  const typename Derived::Nested m = _m;
+  typename Derived::Nested m = _m;
   typedef typename Derived::Scalar Scalar;
-  typedef typename Derived::Index Index;
 
   Index width = 0;
 
@@ -197,21 +188,22 @@ std::ostream & print_matrix(std::ostream & s, const Derived& _m, const IOFormat&
     explicit_precision = fmt.precision;
   }
 
+  std::streamsize old_precision = 0;
+  if(explicit_precision) old_precision = s.precision(explicit_precision);
+
   bool align_cols = !(fmt.flags & DontAlignCols);
   if(align_cols)
   {
     // compute the largest width
-    for(Index j = 1; j < m.cols(); ++j)
+    for(Index j = 0; j < m.cols(); ++j)
       for(Index i = 0; i < m.rows(); ++i)
       {
         std::stringstream sstr;
-        if(explicit_precision) sstr.precision(explicit_precision);
+        sstr.copyfmt(s);
         sstr << m.coeff(i,j);
         width = std::max<Index>(width, Index(sstr.str().length()));
       }
   }
-  std::streamsize old_precision = 0;
-  if(explicit_precision) old_precision = s.precision(explicit_precision);
   s << fmt.matPrefix;
   for(Index i = 0; i < m.rows(); ++i)
   {
@@ -255,5 +247,7 @@ std::ostream & operator <<
 {
   return internal::print_matrix(s, m.eval(), EIGEN_DEFAULT_IO_FORMAT);
 }
+
+} // end namespace Eigen
 
 #endif // EIGEN_IO_H

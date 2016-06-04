@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 
-#include <omp.h>
+#include <libiomp/omp.h>
 
 using namespace std;
 

@@ -9,7 +9,6 @@
 #include <string.h>
 #include <string>
 
-#include "../algorithm/fusion/PgInf.h"
 #include "../utils/utils.h"
 
 using namespace std;

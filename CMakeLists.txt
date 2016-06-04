@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 3.5)
 project(RetrieveServer)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-stack-protector")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-stack-protector -Wc++11-narrowing -Wmacro-redefined")
 
 include_directories("/usr/local/include")
+include_directories("source/algorithm/third_party/")
+include_directories("source/algorithm/third_party/")
+include_directories("source/algorithm/third_party/")
 LINK_DIRECTORIES("/usr/local/lib")
 
 set(SOURCE_FILES
@@ -26,8 +29,6 @@ set(SOURCE_FILES
         source/rpc/retrieve/ImageRetrieveRpc.cpp
         source/algorithm/thumb/imagethumb.cpp
         source/algorithm/thumb/imagethumb.h
-        source/algorithm/retrieve/utils/myredis.h
-        source/algorithm/retrieve/utils/myredis.cpp
         source/algorithm/retrieve/utils/pgdb.h
         source/algorithm/retrieve/utils/pgdb.cpp
         source/algorithm/retrieve/utils/retrieveutils.h
@@ -62,215 +63,8 @@ set(SOURCE_FILES
         source/algorithm/retrieve/ASIFT/orsa.h
         source/algorithm/retrieve/ASIFT/splines.cpp
         source/algorithm/retrieve/ASIFT/splines.h
-        source/algorithm/retrieve/ASIFT/libMatch/match.h
-        source/algorithm/retrieve/ASIFT/libMatch/match.cpp
-        source/algorithm/retrieve/ASIFT/libNumerics/computeH.cpp
-        source/algorithm/retrieve/ASIFT/libNumerics/homography.cpp
-        source/algorithm/retrieve/ASIFT/libNumerics/homography.h
-        source/algorithm/retrieve/ASIFT/libNumerics/matrix.h
-        source/algorithm/retrieve/ASIFT/libNumerics/matrix.cpp
-        source/algorithm/retrieve/ASIFT/libNumerics/numerics.h
-        source/algorithm/retrieve/ASIFT/libNumerics/numerics.cpp
-        source/algorithm/retrieve/ASIFT/libNumerics/rodrigues.h
-        source/algorithm/retrieve/ASIFT/libNumerics/rodrigues.cpp
-        source/algorithm/retrieve/ASIFT/libNumerics/vector.cpp
-        source/algorithm/third_party/Eigen/src/misc/Image.h
-        source/algorithm/third_party/Eigen/src/misc/Kernel.h
-        source/algorithm/third_party/Eigen/src/misc/Solve.h
-        source/algorithm/third_party/Eigen/src/Cholesky/LDLT.h
-        source/algorithm/third_party/Eigen/src/Cholesky/LLT.h
-        source/algorithm/third_party/Eigen/src/Core/Array.h
-        source/algorithm/third_party/Eigen/src/Core/ArrayBase.h
-        source/algorithm/third_party/Eigen/src/Core/ArrayWrapper.h
-        source/algorithm/third_party/Eigen/src/Core/Assign.h
-        source/algorithm/third_party/Eigen/src/Core/BandMatrix.h
-        source/algorithm/third_party/Eigen/src/Core/Block.h
-        source/algorithm/third_party/Eigen/src/Core/BooleanRedux.h
-        source/algorithm/third_party/Eigen/src/Core/CommaInitializer.h
-        source/algorithm/third_party/Eigen/src/Core/CwiseBinaryOp.h
-        source/algorithm/third_party/Eigen/src/Core/CwiseNullaryOp.h
-        source/algorithm/third_party/Eigen/src/Core/CwiseUnaryOp.h
-        source/algorithm/third_party/Eigen/src/Core/CwiseUnaryView.h
-        source/algorithm/third_party/Eigen/src/Core/DenseBase.h
-        source/algorithm/third_party/Eigen/src/Core/DenseCoeffsBase.h
-        source/algorithm/third_party/Eigen/src/Core/DenseStorage.h
-        source/algorithm/third_party/Eigen/src/Core/Diagonal.h
-        source/algorithm/third_party/Eigen/src/Core/DiagonalMatrix.h
-        source/algorithm/third_party/Eigen/src/Core/DiagonalProduct.h
-        source/algorithm/third_party/Eigen/src/Core/Dot.h
-        source/algorithm/third_party/Eigen/src/Core/EigenBase.h
-        source/algorithm/third_party/Eigen/src/Core/Flagged.h
-        source/algorithm/third_party/Eigen/src/Core/ForceAlignedAccess.h
-        source/algorithm/third_party/Eigen/src/Core/Functors.h
-        source/algorithm/third_party/Eigen/src/Core/Fuzzy.h
-        source/algorithm/third_party/Eigen/src/Core/GenericPacketMath.h
-        source/algorithm/third_party/Eigen/src/Core/GlobalFunctions.h
-        source/algorithm/third_party/Eigen/src/Core/IO.h
-        source/algorithm/third_party/Eigen/src/Core/Map.h
-        source/algorithm/third_party/Eigen/src/Core/MapBase.h
-        source/algorithm/third_party/Eigen/src/Core/MathFunctions.h
-        source/algorithm/third_party/Eigen/src/Core/Matrix.h
-        source/algorithm/third_party/Eigen/src/Core/MatrixBase.h
-        source/algorithm/third_party/Eigen/src/Core/NestByValue.h
-        source/algorithm/third_party/Eigen/src/Core/NoAlias.h
-        source/algorithm/third_party/Eigen/src/Core/NumTraits.h
-        source/algorithm/third_party/Eigen/src/Core/PermutationMatrix.h
-        source/algorithm/third_party/Eigen/src/Core/PlainObjectBase.h
-        source/algorithm/third_party/Eigen/src/Core/Product.h
-        source/algorithm/third_party/Eigen/src/Core/ProductBase.h
-        source/algorithm/third_party/Eigen/src/Core/Random.h
-        source/algorithm/third_party/Eigen/src/Core/Redux.h
-        source/algorithm/third_party/Eigen/src/Core/Replicate.h
-        source/algorithm/third_party/Eigen/src/Core/ReturnByValue.h
-        source/algorithm/third_party/Eigen/src/Core/Reverse.h
-        source/algorithm/third_party/Eigen/src/Core/Select.h
-        source/algorithm/third_party/Eigen/src/Core/SelfAdjointView.h
-        source/algorithm/third_party/Eigen/src/Core/SelfCwiseBinaryOp.h
-        source/algorithm/third_party/Eigen/src/Core/SolveTriangular.h
-        source/algorithm/third_party/Eigen/src/Core/StableNorm.h
-        source/algorithm/third_party/Eigen/src/Core/Stride.h
-        source/algorithm/third_party/Eigen/src/Core/Swap.h
-        source/algorithm/third_party/Eigen/src/Core/Transpose.h
-        source/algorithm/third_party/Eigen/src/Core/Transpositions.h
-        source/algorithm/third_party/Eigen/src/Core/TriangularMatrix.h
-        source/algorithm/third_party/Eigen/src/Core/VectorBlock.h
-        source/algorithm/third_party/Eigen/src/Core/VectorwiseOp.h
-        source/algorithm/third_party/Eigen/src/Core/Visitor.h
-        source/algorithm/third_party/Eigen/src/Core/util/BlasUtil.h
-        source/algorithm/third_party/Eigen/src/Core/util/Constants.h
-        source/algorithm/third_party/Eigen/src/Core/util/DisableStupidWarnings.h
-        source/algorithm/third_party/Eigen/src/Core/util/ForwardDeclarations.h
-        source/algorithm/third_party/Eigen/src/Core/util/Macros.h
-        source/algorithm/third_party/Eigen/src/Core/util/Memory.h
-        source/algorithm/third_party/Eigen/src/Core/util/Meta.h
-        source/algorithm/third_party/Eigen/src/Core/util/ReenableStupidWarnings.h
-        source/algorithm/third_party/Eigen/src/Core/util/StaticAssert.h
-        source/algorithm/third_party/Eigen/src/Core/util/XprHelper.h
-        source/algorithm/third_party/Eigen/src/Core/products/CoeffBasedProduct.h
-        source/algorithm/third_party/Eigen/src/Core/products/GeneralBlockPanelKernel.h
-        source/algorithm/third_party/Eigen/src/Core/products/GeneralMatrixMatrix.h
-        source/algorithm/third_party/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h
-        source/algorithm/third_party/Eigen/src/Core/products/GeneralMatrixVector.h
-        source/algorithm/third_party/Eigen/src/Core/products/Parallelizer.h
-        source/algorithm/third_party/Eigen/src/Core/products/SelfadjointMatrixMatrix.h
-        source/algorithm/third_party/Eigen/src/Core/products/SelfadjointMatrixVector.h
-        source/algorithm/third_party/Eigen/src/Core/products/SelfadjointProduct.h
-        source/algorithm/third_party/Eigen/src/Core/products/SelfadjointRank2Update.h
-        source/algorithm/third_party/Eigen/src/Core/products/TriangularMatrixMatrix.h
-        source/algorithm/third_party/Eigen/src/Core/products/TriangularMatrixVector.h
-        source/algorithm/third_party/Eigen/src/Core/products/TriangularSolverMatrix.h
-        source/algorithm/third_party/Eigen/src/Core/products/TriangularSolverVector.h
-        source/algorithm/third_party/Eigen/src/Core/arch/AltiVec/Complex.h
-        source/algorithm/third_party/Eigen/src/Core/arch/AltiVec/PacketMath.h
-        source/algorithm/third_party/Eigen/src/Core/arch/Default/Settings.h
-        source/algorithm/third_party/Eigen/src/Core/arch/NEON/Complex.h
-        source/algorithm/third_party/Eigen/src/Core/arch/NEON/PacketMath.h
-        source/algorithm/third_party/Eigen/src/Core/arch/SSE/Complex.h
-        source/algorithm/third_party/Eigen/src/Core/arch/SSE/MathFunctions.h
-        source/algorithm/third_party/Eigen/src/Core/arch/SSE/PacketMath.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Block.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Cwise.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/CwiseOperators.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Lazy.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/LeastSquares.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/LU.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Macros.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/MathFunctions.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Memory.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Meta.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Minor.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/QR.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/SVD.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/TriangularSolver.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/VectorBlock.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/AlignedBox.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/All.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/AngleAxis.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Hyperplane.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Quaternion.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Rotation2D.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/RotationBase.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Scaling.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Transform.h
-        source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Translation.h
-        source/algorithm/third_party/Eigen/src/Eigenvalues/ComplexEigenSolver.h
-        source/algorithm/third_party/Eigen/src/Eigenvalues/ComplexSchur.h
-        source/algorithm/third_party/Eigen/src/Eigenvalues/EigenSolver.h
-        source/algorithm/third_party/Eigen/src/Eigenvalues/EigenvaluesCommon.h
-        source/algorithm/third_party/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h
-        source/algorithm/third_party/Eigen/src/Eigenvalues/HessenbergDecomposition.h
-        source/algorithm/third_party/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h
-        source/algorithm/third_party/Eigen/src/Eigenvalues/RealSchur.h
-        source/algorithm/third_party/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h
-        source/algorithm/third_party/Eigen/src/Eigenvalues/Tridiagonalization.h
-        source/algorithm/third_party/Eigen/src/Geometry/AlignedBox.h
-        source/algorithm/third_party/Eigen/src/Geometry/AngleAxis.h
-        source/algorithm/third_party/Eigen/src/Geometry/EulerAngles.h
-        source/algorithm/third_party/Eigen/src/Geometry/Homogeneous.h
-        source/algorithm/third_party/Eigen/src/Geometry/Hyperplane.h
-        source/algorithm/third_party/Eigen/src/Geometry/OrthoMethods.h
-        source/algorithm/third_party/Eigen/src/Geometry/ParametrizedLine.h
-        source/algorithm/third_party/Eigen/src/Geometry/Quaternion.h
-        source/algorithm/third_party/Eigen/src/Geometry/Rotation2D.h
-        source/algorithm/third_party/Eigen/src/Geometry/RotationBase.h
-        source/algorithm/third_party/Eigen/src/Geometry/Scaling.h
-        source/algorithm/third_party/Eigen/src/Geometry/Transform.h
-        source/algorithm/third_party/Eigen/src/Geometry/Translation.h
-        source/algorithm/third_party/Eigen/src/Geometry/Umeyama.h
-        source/algorithm/third_party/Eigen/src/Geometry/arch/Geometry_SSE.h
-        source/algorithm/third_party/Eigen/src/Householder/BlockHouseholder.h
-        source/algorithm/third_party/Eigen/src/Householder/Householder.h
-        source/algorithm/third_party/Eigen/src/Householder/HouseholderSequence.h
-        source/algorithm/third_party/Eigen/src/Jacobi/Jacobi.h
-        source/algorithm/third_party/Eigen/src/LU/Determinant.h
-        source/algorithm/third_party/Eigen/src/LU/FullPivLU.h
-        source/algorithm/third_party/Eigen/src/LU/Inverse.h
-        source/algorithm/third_party/Eigen/src/LU/PartialPivLU.h
-        source/algorithm/third_party/Eigen/src/LU/arch/Inverse_SSE.h
-        source/algorithm/third_party/Eigen/src/QR/ColPivHouseholderQR.h
-        source/algorithm/third_party/Eigen/src/QR/FullPivHouseholderQR.h
-        source/algorithm/third_party/Eigen/src/QR/HouseholderQR.h
-        source/algorithm/third_party/Eigen/src/Sparse/AmbiVector.h
-        source/algorithm/third_party/Eigen/src/Sparse/CompressedStorage.h
-        source/algorithm/third_party/Eigen/src/Sparse/CoreIterators.h
-        source/algorithm/third_party/Eigen/src/Sparse/DynamicSparseMatrix.h
-        source/algorithm/third_party/Eigen/src/Sparse/MappedSparseMatrix.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseAssign.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseBlock.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseCwiseBinaryOp.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseCwiseUnaryOp.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseDenseProduct.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseDiagonalProduct.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseDot.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseFuzzy.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseMatrix.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseMatrixBase.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseProduct.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseRedux.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseSelfAdjointView.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseSparseProduct.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseTranspose.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseTriangularView.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseUtil.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseVector.h
-        source/algorithm/third_party/Eigen/src/Sparse/SparseView.h
-        source/algorithm/third_party/Eigen/src/Sparse/TriangularSolver.h
-        source/algorithm/third_party/Eigen/src/StlSupport/details.h
-        source/algorithm/third_party/Eigen/src/StlSupport/StdDeque.h
-        source/algorithm/third_party/Eigen/src/StlSupport/StdList.h
-        source/algorithm/third_party/Eigen/src/StlSupport/StdVector.h
-        source/algorithm/third_party/Eigen/src/SVD/JacobiSVD.h
-        source/algorithm/third_party/Eigen/src/SVD/UpperBidiagonalization.h
-        source/algorithm/third_party/Eigen/src/plugins/ArrayCwiseUnaryOps.h
-        source/algorithm/third_party/Eigen/src/plugins/ArrayCwiseBinaryOps.h
-        source/algorithm/third_party/Eigen/src/plugins/BlockMethods.h
-        source/algorithm/third_party/Eigen/src/plugins/CommonCwiseBinaryOps.h
-        source/algorithm/third_party/Eigen/src/plugins/CommonCwiseUnaryOps.h
-        source/algorithm/third_party/Eigen/src/plugins/MatrixCwiseBinaryOps.h
-        source/algorithm/third_party/Eigen/src/plugins/MatrixCwiseUnaryOps.h
         source/retrieveserver.cpp
         source/retrieveserver.h)
 
 add_executable(RetrieveServer ${SOURCE_FILES})
-target_link_libraries(RetrieveServer Ice IceUtil gdal proj pthread)
+target_link_libraries(RetrieveServer pqxx pq Ice IceUtil gdal proj pthread)

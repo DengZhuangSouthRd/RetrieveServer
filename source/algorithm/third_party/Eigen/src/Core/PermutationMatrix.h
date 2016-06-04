@@ -4,29 +4,17 @@
 // Copyright (C) 2009 Benoit Jacob <jacob.benoit.1@gmail.com>
 // Copyright (C) 2009-2011 Gael Guennebaud <gael.guennebaud@inria.fr>
 //
-// Eigen is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 3 of the License, or (at your option) any later version.
-//
-// Alternatively, you can redistribute it and/or
-// modify it under the terms of the GNU General Public License as
-// published by the Free Software Foundation; either version 2 of
-// the License, or (at your option) any later version.
-//
-// Eigen is distributed in the hope that it will be useful, but WITHOUT ANY
-// WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-// FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License or the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License and a copy of the GNU General Public License along with
-// Eigen. If not, see <http://www.gnu.org/licenses/>.
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #ifndef EIGEN_PERMUTATIONMATRIX_H
 #define EIGEN_PERMUTATIONMATRIX_H
 
-template<int RowCol,typename IndicesType,typename MatrixType, typename StorageKind> class PermutedImpl;
+namespace Eigen { 
+
+// TODO: this does not seems to be needed at all:
+// template<int RowCol,typename IndicesType,typename MatrixType, typename StorageKind> class PermutedImpl;
 
 /** \class PermutationBase
   * \ingroup Core_Module
@@ -54,8 +42,6 @@ template<int RowCol,typename IndicesType,typename MatrixType, typename StorageKi
 
 namespace internal {
 
-template<typename PermutationType, typename MatrixType, int Side, bool Transposed=false>
-struct permut_matrix_product_retval;
 enum PermPermProduct_t {PermPermProduct};
 
 } // end namespace internal
@@ -71,19 +57,18 @@ class PermutationBase : public EigenBase<Derived>
     typedef typename Traits::IndicesType IndicesType;
     enum {
       Flags = Traits::Flags,
-      CoeffReadCost = Traits::CoeffReadCost,
       RowsAtCompileTime = Traits::RowsAtCompileTime,
       ColsAtCompileTime = Traits::ColsAtCompileTime,
       MaxRowsAtCompileTime = Traits::MaxRowsAtCompileTime,
       MaxColsAtCompileTime = Traits::MaxColsAtCompileTime
     };
-    typedef typename Traits::Scalar Scalar;
-    typedef typename Traits::Index Index;
-    typedef Matrix<Scalar,RowsAtCompileTime,ColsAtCompileTime,0,MaxRowsAtCompileTime,MaxColsAtCompileTime>
+    typedef typename Traits::StorageIndex StorageIndex;
+    typedef Matrix<StorageIndex,RowsAtCompileTime,ColsAtCompileTime,0,MaxRowsAtCompileTime,MaxColsAtCompileTime>
             DenseMatrixType;
-    typedef PermutationMatrix<IndicesType::SizeAtCompileTime,IndicesType::MaxSizeAtCompileTime,Index>
+    typedef PermutationMatrix<IndicesType::SizeAtCompileTime,IndicesType::MaxSizeAtCompileTime,StorageIndex>
             PlainPermutationType;
     using Base::derived;
+    typedef Transpose<PermutationBase> TransposeReturnType;
     #endif
 
     /** Copies the other permutation into *this */
@@ -116,20 +101,20 @@ class PermutationBase : public EigenBase<Derived>
     #endif
 
     /** \returns the number of rows */
-    inline Index rows() const { return indices().size(); }
+    inline Index rows() const { return Index(indices().size()); }
 
     /** \returns the number of columns */
-    inline Index cols() const { return indices().size(); }
+    inline Index cols() const { return Index(indices().size()); }
 
     /** \returns the size of a side of the respective square matrix, i.e., the number of indices */
-    inline Index size() const { return indices().size(); }
+    inline Index size() const { return Index(indices().size()); }
 
     #ifndef EIGEN_PARSED_BY_DOXYGEN
     template<typename DenseDerived>
     void evalTo(MatrixBase<DenseDerived>& other) const
     {
       other.setZero();
-      for (int i=0; i<rows();++i)
+      for (Index i=0; i<rows(); ++i)
         other.coeffRef(indices().coeff(i),i) = typename DenseDerived::Scalar(1);
     }
     #endif
@@ -150,23 +135,24 @@ class PermutationBase : public EigenBase<Derived>
 
     /** Resizes to given size.
       */
-    inline void resize(Index size)
+    inline void resize(Index newSize)
     {
-      indices().resize(size);
+      indices().resize(newSize);
     }
 
     /** Sets *this to be the identity permutation matrix */
     void setIdentity()
     {
-      for(Index i = 0; i < size(); ++i)
+      StorageIndex n = StorageIndex(size());
+      for(StorageIndex i = 0; i < n; ++i)
         indices().coeffRef(i) = i;
     }
 
     /** Sets *this to be the identity permutation matrix of given size.
       */
-    void setIdentity(Index size)
+    void setIdentity(Index newSize)
     {
-      resize(size);
+      resize(newSize);
       setIdentity();
     }
 
@@ -174,18 +160,18 @@ class PermutationBase : public EigenBase<Derived>
       *
       * \returns a reference to *this.
       *
-      * \warning This is much slower than applyTranspositionOnTheRight(int,int):
+      * \warning This is much slower than applyTranspositionOnTheRight(Index,Index):
       * this has linear complexity and requires a lot of branching.
       *
-      * \sa applyTranspositionOnTheRight(int,int)
+      * \sa applyTranspositionOnTheRight(Index,Index)
       */
     Derived& applyTranspositionOnTheLeft(Index i, Index j)
     {
       eigen_assert(i>=0 && j>=0 && i<size() && j<size());
       for(Index k = 0; k < size(); ++k)
       {
-        if(indices().coeff(k) == i) indices().coeffRef(k) = j;
-        else if(indices().coeff(k) == j) indices().coeffRef(k) = i;
+        if(indices().coeff(k) == i) indices().coeffRef(k) = StorageIndex(j);
+        else if(indices().coeff(k) == j) indices().coeffRef(k) = StorageIndex(i);
       }
       return derived();
     }
@@ -196,7 +182,7 @@ class PermutationBase : public EigenBase<Derived>
       *
       * This is a fast operation, it only consists in swapping two indices.
       *
-      * \sa applyTranspositionOnTheLeft(int,int)
+      * \sa applyTranspositionOnTheLeft(Index,Index)
       */
     Derived& applyTranspositionOnTheRight(Index i, Index j)
     {
@@ -209,14 +195,14 @@ class PermutationBase : public EigenBase<Derived>
       *
       * \note \note_try_to_help_rvo
       */
-    inline Transpose<PermutationBase> inverse() const
-    { return derived(); }
+    inline TransposeReturnType inverse() const
+    { return TransposeReturnType(derived()); }
     /** \returns the tranpose permutation matrix.
       *
       * \note \note_try_to_help_rvo
       */
-    inline Transpose<PermutationBase> transpose() const
-    { return derived(); }
+    inline TransposeReturnType transpose() const
+    { return TransposeReturnType(derived()); }
 
     /**** multiplication helpers to hopefully get RVO ****/
 
@@ -226,13 +212,13 @@ class PermutationBase : public EigenBase<Derived>
     template<typename OtherDerived>
     void assignTranspose(const PermutationBase<OtherDerived>& other)
     {
-      for (int i=0; i<rows();++i) indices().coeffRef(other.indices().coeff(i)) = i;
+      for (Index i=0; i<rows();++i) indices().coeffRef(other.indices().coeff(i)) = i;
     }
     template<typename Lhs,typename Rhs>
     void assignProduct(const Lhs& lhs, const Rhs& rhs)
     {
       eigen_assert(lhs.cols() == rhs.rows());
-      for (int i=0; i<rows();++i) indices().coeffRef(i) = lhs.indices().coeff(rhs.indices().coeff(i));
+      for (Index i=0; i<rows();++i) indices().coeffRef(i) = lhs.indices().coeff(rhs.indices().coeff(i));
     }
 #endif
 
@@ -261,6 +247,35 @@ class PermutationBase : public EigenBase<Derived>
     template<typename Other> friend
     inline PlainPermutationType operator*(const Transpose<PermutationBase<Other> >& other, const PermutationBase& perm)
     { return PlainPermutationType(internal::PermPermProduct, other.eval(), perm); }
+    
+    /** \returns the determinant of the permutation matrix, which is either 1 or -1 depending on the parity of the permutation.
+      *
+      * This function is O(\c n) procedure allocating a buffer of \c n booleans.
+      */
+    Index determinant() const
+    {
+      Index res = 1;
+      Index n = size();
+      Matrix<bool,RowsAtCompileTime,1,0,MaxRowsAtCompileTime> mask(n);
+      mask.fill(false);
+      Index r = 0;
+      while(r < n)
+      {
+        // search for the next seed
+        while(r<n && mask[r]) r++;
+        if(r>=n)
+          break;
+        // we got one, let's follow it until we are back to the seed
+        Index k0 = r++;
+        mask.coeffRef(k0) = true;
+        for(Index k=indices().coeff(k0); k!=k0; k=indices().coeff(k))
+        {
+          mask.coeffRef(k) = true;
+          res = -res;
+        }
+      }
+      return res;
+    }
 
   protected:
 
@@ -273,7 +288,7 @@ class PermutationBase : public EigenBase<Derived>
   *
   * \param SizeAtCompileTime the number of rows/cols, or Dynamic
   * \param MaxSizeAtCompileTime the maximum number of rows/cols, or Dynamic. This optional parameter defaults to SizeAtCompileTime. Most of the time, you should not have to specify it.
-  * \param IndexType the interger type of the indices
+  * \param StorageIndex the integer type of the indices
   *
   * This class represents a permutation matrix, internally stored as a vector of integers.
   *
@@ -281,24 +296,28 @@ class PermutationBase : public EigenBase<Derived>
   */
 
 namespace internal {
-template<int SizeAtCompileTime, int MaxSizeAtCompileTime, typename IndexType>
-struct traits<PermutationMatrix<SizeAtCompileTime, MaxSizeAtCompileTime, IndexType> >
- : traits<Matrix<IndexType,SizeAtCompileTime,SizeAtCompileTime,0,MaxSizeAtCompileTime,MaxSizeAtCompileTime> >
+template<int SizeAtCompileTime, int MaxSizeAtCompileTime, typename _StorageIndex>
+struct traits<PermutationMatrix<SizeAtCompileTime, MaxSizeAtCompileTime, _StorageIndex> >
+ : traits<Matrix<_StorageIndex,SizeAtCompileTime,SizeAtCompileTime,0,MaxSizeAtCompileTime,MaxSizeAtCompileTime> >
 {
-  typedef IndexType Index;
-  typedef Matrix<IndexType, SizeAtCompileTime, 1, 0, MaxSizeAtCompileTime, 1> IndicesType;
+  typedef PermutationStorage StorageKind;
+  typedef Matrix<_StorageIndex, SizeAtCompileTime, 1, 0, MaxSizeAtCompileTime, 1> IndicesType;
+  typedef _StorageIndex StorageIndex;
 };
 }
 
-template<int SizeAtCompileTime, int MaxSizeAtCompileTime, typename IndexType>
-class PermutationMatrix : public PermutationBase<PermutationMatrix<SizeAtCompileTime, MaxSizeAtCompileTime, IndexType> >
+template<int SizeAtCompileTime, int MaxSizeAtCompileTime, typename _StorageIndex>
+class PermutationMatrix : public PermutationBase<PermutationMatrix<SizeAtCompileTime, MaxSizeAtCompileTime, _StorageIndex> >
 {
     typedef PermutationBase<PermutationMatrix> Base;
     typedef internal::traits<PermutationMatrix> Traits;
   public:
 
+    typedef const PermutationMatrix& Nested;
+
     #ifndef EIGEN_PARSED_BY_DOXYGEN
     typedef typename Traits::IndicesType IndicesType;
+    typedef typename Traits::StorageIndex StorageIndex;
     #endif
 
     inline PermutationMatrix()
@@ -306,8 +325,10 @@ class PermutationMatrix : public PermutationBase<PermutationMatrix<SizeAtCompile
 
     /** Constructs an uninitialized permutation matrix of given size.
       */
-    inline PermutationMatrix(int size) : m_indices(size)
-    {}
+    explicit inline PermutationMatrix(Index size) : m_indices(size)
+    {
+      eigen_internal_assert(size <= NumTraits<StorageIndex>::highest());
+    }
 
     /** Copy constructor. */
     template<typename OtherDerived>
@@ -376,9 +397,12 @@ class PermutationMatrix : public PermutationBase<PermutationMatrix<SizeAtCompile
 #ifndef EIGEN_PARSED_BY_DOXYGEN
     template<typename Other>
     PermutationMatrix(const Transpose<PermutationBase<Other> >& other)
-      : m_indices(other.nestedPermutation().size())
+      : m_indices(other.nestedExpression().size())
     {
-      for (int i=0; i<m_indices.size();++i) m_indices.coeffRef(other.nestedPermutation().indices().coeff(i)) = i;
+      eigen_internal_assert(m_indices.size() <= NumTraits<StorageIndex>::highest());
+      StorageIndex end = StorageIndex(m_indices.size());
+      for (StorageIndex i=0; i<end;++i)
+        m_indices.coeffRef(other.nestedExpression().indices().coeff(i)) = i;
     }
     template<typename Lhs,typename Rhs>
     PermutationMatrix(internal::PermPermProduct_t, const Lhs& lhs, const Rhs& rhs)
@@ -395,18 +419,19 @@ class PermutationMatrix : public PermutationBase<PermutationMatrix<SizeAtCompile
 
 
 namespace internal {
-template<int SizeAtCompileTime, int MaxSizeAtCompileTime, typename IndexType, int _PacketAccess>
-struct traits<Map<PermutationMatrix<SizeAtCompileTime, MaxSizeAtCompileTime, IndexType>,_PacketAccess> >
- : traits<Matrix<IndexType,SizeAtCompileTime,SizeAtCompileTime,0,MaxSizeAtCompileTime,MaxSizeAtCompileTime> >
+template<int SizeAtCompileTime, int MaxSizeAtCompileTime, typename _StorageIndex, int _PacketAccess>
+struct traits<Map<PermutationMatrix<SizeAtCompileTime, MaxSizeAtCompileTime, _StorageIndex>,_PacketAccess> >
+ : traits<Matrix<_StorageIndex,SizeAtCompileTime,SizeAtCompileTime,0,MaxSizeAtCompileTime,MaxSizeAtCompileTime> >
 {
-  typedef IndexType Index;
-  typedef Map<const Matrix<IndexType, SizeAtCompileTime, 1, 0, MaxSizeAtCompileTime, 1>, _PacketAccess> IndicesType;
+  typedef PermutationStorage StorageKind;
+  typedef Map<const Matrix<_StorageIndex, SizeAtCompileTime, 1, 0, MaxSizeAtCompileTime, 1>, _PacketAccess> IndicesType;
+  typedef _StorageIndex StorageIndex;
 };
 }
 
-template<int SizeAtCompileTime, int MaxSizeAtCompileTime, typename IndexType, int _PacketAccess>
-class Map<PermutationMatrix<SizeAtCompileTime, MaxSizeAtCompileTime, IndexType>,_PacketAccess>
-  : public PermutationBase<Map<PermutationMatrix<SizeAtCompileTime, MaxSizeAtCompileTime, IndexType>,_PacketAccess> >
+template<int SizeAtCompileTime, int MaxSizeAtCompileTime, typename _StorageIndex, int _PacketAccess>
+class Map<PermutationMatrix<SizeAtCompileTime, MaxSizeAtCompileTime, _StorageIndex>,_PacketAccess>
+  : public PermutationBase<Map<PermutationMatrix<SizeAtCompileTime, MaxSizeAtCompileTime, _StorageIndex>,_PacketAccess> >
 {
     typedef PermutationBase<Map> Base;
     typedef internal::traits<Map> Traits;
@@ -414,15 +439,15 @@ class Map<PermutationMatrix<SizeAtCompileTime, MaxSizeAtCompileTime, IndexType>,
 
     #ifndef EIGEN_PARSED_BY_DOXYGEN
     typedef typename Traits::IndicesType IndicesType;
-    typedef typename IndicesType::Scalar Index;
+    typedef typename IndicesType::Scalar StorageIndex;
     #endif
 
-    inline Map(const Index* indices)
-      : m_indices(indices)
+    inline Map(const StorageIndex* indicesPtr)
+      : m_indices(indicesPtr)
     {}
 
-    inline Map(const Index* indices, Index size)
-      : m_indices(indices,size)
+    inline Map(const StorageIndex* indicesPtr, Index size)
+      : m_indices(indicesPtr,size)
     {}
 
     /** Copies the other permutation into *this */
@@ -468,8 +493,6 @@ class Map<PermutationMatrix<SizeAtCompileTime, MaxSizeAtCompileTime, IndexType>,
   * \sa class PermutationBase, class PermutationMatrix
   */
 
-struct PermutationStorage {};
-
 template<typename _IndicesType> class TranspositionsWrapper;
 namespace internal {
 template<typename _IndicesType>
@@ -477,15 +500,14 @@ struct traits<PermutationWrapper<_IndicesType> >
 {
   typedef PermutationStorage StorageKind;
   typedef typename _IndicesType::Scalar Scalar;
-  typedef typename _IndicesType::Scalar Index;
+  typedef typename _IndicesType::Scalar StorageIndex;
   typedef _IndicesType IndicesType;
   enum {
     RowsAtCompileTime = _IndicesType::SizeAtCompileTime,
     ColsAtCompileTime = _IndicesType::SizeAtCompileTime,
-    MaxRowsAtCompileTime = IndicesType::MaxRowsAtCompileTime,
-    MaxColsAtCompileTime = IndicesType::MaxColsAtCompileTime,
-    Flags = 0,
-    CoeffReadCost = _IndicesType::CoeffReadCost
+    MaxRowsAtCompileTime = IndicesType::MaxSizeAtCompileTime,
+    MaxColsAtCompileTime = IndicesType::MaxSizeAtCompileTime,
+    Flags = 0
   };
 };
 }
@@ -511,105 +533,35 @@ class PermutationWrapper : public PermutationBase<PermutationWrapper<_IndicesTyp
 
   protected:
 
-    const typename IndicesType::Nested m_indices;
+    typename IndicesType::Nested m_indices;
 };
+
 
 /** \returns the matrix with the permutation applied to the columns.
   */
-template<typename Derived, typename PermutationDerived>
-inline const internal::permut_matrix_product_retval<PermutationDerived, Derived, OnTheRight>
-operator*(const MatrixBase<Derived>& matrix,
-          const PermutationBase<PermutationDerived> &permutation)
+template<typename MatrixDerived, typename PermutationDerived>
+EIGEN_DEVICE_FUNC
+const Product<MatrixDerived, PermutationDerived, AliasFreeProduct>
+operator*(const MatrixBase<MatrixDerived> &matrix,
+          const PermutationBase<PermutationDerived>& permutation)
 {
-  return internal::permut_matrix_product_retval
-           <PermutationDerived, Derived, OnTheRight>
-           (permutation.derived(), matrix.derived());
+  return Product<MatrixDerived, PermutationDerived, AliasFreeProduct>
+            (matrix.derived(), permutation.derived());
 }
 
 /** \returns the matrix with the permutation applied to the rows.
   */
-template<typename Derived, typename PermutationDerived>
-inline const internal::permut_matrix_product_retval
-               <PermutationDerived, Derived, OnTheLeft>
+template<typename PermutationDerived, typename MatrixDerived>
+EIGEN_DEVICE_FUNC
+const Product<PermutationDerived, MatrixDerived, AliasFreeProduct>
 operator*(const PermutationBase<PermutationDerived> &permutation,
-          const MatrixBase<Derived>& matrix)
+          const MatrixBase<MatrixDerived>& matrix)
 {
-  return internal::permut_matrix_product_retval
-           <PermutationDerived, Derived, OnTheLeft>
-           (permutation.derived(), matrix.derived());
+  return Product<PermutationDerived, MatrixDerived, AliasFreeProduct>
+            (permutation.derived(), matrix.derived());
 }
 
 namespace internal {
-
-template<typename PermutationType, typename MatrixType, int Side, bool Transposed>
-struct traits<permut_matrix_product_retval<PermutationType, MatrixType, Side, Transposed> >
-{
-  typedef typename MatrixType::PlainObject ReturnType;
-};
-
-template<typename PermutationType, typename MatrixType, int Side, bool Transposed>
-struct permut_matrix_product_retval
- : public ReturnByValue<permut_matrix_product_retval<PermutationType, MatrixType, Side, Transposed> >
-{
-    typedef typename remove_all<typename MatrixType::Nested>::type MatrixTypeNestedCleaned;
-
-    permut_matrix_product_retval(const PermutationType& perm, const MatrixType& matrix)
-      : m_permutation(perm), m_matrix(matrix)
-    {}
-
-    inline int rows() const { return m_matrix.rows(); }
-    inline int cols() const { return m_matrix.cols(); }
-
-    template<typename Dest> inline void evalTo(Dest& dst) const
-    {
-      const int n = Side==OnTheLeft ? rows() : cols();
-
-      if(is_same<MatrixTypeNestedCleaned,Dest>::value && extract_data(dst) == extract_data(m_matrix))
-      {
-        // apply the permutation inplace
-        Matrix<bool,PermutationType::RowsAtCompileTime,1,0,PermutationType::MaxRowsAtCompileTime> mask(m_permutation.size());
-        mask.fill(false);
-        int r = 0;
-        while(r < m_permutation.size())
-        {
-          // search for the next seed
-          while(r<m_permutation.size() && mask[r]) r++;
-          if(r>=m_permutation.size())
-            break;
-          // we got one, let's follow it until we are back to the seed
-          int k0 = r++;
-          int kPrev = k0;
-          mask.coeffRef(k0) = true;
-          for(int k=m_permutation.indices().coeff(k0); k!=k0; k=m_permutation.indices().coeff(k))
-          {
-                  Block<Dest, Side==OnTheLeft ? 1 : Dest::RowsAtCompileTime, Side==OnTheRight ? 1 : Dest::ColsAtCompileTime>(dst, k)
-            .swap(Block<Dest, Side==OnTheLeft ? 1 : Dest::RowsAtCompileTime, Side==OnTheRight ? 1 : Dest::ColsAtCompileTime>
-                       (dst,((Side==OnTheLeft) ^ Transposed) ? k0 : kPrev));
-
-            mask.coeffRef(k) = true;
-            kPrev = k;
-          }
-        }
-      }
-      else
-      {
-        for(int i = 0; i < n; ++i)
-        {
-          Block<Dest, Side==OnTheLeft ? 1 : Dest::RowsAtCompileTime, Side==OnTheRight ? 1 : Dest::ColsAtCompileTime>
-               (dst, ((Side==OnTheLeft) ^ Transposed) ? m_permutation.indices().coeff(i) : i)
-
-          =
-
-          Block<const MatrixTypeNestedCleaned,Side==OnTheLeft ? 1 : MatrixType::RowsAtCompileTime,Side==OnTheRight ? 1 : MatrixType::ColsAtCompileTime>
-               (m_matrix, ((Side==OnTheRight) ^ Transposed) ? m_permutation.indices().coeff(i) : i);
-        }
-      }
-    }
-
-  protected:
-    const PermutationType& m_permutation;
-    const typename MatrixType::Nested m_matrix;
-};
 
 /* Template partial specialization for transposed/inverse permutations */
 
@@ -620,6 +572,8 @@ struct traits<Transpose<PermutationBase<Derived> > >
 
 } // end namespace internal
 
+// TODO: the specificties should be handled by the evaluator,
+// at the very least we should only specialize TransposeImpl
 template<typename Derived>
 class Transpose<PermutationBase<Derived> >
   : public EigenBase<Transpose<PermutationBase<Derived> > >
@@ -634,26 +588,26 @@ class Transpose<PermutationBase<Derived> >
     typedef typename Derived::DenseMatrixType DenseMatrixType;
     enum {
       Flags = Traits::Flags,
-      CoeffReadCost = Traits::CoeffReadCost,
       RowsAtCompileTime = Traits::RowsAtCompileTime,
       ColsAtCompileTime = Traits::ColsAtCompileTime,
       MaxRowsAtCompileTime = Traits::MaxRowsAtCompileTime,
       MaxColsAtCompileTime = Traits::MaxColsAtCompileTime
     };
     typedef typename Traits::Scalar Scalar;
+    typedef typename Traits::StorageIndex StorageIndex;
     #endif
 
     Transpose(const PermutationType& p) : m_permutation(p) {}
 
-    inline int rows() const { return m_permutation.rows(); }
-    inline int cols() const { return m_permutation.cols(); }
+    inline Index rows() const { return m_permutation.rows(); }
+    inline Index cols() const { return m_permutation.cols(); }
 
     #ifndef EIGEN_PARSED_BY_DOXYGEN
     template<typename DenseDerived>
     void evalTo(MatrixBase<DenseDerived>& other) const
     {
       other.setZero();
-      for (int i=0; i<rows();++i)
+      for (Index i=0; i<rows();++i)
         other.coeffRef(i, m_permutation.indices().coeff(i)) = typename DenseDerived::Scalar(1);
     }
     #endif
@@ -666,22 +620,22 @@ class Transpose<PermutationBase<Derived> >
     /** \returns the matrix with the inverse permutation applied to the columns.
       */
     template<typename OtherDerived> friend
-    inline const internal::permut_matrix_product_retval<PermutationType, OtherDerived, OnTheRight, true>
+    const Product<OtherDerived, Transpose, AliasFreeProduct>
     operator*(const MatrixBase<OtherDerived>& matrix, const Transpose& trPerm)
     {
-      return internal::permut_matrix_product_retval<PermutationType, OtherDerived, OnTheRight, true>(trPerm.m_permutation, matrix.derived());
+      return Product<OtherDerived, Transpose, AliasFreeProduct>(matrix.derived(), trPerm.derived());
     }
 
     /** \returns the matrix with the inverse permutation applied to the rows.
       */
     template<typename OtherDerived>
-    inline const internal::permut_matrix_product_retval<PermutationType, OtherDerived, OnTheLeft, true>
+    const Product<Transpose, OtherDerived, AliasFreeProduct>
     operator*(const MatrixBase<OtherDerived>& matrix) const
     {
-      return internal::permut_matrix_product_retval<PermutationType, OtherDerived, OnTheLeft, true>(m_permutation, matrix.derived());
+      return Product<Transpose, OtherDerived, AliasFreeProduct>(*this, matrix.derived());
     }
 
-    const PermutationType& nestedPermutation() const { return m_permutation; }
+    const PermutationType& nestedExpression() const { return m_permutation; }
 
   protected:
     const PermutationType& m_permutation;
@@ -692,5 +646,13 @@ const PermutationWrapper<const Derived> MatrixBase<Derived>::asPermutation() con
 {
   return derived();
 }
+
+namespace internal {
+
+template<> struct AssignmentKind<DenseShape,PermutationShape> { typedef EigenBase2EigenBase Kind; };
+
+} // end namespace internal
+
+} // end namespace Eigen
 
 #endif // EIGEN_PERMUTATIONMATRIX_H

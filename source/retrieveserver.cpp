@@ -15,11 +15,16 @@ RetrieveServer::~RetrieveServer() {
 }
 
 void RetrieveServer::log_InputParameters(const DictStr2Str &mapArg) {
-
+    string str = "RetrieveServer ## ";
+    for(DictStr2Str::const_iterator it=mapArg.begin(); it!=mapArg.end(); ++it) {
+        str += (it->first + "=" + it->second + "#");
+    }
+    Log::Info(str);
 }
 
 void RetrieveServer::log_OutputResult(const WordWiki &wiki) {
-
+    string str = "RetrieveServer ## ";
+    str += ("Key is " + wiki.key);
 }
 
 void RetrieveServer::log_OutputResult(const WordRes &wordres) {

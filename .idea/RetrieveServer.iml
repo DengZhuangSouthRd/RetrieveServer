@@ -6,254 +6,45 @@
       <sourceFolder url="file://$MODULE_DIR$/source/server.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/retrieveserver.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/utils/jsoncpp.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/utils/log.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/utils/utils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/utils/json/json.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/utils/json/json-forwards.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/utils/utils.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/utils/log.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/utils/log.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/misc/Kernel.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/misc/Image.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/misc/Solve.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Jacobi/Jacobi.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/plugins/MatrixCwiseUnaryOps.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/plugins/MatrixCwiseBinaryOps.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/plugins/CommonCwiseUnaryOps.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/plugins/ArrayCwiseUnaryOps.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/plugins/ArrayCwiseBinaryOps.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/plugins/BlockMethods.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/plugins/CommonCwiseBinaryOps.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/QR/FullPivHouseholderQR.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/QR/ColPivHouseholderQR.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/QR/HouseholderQR.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/StlSupport/StdVector.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/StlSupport/details.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/StlSupport/StdDeque.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/StlSupport/StdList.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/LU/Determinant.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/LU/Inverse.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/LU/FullPivLU.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/LU/PartialPivLU.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/LU/arch/Inverse_SSE.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Block.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Minor.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Macros.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/VectorBlock.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/LU.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/QR.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/MathFunctions.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/AlignedBox.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Hyperplane.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/All.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Rotation2D.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Translation.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/RotationBase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Scaling.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/AngleAxis.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Transform.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Quaternion.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/LeastSquares.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Lazy.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/CwiseOperators.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Memory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Cwise.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/TriangularSolver.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/SVD.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Meta.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Householder/Householder.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Householder/BlockHouseholder.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Householder/HouseholderSequence.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/Tridiagonalization.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/EigenvaluesCommon.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/EigenSolver.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/HessenbergDecomposition.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/ComplexEigenSolver.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/RealSchur.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/ComplexSchur.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseSparseProduct.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseTriangularView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/CompressedStorage.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseProduct.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseBlock.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseUtil.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseMatrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/CoreIterators.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseDiagonalProduct.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseFuzzy.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseDot.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/TriangularSolver.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseCwiseBinaryOp.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseVector.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseSelfAdjointView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseTranspose.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/DynamicSparseMatrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseRedux.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseDenseProduct.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/AmbiVector.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseCwiseUnaryOp.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/MappedSparseMatrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseMatrixBase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseAssign.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/SVD/UpperBidiagonalization.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/SVD/JacobiSVD.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/NestByValue.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/CwiseNullaryOp.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/IO.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/DenseBase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Matrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Redux.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Select.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/ProductBase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/EigenBase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/DenseCoeffsBase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/DenseStorage.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/CommaInitializer.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Flagged.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Map.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Swap.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/AltiVec/Complex.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/AltiVec/PacketMath.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/SSE/MathFunctions.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/SSE/Complex.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/SSE/PacketMath.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/NEON/Complex.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/NEON/PacketMath.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/Default/Settings.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/BooleanRedux.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/BandMatrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/DiagonalProduct.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/NumTraits.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Fuzzy.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Replicate.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Stride.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Block.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/PlainObjectBase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Dot.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Assign.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/PermutationMatrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Array.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/CwiseBinaryOp.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Random.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/GenericPacketMath.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/util/Macros.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/util/ForwardDeclarations.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/util/Meta.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/util/BlasUtil.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/util/Memory.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/util/Constants.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/util/StaticAssert.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/util/DisableStupidWarnings.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/util/ReenableStupidWarnings.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/util/XprHelper.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/ForceAlignedAccess.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/MatrixBase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/GlobalFunctions.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/CwiseUnaryView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Product.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Diagonal.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/VectorwiseOp.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/MathFunctions.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/CwiseUnaryOp.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/NoAlias.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/MapBase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Transpositions.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/TriangularMatrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Transpose.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/SolveTriangular.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/DiagonalMatrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/ReturnByValue.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/VectorBlock.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/ArrayBase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Functors.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/SelfadjointMatrixVector.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/SelfadjointRank2Update.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/TriangularMatrixVector.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/Parallelizer.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/GeneralMatrixMatrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/GeneralMatrixVector.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/GeneralBlockPanelKernel.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/TriangularSolverVector.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/TriangularMatrixMatrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/SelfadjointMatrixMatrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/CoeffBasedProduct.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/TriangularSolverMatrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/products/SelfadjointProduct.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Visitor.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/ArrayWrapper.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/SelfCwiseBinaryOp.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/SelfAdjointView.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/StableNorm.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Core/Reverse.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Cholesky/LDLT.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Cholesky/LLT.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Rotation2D.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/RotationBase.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/AlignedBox.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/AngleAxis.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Scaling.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/arch/Geometry_SSE.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Hyperplane.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/ParametrizedLine.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Homogeneous.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Umeyama.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Quaternion.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/EulerAngles.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Translation.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Transform.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/third_party/Eigen/src/Geometry/OrthoMethods.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/utils/utils.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/filter.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/domain.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/compute_asift_keypoints.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/demo_lib_sift.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/orsa.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/compute_asift_matches.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/demo_lib_sift.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/domain.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/splines.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/library.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/gdalio.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/compute_asift_matches.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/filter.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/fproj.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/flimage.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/frot.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/fproj.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/numerics.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/matrix.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/vector.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/rodrigues.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/computeH.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/matrix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/numerics.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/homography.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/rodrigues.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/homography.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/orsa.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/extract_feature.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/domain.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/compute_asift_keypoints.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/fproj.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/library.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/extract_feature.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/filter.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/splines.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/numerics1.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/flimage.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/numerics1.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/library.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/frot.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/numerics1.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/demo_lib_sift.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/libMatch/match.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/libMatch/match.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/splines.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/compute_asift_keypoints.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/compute_asift_matches.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/detect/basicoperator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/detect/sr.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/detect/readcsv.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/utils/myredis.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/utils/myredis.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/utils/pgdb.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/utils/retrieveutils.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/utils/pgdb.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/utils/retrieveutils.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/utils/pgdb.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/utils/retrieveutils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/thumb/imagethumb.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/thumb/imagethumb.cpp" isTestSource="false" />
