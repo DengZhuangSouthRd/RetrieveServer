@@ -14,6 +14,8 @@
 #include "rpc/retrieve/ImageRetrieveRpc.h"
 #include "utils/log.h"
 #include "threadpool/threadpool.h"
+#include "algorithm/retrieve/utils/retrieveutils.h"
+#include "algorithm/retrieve/utils/pgdb.h"
 
 using namespace std;
 using namespace RPCImgRecong;

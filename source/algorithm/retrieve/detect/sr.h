@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <string>
 
-#include "../../third_party/Eigen/Dense"
+#include "Eigen/Dense"
 #include "readcsv.h"
 #include "basicoperator.h"
 

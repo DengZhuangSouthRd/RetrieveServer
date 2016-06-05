@@ -13,238 +13,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="466380a9-75a8-465e-8489-a062e0ee321d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/utils/myredis.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/utils/myredis.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Array" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Eigen2Support" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/LeastSquares" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Functors.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/ProductBase.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/CoeffBasedProduct.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Block.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Cwise.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/CwiseOperators.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/AlignedBox.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/All.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/AngleAxis.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Hyperplane.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/ParametrizedLine.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Quaternion.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Rotation2D.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/RotationBase.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Scaling.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Transform.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Geometry/Translation.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/LU.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Lazy.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/LeastSquares.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Macros.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/MathFunctions.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Memory.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Meta.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/Minor.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/QR.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/SVD.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/TriangularSolver.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigen2Support/VectorBlock.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/EigenvaluesCommon.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/Inverse.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/AmbiVector.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/CompressedStorage.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/CoreIterators.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/DynamicSparseMatrix.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/MappedSparseMatrix.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseAssign.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseBlock.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseCwiseBinaryOp.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseCwiseUnaryOp.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseDenseProduct.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseDiagonalProduct.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseDot.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseFuzzy.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseMatrix.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseMatrixBase.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseProduct.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseRedux.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseSelfAdjointView.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseSparseProduct.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseTranspose.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseTriangularView.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseUtil.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseVector.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/SparseView.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Sparse/TriangularSolver.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/misc/Solve.h" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/libMatch/match.cpp" afterPath="$PROJECT_DIR$/source/algorithm/third_party/libMatch/match.cpp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/libMatch/match.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/libMatch/match.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/computeH.cpp" afterPath="$PROJECT_DIR$/source/algorithm/third_party/libNumerics/computeH.cpp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/homography.cpp" afterPath="$PROJECT_DIR$/source/algorithm/third_party/libNumerics/homography.cpp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/homography.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/libNumerics/homography.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/matrix.cpp" afterPath="$PROJECT_DIR$/source/algorithm/third_party/libNumerics/matrix.cpp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/matrix.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/libNumerics/matrix.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/numerics.cpp" afterPath="$PROJECT_DIR$/source/algorithm/third_party/libNumerics/numerics.cpp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/numerics.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/libNumerics/numerics.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/rodrigues.cpp" afterPath="$PROJECT_DIR$/source/algorithm/third_party/libNumerics/rodrigues.cpp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/rodrigues.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/libNumerics/rodrigues.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/libNumerics/vector.cpp" afterPath="$PROJECT_DIR$/source/algorithm/third_party/libNumerics/vector.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/RetrieveServer.iml" afterPath="$PROJECT_DIR$/.idea/RetrieveServer.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/extract_feature.h" afterPath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/extract_feature.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/orsa.h" afterPath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/orsa.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Cholesky" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Cholesky" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Core" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Core" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Eigen" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Eigen" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Eigenvalues" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Eigenvalues" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Geometry" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Geometry" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Householder" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Householder" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Jacobi" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Jacobi" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/LU" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/LU" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/QR" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/QR" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/SVD" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/SVD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Sparse" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/Sparse" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/StdDeque" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/StdDeque" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/StdList" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/StdList" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/StdVector" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/StdVector" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Cholesky/LDLT.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Cholesky/LDLT.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Cholesky/LLT.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Cholesky/LLT.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Array.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Array.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/ArrayBase.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/ArrayBase.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/ArrayWrapper.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/ArrayWrapper.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Assign.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Assign.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/BandMatrix.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/BandMatrix.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Block.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Block.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/BooleanRedux.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/BooleanRedux.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/CommaInitializer.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/CommaInitializer.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/CwiseBinaryOp.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/CwiseBinaryOp.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/CwiseNullaryOp.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/CwiseNullaryOp.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/CwiseUnaryOp.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/CwiseUnaryOp.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/CwiseUnaryView.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/CwiseUnaryView.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/DenseBase.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/DenseBase.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/DenseCoeffsBase.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/DenseCoeffsBase.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/DenseStorage.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/DenseStorage.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Diagonal.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Diagonal.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/DiagonalMatrix.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/DiagonalMatrix.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/DiagonalProduct.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/DiagonalProduct.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Dot.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Dot.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/EigenBase.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/EigenBase.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Flagged.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Flagged.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/ForceAlignedAccess.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/ForceAlignedAccess.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Fuzzy.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Fuzzy.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/GenericPacketMath.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/GenericPacketMath.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/GlobalFunctions.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/GlobalFunctions.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/IO.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/IO.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Map.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Map.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/MapBase.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/MapBase.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/MathFunctions.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/MathFunctions.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Matrix.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Matrix.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/MatrixBase.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/MatrixBase.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/NestByValue.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/NestByValue.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/NoAlias.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/NoAlias.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/NumTraits.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/NumTraits.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/PermutationMatrix.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/PermutationMatrix.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/PlainObjectBase.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/PlainObjectBase.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Product.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Product.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Random.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Random.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Redux.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Redux.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Replicate.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Replicate.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/ReturnByValue.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/ReturnByValue.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Reverse.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Reverse.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Select.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Select.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/SelfAdjointView.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/SelfAdjointView.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/SelfCwiseBinaryOp.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/SelfCwiseBinaryOp.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/SolveTriangular.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/SolveTriangular.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/StableNorm.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/StableNorm.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Stride.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Stride.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Swap.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Swap.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Transpose.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Transpose.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Transpositions.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Transpositions.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/TriangularMatrix.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/TriangularMatrix.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/VectorBlock.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/VectorBlock.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/VectorwiseOp.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/VectorwiseOp.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Visitor.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/Visitor.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/AltiVec/Complex.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/AltiVec/Complex.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/AltiVec/PacketMath.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/AltiVec/PacketMath.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/Default/Settings.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/Default/Settings.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/NEON/Complex.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/NEON/Complex.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/NEON/PacketMath.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/NEON/PacketMath.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/SSE/Complex.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/SSE/Complex.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/SSE/MathFunctions.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/SSE/MathFunctions.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/SSE/PacketMath.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/SSE/PacketMath.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/GeneralBlockPanelKernel.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/GeneralBlockPanelKernel.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/GeneralMatrixMatrix.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/GeneralMatrixMatrix.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/GeneralMatrixVector.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/GeneralMatrixVector.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/Parallelizer.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/Parallelizer.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/SelfadjointMatrixMatrix.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/SelfadjointMatrixMatrix.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/SelfadjointMatrixVector.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/SelfadjointMatrixVector.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/SelfadjointProduct.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/SelfadjointProduct.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/SelfadjointRank2Update.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/SelfadjointRank2Update.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/TriangularMatrixMatrix.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/TriangularMatrixMatrix.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/TriangularMatrixVector.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/TriangularMatrixVector.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/TriangularSolverMatrix.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/TriangularSolverMatrix.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/TriangularSolverVector.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/products/TriangularSolverVector.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/BlasUtil.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/BlasUtil.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/Constants.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/Constants.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/DisableStupidWarnings.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/DisableStupidWarnings.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/ForwardDeclarations.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/ForwardDeclarations.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/Macros.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/Macros.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/Memory.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/Memory.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/Meta.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/Meta.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/StaticAssert.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/StaticAssert.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/XprHelper.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/util/XprHelper.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/ComplexEigenSolver.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/ComplexEigenSolver.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/ComplexSchur.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/ComplexSchur.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/EigenSolver.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/EigenSolver.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/HessenbergDecomposition.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/HessenbergDecomposition.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/RealSchur.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/RealSchur.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/Tridiagonalization.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Eigenvalues/Tridiagonalization.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/AlignedBox.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/AlignedBox.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/AngleAxis.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/AngleAxis.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/EulerAngles.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/EulerAngles.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Homogeneous.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Homogeneous.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Hyperplane.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Hyperplane.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/OrthoMethods.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/OrthoMethods.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/ParametrizedLine.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/ParametrizedLine.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Quaternion.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Quaternion.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Rotation2D.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Rotation2D.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/RotationBase.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/RotationBase.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Scaling.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Scaling.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Transform.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Transform.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Translation.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Translation.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Umeyama.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/Umeyama.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/arch/Geometry_SSE.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Geometry/arch/Geometry_SSE.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Householder/BlockHouseholder.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Householder/BlockHouseholder.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Householder/Householder.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Householder/Householder.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Householder/HouseholderSequence.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Householder/HouseholderSequence.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Jacobi/Jacobi.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Jacobi/Jacobi.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/Determinant.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/Determinant.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/FullPivLU.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/FullPivLU.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/PartialPivLU.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/PartialPivLU.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/arch/Inverse_SSE.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/arch/Inverse_SSE.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/QR/ColPivHouseholderQR.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/QR/ColPivHouseholderQR.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/QR/FullPivHouseholderQR.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/QR/FullPivHouseholderQR.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/QR/HouseholderQR.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/QR/HouseholderQR.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/SVD/JacobiSVD.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/SVD/JacobiSVD.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/SVD/UpperBidiagonalization.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/SVD/UpperBidiagonalization.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/StlSupport/StdDeque.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/StlSupport/StdDeque.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/StlSupport/StdList.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/StlSupport/StdList.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/StlSupport/StdVector.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/StlSupport/StdVector.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/StlSupport/details.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/StlSupport/details.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/misc/Image.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/misc/Image.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/misc/Kernel.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/misc/Kernel.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/ArrayCwiseBinaryOps.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/ArrayCwiseBinaryOps.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/ArrayCwiseUnaryOps.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/ArrayCwiseUnaryOps.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/BlockMethods.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/BlockMethods.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/CommonCwiseBinaryOps.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/CommonCwiseBinaryOps.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/CommonCwiseUnaryOps.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/CommonCwiseUnaryOps.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/MatrixCwiseBinaryOps.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/MatrixCwiseBinaryOps.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/MatrixCwiseUnaryOps.h" afterPath="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/plugins/MatrixCwiseUnaryOps.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/detect/sr.h" afterPath="$PROJECT_DIR$/source/algorithm/retrieve/detect/sr.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/retrieveserver.cpp" afterPath="$PROJECT_DIR$/source/retrieveserver.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/threadpool/task.h" afterPath="$PROJECT_DIR$/source/threadpool/task.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/retrieveserver.h" afterPath="$PROJECT_DIR$/source/retrieveserver.h" />
     </list>
     <ignored path="RetrieveServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -265,103 +36,104 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <file leaf-file-name="retrieveserver.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/retrieveserver.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="990">
-              <caret line="66" column="32" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
+            <state relative-caret-position="210">
+              <caret line="81" column="41" selection-start-line="81" selection-start-column="41" selection-end-line="81" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/CMakeLists.txt">
+      <file leaf-file-name="readcsv.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/detect/readcsv.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="match.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/libMatch/match.cpp">
+      <file leaf-file-name="basicoperator.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/detect/basicoperator.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <element signature="e#212#230#0" expanded="true" />
+                <element signature="e#0#19#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="match.h" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/libMatch/match.h">
+      <file leaf-file-name="pgdb.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/pgdb.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="135">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="retrieveserver.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/retrieveserver.cpp">
+      <file leaf-file-name="pgdb.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/pgdb.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MathFunctions.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/SSE/MathFunctions.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-27">
+            <state relative-caret-position="-635">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PacketMath.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/SSE/PacketMath.h">
+      <file leaf-file-name="sr.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/detect/sr.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3795">
-              <caret line="699" column="15" selection-start-line="699" selection-start-column="15" selection-end-line="699" selection-end-column="15" />
+            <state relative-caret-position="120">
+              <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+              <folding>
+                <element signature="e#234#250#0" expanded="true" />
+                <element signature="e#1283#1299#0" expanded="true" />
+                <element signature="e#1373#1389#0" expanded="true" />
+                <element signature="e#1464#1480#0" expanded="true" />
+                <element signature="e#1556#1572#0" expanded="true" />
+                <element signature="e#1660#1676#0" expanded="true" />
+                <element signature="e#1803#1819#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Dense" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/Dense">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Complex.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Core/arch/AltiVec/Complex.h">
+      <file leaf-file-name="Eigenvalues" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/Eigenvalues">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="-78">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding>
+                <element signature="e#558#605#0" expanded="true" />
+                <element signature="e#1108#1252#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LDLT.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Cholesky/LDLT.h">
+      <file leaf-file-name="retrieveutils.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/retrieveutils.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LLT.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/Cholesky/LLT.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+            <state relative-caret-position="120">
+              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -382,13 +154,14 @@
         <option value="$PROJECT_DIR$/conf/configure.json" />
         <option value="$PROJECT_DIR$/conf/configure_duc.json" />
         <option value="$PROJECT_DIR$/source/server.cpp" />
-        <option value="$PROJECT_DIR$/source/retrieveserver.h" />
-        <option value="$PROJECT_DIR$/source/retrieveserver.cpp" />
         <option value="$PROJECT_DIR$/source/threadpool/task.h" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/extract_feature.h" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/orsa.h" />
         <option value="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/arch/Inverse_SSE.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/source/retrieveserver.h" />
+        <option value="$PROJECT_DIR$/source/retrieveserver.cpp" />
+        <option value="$PROJECT_DIR$/source/algorithm/retrieve/detect/sr.h" />
       </list>
     </option>
   </component>
@@ -527,7 +300,67 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="conf" />
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="retrieve" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RetrieveServer" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RetrieveServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="retrieve" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="detect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RetrieveServer" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RetrieveServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="algorithm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="retrieve" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -744,11 +577,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32934928" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25232404" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -785,90 +618,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/conf/configure_duc.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf/configure.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/utils/utils.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="68" column="32" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/server.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
-          <folding>
-            <element signature="e#37#56#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/server.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/retrieveserver.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-          <folding>
-            <element signature="e#116#135#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/threadpool/task.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/threadpool/task.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/pgdb.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/include/pqxx/connection">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/include/pqxx/connection.hxx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -881,14 +630,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/pgdb.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -953,22 +694,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/retrieveutils.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/retrieveutils.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1056,14 +781,6 @@
           <folding>
             <element signature="e#53#70#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/Eigenvalues">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1163,14 +880,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/retrieveserver.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
@@ -1199,8 +908,145 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/libMatch/match.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
+        <state relative-caret-position="240">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/server.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/server.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-225">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/library.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+          <folding>
+            <element signature="e#254#272#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/library.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-435">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/retrieveserver.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/retrieveserver.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="81" column="41" selection-start-line="81" selection-start-column="41" selection-end-line="81" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/retrieveutils.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/Dense">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/Eigenvalues">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-78">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#558#605#0" expanded="true" />
+            <element signature="e#1108#1252#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/detect/sr.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding>
+            <element signature="e#234#250#0" expanded="true" />
+            <element signature="e#1283#1299#0" expanded="true" />
+            <element signature="e#1373#1389#0" expanded="true" />
+            <element signature="e#1464#1480#0" expanded="true" />
+            <element signature="e#1556#1572#0" expanded="true" />
+            <element signature="e#1660#1676#0" expanded="true" />
+            <element signature="e#1803#1819#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/detect/basicoperator.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/pgdb.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/pgdb.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-635">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/retrieveutils.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+          <folding>
+            <element signature="e#49#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/detect/readcsv.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
