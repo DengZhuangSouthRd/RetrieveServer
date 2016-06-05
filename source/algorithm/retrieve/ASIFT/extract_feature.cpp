@@ -35,7 +35,7 @@ bool ASIFT_Ext_Features_Gdal(const string Output_FileName, string Input_FilePath
             delete[] Img;
             Img=NULL;
         }
-        throw runtime_error("ImageRetrieve Memort Error !");
+        return false;
     }
 
     if (bandcount==3) {
@@ -54,7 +54,7 @@ bool ASIFT_Ext_Features_Gdal(const string Output_FileName, string Input_FilePath
             delete[] Img;
             Img=NULL;
         }
-        throw runtime_error("ImageRetrieve Image Band Error !");
+        return false;
     }
 
     //释放内存
@@ -146,7 +146,7 @@ bool ASIFT_Ext_Features_Gdal(const string Output_FileName, string Input_FilePath
     ofstream fout(Output_FileName.c_str());
     if (!fout) {
         cerr << "Output File Name Error!" << endl;
-        throw runtime_error("ImageRetrieve OutPut Feature File Error !");
+        return false;
     }
 
     /*将特征写入文件*/

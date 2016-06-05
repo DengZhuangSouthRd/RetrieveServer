@@ -72,18 +72,18 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
 }
 
 WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Current &) {
-    string task_id = mapArg.at("id");
+    string task_id = mapArg.at("uuid");
     WordRes obj;
     log_InputParameters(mapArg);
-    if(mapArg.count("imgurl") == 0) {
+    if(mapArg.count("purl") == 0) {
         obj.status = -1;
         Log::Error("RetrieveServer ## imgSearchSync, Parameters Error !");
         return obj;
     }
-    string imgurl(mapArg.at("imgurl"));
+    string purl(mapArg.at("purl"));
     string saveurl("");
     vector<vector<double>> imgFeatures;
-    bool flag = ASIFT_Ext_Features_Gdal(saveurl, imgurl, imgFeatures);
+    bool flag = ASIFT_Ext_Features_Gdal(saveurl, purl, imgFeatures);
     if(flag == false) {
         Log::Error("Fetch Fusion Result Struct Failed !");
         obj.status = -1;
