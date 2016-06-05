@@ -48,7 +48,8 @@
 #include "compute_asift_keypoints.h"
 
 #ifdef _OPENMP
-#include <omp.h>
+//#include <omp.h>
+#include <>
 #endif
 
 

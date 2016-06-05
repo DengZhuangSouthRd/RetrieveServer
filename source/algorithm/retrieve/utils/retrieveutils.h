@@ -15,7 +15,7 @@ typedef struct _InputInterface{
     string saveurl;
 }InputInterface;
 
-string getPGConfInfo(const map<string, string>& argvMap);
+
 void* retrieveInterface(void* args);
 
 #endif // RETRIEVEUTILS_H

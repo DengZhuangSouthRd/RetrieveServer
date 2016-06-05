@@ -16,6 +16,8 @@ set(SOURCE_FILES
         source/utils/log.h
         source/utils/utils.cpp
         source/utils/utils.h
+        source/utils/pgdb.h
+        source/utils/pgdb.cpp
         source/utils/jsoncpp.cpp
         source/utils/json/json.h
         source/utils/json/json-forwards.h
@@ -29,8 +31,6 @@ set(SOURCE_FILES
         source/rpc/retrieve/ImageRetrieveRpc.cpp
         source/algorithm/thumb/imagethumb.cpp
         source/algorithm/thumb/imagethumb.h
-        source/algorithm/retrieve/utils/pgdb.h
-        source/algorithm/retrieve/utils/pgdb.cpp
         source/algorithm/retrieve/utils/retrieveutils.h
         source/algorithm/retrieve/utils/retrieveutils.cpp
         source/algorithm/retrieve/detect/basicoperator.h

@@ -1,3 +1,4 @@
+
 #ifndef _SR_H_
 #define _SR_H_
 
@@ -5,11 +6,9 @@
 #include <vector>
 #include <algorithm>
 #include <string>
-
 #include "Eigen/Dense"
 #include "readcsv.h"
 #include "basicoperator.h"
-
 using namespace std;
 using namespace Eigen;
 
@@ -17,335 +16,435 @@ template<class DataType>
 class SR {
 
 public:
-    static SR* p_SingleSR;
-    static SR* getSingleInstance();
 
-private:
+	//���캯��
 	SR();
 	SR(vector<string> DicFilePath);
-    ~SR();
 
-public:
-    void setDictFilePaths(vector<string> DictFilePath);
-	//加载字典 第0类字典对应DicFilePath[0]
-	void LoadDic(vector<string> DicFilePath);
+	//�����ֵ� ��0���ֵ��ӦDicFilePath[0]
+	bool LoadDic(vector<string> DicFilePath);
 
-	//稀疏表示分类（一组特征）
+	//ϡ���ʾ���ࣨһ��������
 	int SRClassify(vector<DataType>& y, DataType min_residual, int sparsity);
 
-	//稀疏表示分类（多组特征）
+	//ϡ���ʾ���ࣨ����������
 	int SRClassify(vector<vector<DataType>>& y, DataType min_residual, int sparsity);
 
-private:
-	vector<vector<DataType>> dic;		//存放字典 （vector<DataType>：列）
-	vector<int> dicclassnum;			//每类字典的列数
-	int	classnum;						//类的个数
+	//��������
+	~SR();
 
 private:
-	//两个数组内积
+
+	vector<vector<DataType>> dic;		//����ֵ� ��vector<DataType>���У�
+	vector<int> dicclassnum;			//ÿ���ֵ������
+	int	classnum;						//��ĸ���
+
+
+private:
 	DataType Dot(vector<DataType> vec1, vector<DataType> vec2);
 
-	//数组2范数
 	DataType Norm(vector<DataType> vec);
 
-	//数组的最大值
-	int Max(vector<DataType> vec);
+	int Max(vector<int> vec);
 
-	//求解最小二乘问题
-	void solve(vector<vector<DataType>> phi, vector<DataType>& y, vector<DataType>& x);
+	//�����С��������
+	bool solve(vector<vector<DataType>> phi, vector<DataType>& y, vector<DataType>& x);
 
-	//OMP算法
-	void OrthMatchPursuit(vector<DataType>& y, DataType min_residual, int sparsity, vector<DataType>& x, vector<int>& patch_indices);
+	//OMP�㷨
+	bool OrthMatchPursuit(vector<DataType>& y, DataType min_residual, int sparsity, vector<DataType>& x, vector<int>& patch_indices);
+
+
+
 };
 
+//���캯��
 template<class DataType>
-SR* SR<DataType>::p_SingleSR = new (std::nothrow) SR<double>();
-
-template<class DataType>
-SR* SR<DataType>::getSingleInstance() {
-    return p_SingleSR;
-}
-
-template<class DataType>
-SR<DataType>::SR() {
+SR<DataType>::SR()
+{
 	this->classnum = 0;
 	dicclassnum.clear();
 }
-
 template<class DataType>
-SR<DataType>::SR(vector<string> DicFilePath) {
+SR<DataType>::SR(vector<string> DicFilePath)
+{
 	this->LoadDic(DicFilePath);
 }
 
 template<class DataType>
-void SR<DataType>::setDictFilePaths(vector<string> DictFilePath) {
-    this->LoadDic(DictFilePath);
-}
-
-//稀疏表示分类（一组特征）
-template<class DataType>
-int SR<DataType>::SRClassify(vector<DataType>& y, DataType min_residual, int sparsity) {
-	/*SRClassify		稀疏表示识别
-	*dic				字典（列*行）
-	*dicclassnum		字典中每个类别的列数
-	*y					特征
-	*min_residual		最小残差
-	*sparsity			稀疏度
-	*return：类别（1，2，3，...）
+int SR<DataType>::SRClassify(vector<DataType>& y, DataType min_residual, int sparsity)
+{
+	/*SRClassify		ϡ���ʾʶ��
+	*y					����
+	*min_residual		��С�в�
+	*sparsity			ϡ���
+	*return�����:��0, 1��2��3��...�� -1������
 	*author:ys
 	*date:2016.05.05
 	*/
-
-	int fsize = y.size(); //特征维数
+	int fsize = y.size(); //����ά��
 	if (!fsize){
 		cerr << "SRClassify:error." << endl;
-        throw "SRClassify:error";
+		cerr << "file:" << __FILE__ << endl;
+		cerr << "line: " << __LINE__ << endl;
+		cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+		return -1;
 	}
-
-	int dcol = dic.size();      //字典的列数
+	int dcol = dic.size();      //�ֵ������
 	if (!dcol){
 		cerr << "SRClassify:error." << endl;
-		throw "SRClassify:error";
+		cerr << "file:" << __FILE__ << endl;
+		cerr << "line: " << __LINE__ << endl;
+		cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+		return -1;
 	}
-	int drow = dic[0].size();   //字典的行数
+	int drow = dic[0].size();   //�ֵ������
 	if (!drow || drow != fsize){
 		cerr << "SRClassify:error." << endl;
-		throw "SRClassify:error";
+		cerr << "file:" << __FILE__ << endl;
+		cerr << "line: " << __LINE__ << endl;
+		cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+		return -1;
 	}
 	int i, j;
-	vector<int> patch_indices;	//稀疏系数的列号
-	vector<double> coefficient;//稀疏系数
+	vector<int> patch_indices;	//ϡ��ϵ�����к�
+	vector<DataType> coefficient;//ϡ��ϵ��
 
-	OrthMatchPursuit(y, min_residual, sparsity, coefficient, patch_indices);//OMP求稀疏系数
+	if ( !OrthMatchPursuit(y, min_residual, sparsity, coefficient, patch_indices) )//OMP��ϡ��ϵ��
+	{
+		vector<int>().swap(patch_indices);//�ͷ��ڴ�
+		vector<DataType>().swap(coefficient);//�ͷ��ڴ�
+		//patch_indices.clear();//�ͷ��ڴ�
+		//coefficient.clear();//�ͷ��ڴ�
+		cerr << "SRClassify:OMP error." << endl;
+		cerr << "file:" << __FILE__ << endl;
+		cerr << "line: " << __LINE__ << endl;
+		cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+		return -1;
+	}
 
-	vector<double> x(dcol, 0.0); //稀疏解
-    for (i = 0; i < patch_indices.size(); i++) {
-		cout << coefficient[i] << "  ";
+	vector<DataType> x(dcol, 0.0); //ϡ���
+	for (i = 0; i < patch_indices.size(); i++) {
 		x[patch_indices[i]] = coefficient[i];
 	}
-	cout << endl;
 
-	patch_indices.clear();//释放内存
-	coefficient.clear();//释放内存
+	vector<int>().swap(patch_indices);//�ͷ��ڴ�
+	vector<DataType>().swap(coefficient);//�ͷ��ڴ�
+	//patch_indices.clear();//�ͷ��ڴ�
+	//coefficient.clear();//�ͷ��ڴ�
 
-	int result = 0;//分类结果 属于字典对应的类
+	int result = 0;//������ �����ֵ��Ӧ����
 
-	int start = 0;//某一类开始位置
+	int start = 0;//ĳһ�࿪ʼλ��
 	DataType mindist = 100000000;
-    for (i = 0; i < classnum; i++) {
+	for (i = 0; i < classnum; i++)
+	{
 		vector<DataType> tmp(fsize, 0.0);
-        for (j = start; j < dicclassnum[i]; j++) {
-            if (x[j] != 0.0) {
-				tmp = tmp + dic[j] * x[j];
+		for (j = start; j < dicclassnum[i]; j++)
+		{
+			if (x[j] != 0.0)
+			{
+				try
+				{
+					tmp = tmp + dic[j] * x[j];
+				}
+				catch (runtime_error &e)
+				{
+					vector<DataType>().swap(tmp);//�ͷ��ڴ�
+					//tmp.clear();//�ͷ��ڴ�
+
+					vector<DataType>().swap(x);//�ͷ��ڴ�
+					//x.clear();//�ͷ��ڴ�
+
+					cerr << "SRClassify:error." << endl;
+					cerr << e.what() << endl;
+					cerr << "file:" << __FILE__ << endl;
+					cerr << "line: " << __LINE__ << endl;
+					cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+					return -1;
+
+				}
+				
 			}
+
 		}
-		DataType dist = Norm(y - tmp);
+		DataType dist;
+		try
+		{
+			dist = Norm(y - tmp);
+		}
+		catch (runtime_error &e)
+		{
+			vector<DataType>().swap(tmp);//�ͷ��ڴ�
+			//tmp.clear();//�ͷ��ڴ�
 
-		tmp.clear();//释放内存
+			vector<DataType>().swap(x);//�ͷ��ڴ�
+			//x.clear();//�ͷ��ڴ�
 
-        if (mindist > dist) {
+			cerr << "SRClassify:error." << endl;
+			cerr << e.what() << endl;
+			cerr << "file:" << __FILE__ << endl;
+			cerr << "line: " << __LINE__ << endl;
+			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+			return -1;
+
+		}
+
+		vector<DataType>().swap(tmp);//�ͷ��ڴ�
+		//tmp.clear();//�ͷ��ڴ�
+
+		if (mindist > dist)
+		{
 			mindist = dist;
 			result = i;//
 		}
 
 		start += dicclassnum[i];
 	}
+	vector<DataType>().swap(x);//�ͷ��ڴ�
+	//x.clear();//�ͷ��ڴ�
 
-	x.clear();//释放内存
+	return result; //result��0��1��2��3��...��
 
-	return result; //result（0，1，2，3，...）
 }
 
-//稀疏表示分类（多组特征）
+//ϡ���ʾ���ࣨ����������
 template<class DataType>
-int SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual, int sparsity) {
-    int size = y.size(),i=0;
+int SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual, int sparsity){
+	int i;
+	int size = y.size();
 	vector<int> result(this->classnum, 0);
-    for (i = 0; i < size; i++) {
+	for (i = 0; i < size; i++)
+	{
 		int tmp = SRClassify(y[i], min_residual, sparsity);
+		if (tmp < 0)
+		{
+			cerr << "SRClassify:error." << endl;
+			cerr << "file:" << __FILE__ << endl;
+			cerr << "line: " << __LINE__ << endl;
+			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+			vector<int>().swap(result);//�ͷ��ڴ�
+			return -1;
+		}
 		result[tmp]++;
 	}
-	int maxindex = Max(result);
-	result.clear();
+	
+	int maxindex;
+	try
+	{
+		maxindex = Max(result);
+	}
+	catch (runtime_error &e)
+	{
+		vector<int>().swap(result);//�ͷ��ڴ�
+		//result.clear();//�ͷ��ڴ�
+
+		cerr << "SRClassify:error." << endl;
+		cerr << e.what() << endl;
+		cerr << "file:" << __FILE__ << endl;
+		cerr << "line: " << __LINE__ << endl;
+		cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+		return -1;
+
+	}
+	vector<int>().swap(result);//�ͷ��ڴ�
+	//result.clear();//�ͷ��ڴ�
+
 	return maxindex;
 }
 
-//析构函数
+//��������
 template<class DataType>
-SR<DataType>::~SR() {
-    int size = dic.size(),i=0;
-    for (i = 0; i < size; i++) {
-		dic[i].clear();
+SR<DataType>::~SR(){
+	//�ͷ��ֵ��ڴ�
+	int i;
+	int size = dic.size();
+	for (i = 0; i < size; i++) 
+	{
+		vector<DataType>().swap(dic[i]);
+		//dic[i].clear();
 	}
-	dic.clear();
+	vector<vector<DataType>>().swap(dic);
+	//dic.clear();
+	vector<int>().swap(dicclassnum);
 }
 
-//两个数组内积
+//���������ڻ�
 template<class DataType>
 DataType SR<DataType>::Dot(vector<DataType> vec1, vector<DataType> vec2)
 {
-	/*Norm				求两个数组的内积
-	*vec1				数组（N）
-	*vec2				数组（N）
-	*return：DataType
+	/*Norm				������������ڻ�
+	*vec1				���飨N��
+	*vec2				���飨N��
+	*return��DataType
 	*author:ys
 	*date:2016.05.05
 	*/
 	if (!vec1.size() || !vec2.size() || vec1.size() != vec2.size()){
 		cerr << "Dot:error." << endl;
-		throw "Dot:error";
+		throw runtime_error("Dot:error");
 	}
 	DataType sum = 0;
 	int i;
 	int len = vec1.size();
 	for (i = 0; i < len; i++)
+	{
 		sum += vec1[i] * vec2[i];
+	}
 
 	return sum;
 }
 
-//数组2范数
+//����2����
 template<class DataType>
 DataType SR<DataType>::Norm(vector<DataType> vec)
 {
-	/*Norm				求数组的2范数
-	*vec				数组（N）
-	*return：DataType
+	/*Norm				�������2����
+	*vec				���飨N��
+	*return��DataType
 	*author:ys
 	*date:2016.05.05
 	*/
 	if (!vec.size()){
 		cerr << "Norm:error." << endl;
-		throw "Norm:error";
+		throw runtime_error("Norm:error");
 	}
 	DataType norm = 0;
 	int i;
 	int len = vec.size();
 	for (i = 0; i < len; i++)
+	{
 		norm += vec[i] * vec[i];
+	}
 
 	return sqrt(norm);
 }
 
-//数组的最大值
 template<class DataType>
-int SR<DataType>::Max(vector<DataType> vec){
-	/*Max				求数组的最大值
-	*vec				数组（N）
-	*return：下标
-	*author:ys
-	*date:2016.05.05
-	*/
+int SR<DataType>::Max(vector<int> vec){
 	if (!vec.size()){
 		cerr << "Max:error." << endl;
-		throw "Max:error";
+		throw runtime_error("Max:error");
 	}
 	int index = 0;
 	int i;
 	int len = vec.size();
 	for (i = 1; i < len; i++)
+	{
 		if (vec[1] > vec[index])
+		{
 			index = i;
+		}
+	}
 
 	return index;
 }
 
-//加载字典 第0类字典对应DicFilePath[0]
 template<class DataType>
-void SR<DataType>::LoadDic(vector<string> DicFilePath){
-
-	/*LoadDic				按0，1，2，...，n类依次加载字典，并记录每类字典的列数
-	*DicFilePath			每类对应的字典
-	*author:ys
-	*date:2016.05.05
-	*/
+bool SR<DataType>::LoadDic(vector<string> DicFilePath){
 	this->classnum = DicFilePath.size();
-    if (this->classnum == 0) {
-		cerr << "dic path error." << endl;
-		throw "dic path error";
-    } else {
+	if (this->classnum == 0) {
+		cerr << "LoadDic:Dic Path error." << endl;
+		cerr << "file:" << __FILE__ << endl;
+		cerr << "line: " << __LINE__ << endl;
+		cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+		return false;
+	} else {
 		cout << "the classnum is " << this->classnum << "." << endl;
 	}
 
 	ReadCsvFile<DataType> readcsv;
 	int i;
 	int num;
-    for (i = 0; i < this->classnum; i++) {
-		num = readcsv.ReadCsv(DicFilePath[i], this->dic);
-        //cout << "the cols of class " << i << " are: " << num << endl;
+	for (i = 0; i < this->classnum; i++) {
+		cout << "loading " << DicFilePath[i] << ". ";
+		if (!readcsv.ReadCsv(DicFilePath[i], this->dic, num)) {
+			cerr << "LoadDic:ReadCsv error." << endl;
+			cerr << "file:" << __FILE__ << endl;
+			cerr << "line: " << __LINE__ << endl;
+			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+		}	
+		cout << "the cols of class " << i << " are: " << num << endl;
 		dicclassnum.push_back(num);
 	}
+
+	return true;
 }
 
-//求解最小二乘问题
 template<class DataType>
-void SR<DataType>::solve(vector<vector<DataType>> phi, vector<DataType>& y, vector<DataType>& x)
-{
-	/*solve				求解最小二乘问题
-	*phi				矩阵（列*行）
-	*y					特征
-	*x					求解系数
-	*author:ys
-	*date:2016.05.05
-	*/
+bool SR<DataType>::solve(vector<vector<DataType>> phi, vector<DataType>& y, vector<DataType>& x) {
 	int col = phi.size();
-    if (col <= 0) {
+	if (col <= 0) {
 		cerr << "solve: error." << endl;
-		throw "solve: error";
+		cerr << "file:" << __FILE__ << endl;
+		cerr << "line: " << __LINE__ << endl;
+		cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+		return false;
 	}
 	int row = phi[0].size();
-    if (row != y.size() || col != x.size()) {
+	if (row != y.size() || col != x.size()) {
 		cerr << "solve: error." << endl;
-		throw "solve: error";
+		cerr << "file:" << __FILE__ << endl;
+		cerr << "line: " << __LINE__ << endl;
+		cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+		return false;
 	}
 	MatrixXd A(row, col);
 	VectorXd b(row);
 	int i, j;
-    for (i = 0; i < row; i++) {
+	for (i = 0; i < row; i++)
+	{
 		b(i) = y[i];
 		for (j = 0; j < col; j++)
 			A(i, j) = phi[j][i];
-    }
+	}
+	//jacobiSvd ��ʽ:Slow (but fast for small matrices)
+	//cout << "The least-squares solution is:\n"<< A.jacobiSvd(ComputeThinU | ComputeThinV).solve(b) << std::endl;
+	//colPivHouseholderQr����:fast
+	//std::cout << "The least-squares solution is:\n"<< A.colPivHouseholderQr().solve(b) << std::endl;
 
 	VectorXd result = A.colPivHouseholderQr().solve(b);
 	for (i = 0; i < col; i++)
+	{
 		x[i] = result(i);
+	}
+
+	return true;
 }
 
-//OMP算法
+//OMP�㷨
 template<class DataType>
-void SR<DataType>::OrthMatchPursuit(vector<DataType>& y, DataType min_residual, int sparsity, vector<DataType>& x, vector<int>& patch_indices)
-{
-	/*OrthMatchPursuit	正交匹配追踪算法（OMP）
-	*dic				字典（列*行）
-	*y					特征
-	*min_residual		最小残差
-	*sparsity			稀疏度
-	*x					返回每个原子对应的系数
-	*patch_indices		返回选出的原子序号
-	*return：true：成功	| false：失败
-	*author:ys
-	*date:2016.05.05
-	*/
-	int fsize = y.size(); //特征维数
-    if (!fsize) {
+bool SR<DataType>::OrthMatchPursuit(vector<DataType>& y, DataType min_residual, int sparsity, vector<DataType>& x, vector<int>& patch_indices) {
+	int fsize = y.size();
+	if (!fsize)
+	{
 		cerr << "OrthMatchPursuit:error." << endl;
-		throw "OrthMatchPursuit:error";
+		cerr << "file:" << __FILE__ << endl;
+		cerr << "line: " << __LINE__ << endl;
+		cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+		return false;
 	}
-	int dcol = dic.size();      //字典的列数
-    if (!dcol) {
+	int dcol = dic.size();      //�ֵ������
+	if (!dcol)
+	{
 		cerr << "OrthMatchPursuit:error." << endl;
-		throw "OrthMatchPursuit:error";
+		cerr << "file:" << __FILE__ << endl;
+		cerr << "line: " << __LINE__ << endl;
+		cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+		return false;
 	}
-	int drow = dic[0].size();   //字典的行数
-    if (!drow || drow != fsize) {
+	int drow = dic[0].size();   //�ֵ������
+	if (!drow || drow != fsize)
+	{
 		cerr << "OrthMatchPursuit:error." << endl;
-		throw "OrthMatchPursuit:error";
+		cerr << "file:" << __FILE__ << endl;
+		cerr << "line: " << __LINE__ << endl;
+		cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+		return false;
 	}
 
-	vector<DataType> residual(y); //残差
+	vector<DataType> residual(y); //�в�
 
-	vector<vector<DataType>> phi; //保存已选出的原子向量
+	vector<vector<DataType>> phi; //������ѡ����ԭ������
 
 	x.clear();
 
@@ -353,12 +452,32 @@ void SR<DataType>::OrthMatchPursuit(vector<DataType>& y, DataType min_residual, 
 	unsigned int patch_index;
 	int i;
 
-    while(true) {
+	for (;;)
+	{
 		max_coefficient = 0;
-        for (i = 0; i < dcol; i++) {
-			DataType coefficient = (DataType)Dot(dic[i], residual);
-
-            if (fabs(coefficient) > fabs(max_coefficient)) {
+		for (i = 0; i < dcol; i++)
+		{
+			DataType coefficient;
+			try
+			{
+				coefficient = (DataType)Dot(dic[i], residual);
+			}
+			catch (runtime_error &e)
+			{
+				vector<DataType>().swap(residual);//�ͷ��ڴ�
+				//residual.clear();//�ͷ��ڴ�
+				for (i = 0; i < phi.size(); i++) vector<DataType>().swap(phi[i]);
+				vector<vector<DataType>>().swap(phi);
+				//phi.clear();//�ͷ��ڴ�
+				cerr << "OrthMatchPursuit:error." << endl;
+				cerr << e.what() << endl;
+				cerr << "file:" << __FILE__ << endl;
+				cerr << "line: " << __LINE__ << endl;
+				cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+				return false;
+			}
+			if (fabs(coefficient) > fabs(max_coefficient))
+			{
 				max_coefficient = coefficient;
 				patch_index = i;
 			}
@@ -370,15 +489,55 @@ void SR<DataType>::OrthMatchPursuit(vector<DataType>& y, DataType min_residual, 
 
 		x.push_back(0.0);
 
-		solve(phi, y, x); //求解最小二乘问题
+		if ( !solve(phi, y, x) )//�����С��������
+		{
+			cerr << "OrthMatchPursuit:error." << endl;
+			cerr << "file:" << __FILE__ << endl;
+			cerr << "line: " << __LINE__ << endl;
+			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+			vector<DataType>().swap(residual);//�ͷ��ڴ�
+			//residual.clear();//�ͷ��ڴ�
+			for (i = 0; i < phi.size(); i++) vector<DataType>().swap(phi[i]);
+			vector<vector<DataType>>().swap(phi);
+			//phi.clear();//�ͷ��ڴ�
+			return false;
+		}
 
-		residual = y - phi *x;
+		DataType res_norm;
+		try
+		{
+			residual = y - phi *x;
+			res_norm = (DataType)Norm(residual);
+		}
+		catch (runtime_error &e)
+		{
+			vector<DataType>().swap(residual);//�ͷ��ڴ�
+			//residual.clear();//�ͷ��ڴ�
+			for (i = 0; i < phi.size(); i++) vector<DataType>().swap(phi[i]);
+			vector<vector<DataType>>().swap(phi);
+			//phi.clear();//�ͷ��ڴ�
+			cerr << "OrthMatchPursuit:error." << endl;
+			cerr << e.what() << endl;			
+			cerr << "file:" << __FILE__ << endl;
+			cerr << "line: " << __LINE__ << endl;
+			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+			return false;
+
+		}
+		
+
+		//if (x.size() >= sparsity || res_norm <= min_residual) //����ϡ������Ͳв���Ϊ��ֹ����
 		if (x.size() >= sparsity)
 			break;
 	}
 
-	residual.clear();//释放内存
-	phi.clear();//释放内存
+	vector<DataType>().swap(residual);//�ͷ��ڴ�
+	//residual.clear();//�ͷ��ڴ�
+	for (i = 0; i < phi.size(); i++) vector<DataType>().swap(phi[i]);
+	vector<vector<DataType>>().swap(phi);
+	//phi.clear();//�ͷ��ڴ�
+
+	return true;
 }
 
 

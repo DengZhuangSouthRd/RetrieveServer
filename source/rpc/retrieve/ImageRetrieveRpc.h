@@ -154,7 +154,85 @@ struct WordWiki
     }
 };
 
-typedef ::std::vector< ::std::string> ListString;
+struct ImgInfo
+{
+    ::Ice::Int id;
+    ::std::string path;
+    ::std::string name;
+
+    bool operator==(const ImgInfo& __rhs) const
+    {
+        if(this == &__rhs)
+        {
+            return true;
+        }
+        if(id != __rhs.id)
+        {
+            return false;
+        }
+        if(path != __rhs.path)
+        {
+            return false;
+        }
+        if(name != __rhs.name)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    bool operator<(const ImgInfo& __rhs) const
+    {
+        if(this == &__rhs)
+        {
+            return false;
+        }
+        if(id < __rhs.id)
+        {
+            return true;
+        }
+        else if(__rhs.id < id)
+        {
+            return false;
+        }
+        if(path < __rhs.path)
+        {
+            return true;
+        }
+        else if(__rhs.path < path)
+        {
+            return false;
+        }
+        if(name < __rhs.name)
+        {
+            return true;
+        }
+        else if(__rhs.name < name)
+        {
+            return false;
+        }
+        return false;
+    }
+
+    bool operator!=(const ImgInfo& __rhs) const
+    {
+        return !operator==(__rhs);
+    }
+    bool operator<=(const ImgInfo& __rhs) const
+    {
+        return operator<(__rhs) || operator==(__rhs);
+    }
+    bool operator>(const ImgInfo& __rhs) const
+    {
+        return !operator<(__rhs) && !operator==(__rhs);
+    }
+    bool operator>=(const ImgInfo& __rhs) const
+    {
+        return !operator<(__rhs);
+    }
+};
+
+typedef ::std::vector< ::RPCImgRecong::ImgInfo> ListString;
 
 typedef ::std::map< ::std::string, ::std::string> DictStr2Str;
 
@@ -202,6 +280,36 @@ struct StreamReader< ::RPCImgRecong::WordWiki, S>
         __is->read(v.key);
         __is->read(v.abstr);
         __is->read(v.descr);
+    }
+};
+
+template<>
+struct StreamableTraits< ::RPCImgRecong::ImgInfo>
+{
+    static const StreamHelperCategory helper = StreamHelperCategoryStruct;
+    static const int minWireSize = 6;
+    static const bool fixedLength = false;
+};
+
+template<class S>
+struct StreamWriter< ::RPCImgRecong::ImgInfo, S>
+{
+    static void write(S* __os, const ::RPCImgRecong::ImgInfo& v)
+    {
+        __os->write(v.id);
+        __os->write(v.path);
+        __os->write(v.name);
+    }
+};
+
+template<class S>
+struct StreamReader< ::RPCImgRecong::ImgInfo, S>
+{
+    static void read(S* __is, ::RPCImgRecong::ImgInfo& v)
+    {
+        __is->read(v.id);
+        __is->read(v.path);
+        __is->read(v.name);
     }
 };
 

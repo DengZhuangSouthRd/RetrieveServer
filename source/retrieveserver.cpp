@@ -4,14 +4,26 @@
 
 #include "retrieveserver.h"
 
+extern  map<string, string> g_ConfMap;
 RetrieveServer::RetrieveServer() {
     p_threadPool = NULL;
     p_threadPool = ThreadPool::getSingleInstance();
+    p_pgdb = NULL;
+    string pg_con_info = getPGConfInfo(g_ConfMap);
+    p_pgdb = new PGDB(pg_con_info);
+    if(p_pgdb->is_Working() == false) {
+        delete p_pgdb;
+        throw runtime_error("PG DB Not Working ! Please Check !");
+    }
+    p_SRClassify = NULL;
+    p_SRClassify = new SR<float>();
 }
 
 RetrieveServer::~RetrieveServer() {
     p_threadPool->revokeSingleInstance();
     p_threadPool = NULL;
+    delete p_pgdb;
+    delete p_SRClassify;
 }
 
 void RetrieveServer::log_InputParameters(const DictStr2Str &mapArg) {
@@ -33,8 +45,8 @@ void RetrieveServer::log_OutputResult(const WordWiki &wiki) {
 void RetrieveServer::log_OutputResult(const WordRes &wordres) {
     string str = "RetrieveServer ## ";
     str += ("status " + to_string(wordres.status));
-    for(vector<string>::const_iterator it=wordres.keyWords.begin(); it!=wordres.keyWords.end(); it++) {
-        str += (" " + *it);
+    for(auto it=wordres.keyWords.begin(); it!=wordres.keyWords.end(); it++) {
+        str += (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
     }
     Log::Info(str);
 }
@@ -42,11 +54,11 @@ void RetrieveServer::log_OutputResult(const WordRes &wordres) {
 void RetrieveServer::log_OutputResult(const ImgRes &imgres) {
     string str = "RetrieveServer ## ";
     str += ("status " + to_string(imgres.status));
-    for(vector<string>::const_iterator it=imgres.imgRemote.begin(); it!=imgres.imgRemote.end(); it++) {
-        str += (" " + *it);
+    for(auto it=imgres.imgRemote.begin(); it!=imgres.imgRemote.end(); it++) {
+        str += (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
     }
-    for(vector<string>::const_iterator it=imgres.imgPic.begin(); it!=imgres.imgPic.end(); it++) {
-        str += (" " + *it);
+    for(auto it=imgres.imgPic.begin(); it!=imgres.imgPic.end(); it++) {
+        str += (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
     }
     Log::Info(str);
 }
@@ -74,6 +86,7 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
 WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Current &) {
     string task_id = mapArg.at("uuid");
     WordRes obj;
+    obj.status = 0;
     log_InputParameters(mapArg);
     if(mapArg.count("purl") == 0) {
         obj.status = -1;
@@ -81,13 +94,30 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
         return obj;
     }
     string purl(mapArg.at("purl"));
-    string saveurl("");
-    vector<vector<double>> imgFeatures;
-    bool flag = ASIFT_Ext_Features_Gdal(saveurl, purl, imgFeatures);
+    string filename = purl.substr(purl.find_last_of('/'), purl.find_last_of('.'));
+//    string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
+    string saveurl = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/feature/" + filename + ".csv";
+    cout << "Save URL ## " << saveurl << endl;
+    vector<vector<float>> imgFeatures;
+    bool flag = AsiftFeature(saveurl, purl, imgFeatures);
     if(flag == false) {
-        Log::Error("Fetch Fusion Result Struct Failed !");
+        Log::Error("Fetch RetrieveServer Result Struct Failed !");
         obj.status = -1;
     }
+    vector<string> dict_path;
+    dict_path.push_back("/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/dict/13_国家图书馆_f.csv");
+    dict_path.push_back("/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/dict/14_国家大剧院_f.csv");
+    flag = p_SRClassify->LoadDic(dict_path);
+    if(flag == false) {
+        Log::Error("Fetch RetrieveServer Result Struct Failed !");
+        obj.status = -1;
+    }
+    int res = p_SRClassify->SRClassify(imgFeatures, 1, 1);
+    if(res == -1) {
+        Log::Error("Fetch RetrieveServer Result Struct Failed !");
+        obj.status = -1;
+    }
+    log_OutputResult(obj);
     return obj;
 }
 

@@ -12,7 +12,6 @@
 #include <time.h>
 #include <float.h>
 
-
 #define MAX(i,j) ( (i)<(j) ? (j):(i) )
 #define MIN(i,j) ( (i)<(j) ? (i):(j) )
 
@@ -132,70 +131,6 @@ void draw_line(float *igray, int a0, int b0, int a1, int b1, float value, int wi
 // void draw_circle(float *igray, int pi,int pj,float radius, float value, int width, int height);
 void draw_square(float *igray, int a0, int b0, int w0, int h0, float value, int width, int height);
 
-
-
 #endif // _LIBRARY_H_
 
 
-/////////////////////////////////////// Not often used and not checked
-
-//
-
-//
-
-
-
-
-
-/*		
-*/
-
-
-
-
-//void md_fsig_absdif(float *u,float *v,int size);  	/// v = abs(v-u)
-
-
-
-//void md_fsig_sign(float *u,float *v, int size);    	//// ¿¿¿¿¿ ?????
-//int md_fsig_is_increasing(float *u,float tolerance, int size);    ///// ¿¿¿¿¿ ?????	
-
-
-
-
-
-
-
-
-//void md_fsig_multiple(float *u,float multiplier,int size);         	// u = K * u  
-//void md_fsig_product(float *u,float *v,int size);        		// u = u * v 
-//void md_fsig_offset(float *u,float offset, int size);    		// u = u - K  
-
-
-
-//
-
-
-//
-//void md_fsig_threshold(float *u, float *v,float valuem,float valueM, int size);  // threshold into (m,M) 
-
-
-
-//--- Conversion ---
-//void md_fsig_float2char(float min, float max, float *u, float *v, int size);    // Linear Conversion between  (min,max) and (0,255)  
-
-
-
-  
-//void md_fsig_addnoise(float *u,float *v,float std,long int randinit, int size);    // Add gaussian noise of standard deviation sigma  
-
-
-
-// v quantified mxmximage u with interval length lambda
-// if u \in ( (n - 1/2) l, (n + 1/2 ) l )  - >  v = n l  
-// n= 0 -> (-1/2 * l, 1/2 * l) //
-//void  md_fsig_quant(float *u, float *v, float lambda,  int size);
-
-
-// v is projected to the space of quantizations of length lambda that gives u
-//void  md_fsig_projectquant(float *u,float *v,float lambda, int size);

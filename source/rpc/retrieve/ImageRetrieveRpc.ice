@@ -8,8 +8,12 @@ module RPCImgRecong {
         string abstr; //
         string descr; //描述信息
     };
-
-    sequence<string> ListString;
+	struct ImgInfo {
+        int id; //关键字
+        string path; //文件路径 /a/b/c/d/
+        string name; //文件名
+    };
+    sequence<ImgInfo> ListString;
     dictionary<string, string> DictStr2Str;
 
     struct ImgRes {
@@ -38,7 +42,7 @@ module RPCImgRecong {
         ImgRes wordSearchImg(DictStr2Str mapArg); // 通过单词搜索得到图像地址列表
 
         /*
-        "uuid" : "sdmdsfdsfdk"
+        "id" : "sdmdsfdsfdk"
         "purl" : "/home/data/test/test.jpg"
         */
         int imgSearchAsync(DictStr2Str mapArg); //通过图像搜索得到文字列表, 提交的是异步任务，提交成功返回直 > 0, 提交失败返回直 < 0

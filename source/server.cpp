@@ -54,7 +54,7 @@ void Server::close() {
     }
 }
 
-#define REALRUN
+//#define REALRUN
 
 int main(int argc,char* argv[]) {
 #ifdef REALRUN
@@ -65,7 +65,7 @@ int main(int argc,char* argv[]) {
     }
     string configPath(argv[1]);
 #else
-    string configPath = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/conf/configure.json";
+    string configPath = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/conf/configure.json";
 #endif
 
     try {

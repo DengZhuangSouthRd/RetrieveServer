@@ -15,7 +15,8 @@
 #include "utils/log.h"
 #include "threadpool/threadpool.h"
 #include "algorithm/retrieve/utils/retrieveutils.h"
-#include "algorithm/retrieve/utils/pgdb.h"
+#include "utils/pgdb.h"
+#include "algorithm/retrieve/detect/SR.h"
 
 using namespace std;
 using namespace RPCImgRecong;
@@ -42,6 +43,8 @@ public:
 
 private:
     ThreadPool* p_threadPool;
+    PGDB* p_pgdb;
+    SR<float> * p_SRClassify;
 };
 
 

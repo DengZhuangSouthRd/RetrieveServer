@@ -80,6 +80,7 @@ void read_config_Json(string fileName, map<string, string> &argvMap) {
 
         argvMap["RETRIEVESerializePath"] = root["RETRIEVE"].get("RETRIEVESerializePath", "NULL").asString();
         argvMap["RETRIEVESerializePathBak"] = root["RETRIEVE"].get("RETRIEVESerializePathBak", "NULL").asString();
+        argvMap["RETRIEVEUSERIMGFEATUREDIR"] = root["RETRIEVE"].get("RETRIEVEUSERIMGFEATUREDIR", "NULL").asString();
     }
 
     if(root.isMember("QUALITY") == true) {
@@ -95,6 +96,12 @@ void read_config_Json(string fileName, map<string, string> &argvMap) {
             throw runtime_error("Configure Json File Parameter Error !");
         }
     }
+}
+
+string getPGConfInfo(const map<string, string> &argvMap) {
+    string str = "";
+    str = "dbname=" + argvMap.at("RETRIEVEPG_NAME") + " user=" + argvMap.at("RETRIEVEPG_USER") + " password=" + argvMap.at("RETRIEVEPG_PASSWD") + " host=" + argvMap.at("RETRIEVEPG_HOST") + " port=" + argvMap.at("RETRIEVEPG_PORT");
+    return str;
 }
 
 std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
