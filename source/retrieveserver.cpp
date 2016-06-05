@@ -60,42 +60,44 @@ WordWiki RetrieveServer::wordGetKnowledge(const string &word, const Ice::Current
 }
 
 WordRes RetrieveServer::wordSearch(const DictStr2Str &mapArg, const Ice::Current &) {
-
+    WordRes obj;
+    obj.status = 1;
+    return obj;
 }
 
 ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Current &) {
-
+    ImgRes obj;
+    obj.status = 1;
+    return obj;
 }
 
 ImgRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Current &) {
     string task_id = mapArg.at("id");
     ImgRes obj;
     log_InputParameters(mapArg);
-    string imgurl = "";
     if(mapArg.count("imgurl") == 0) {
         obj.status = -1;
         Log::Error("RetrieveServer ## imgSearchSync, Parameters Error !");
         return obj;
     }
-    imgurl.assign(mapArg["imgurl"]);
-    void* tmp = NULL;
-    tmp = retrieveInterface((void*)(&args));
-    if(tmp == NULL) {
+    string imgurl(mapArg.at("imgurl"));
+    string saveurl("");
+    vector<vector<double>> imgFeatures;
+    bool flag = ASIFT_Ext_Features_Gdal(saveurl, imgurl, imgFeatures);
+    if(flag == false) {
         Log::Error("Fetch Fusion Result Struct Failed !");
         return obj;
     }
-    test = (FusionStruct*)tmp;
-    deepCopyTask2RpcResult(*test, obj);
-    delete test;
-    log_OutputResult(obj);
-    fillFinishTaskMap(task_id, args, obj);
     return obj;
 }
 
 int RetrieveServer::imgSearchAsync(const DictStr2Str &mapArg, const Ice::Current &) {
-
+    int status = 2;
+    return status;
 }
 
 ImgRes RetrieveServer::fetchImgSearchResult(const DictStr2Str &mapArg, const Ice::Current &) {
-
+    ImgRes obj;
+    obj.status = 1;
+    return obj;
 }

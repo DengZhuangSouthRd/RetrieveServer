@@ -1,6 +1,6 @@
 {
     "SERVERIP": "10.2.3.119",
-    "PORT": "9999",
+    "PORT": "9998",
     "SERIALIZETIME" : "600",
     "LOGPATH": "/home/fighter/AlgorithmServer/data/log/loginfo.log",
     "FUSION": {

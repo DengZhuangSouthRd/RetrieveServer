@@ -11,4 +11,5 @@ void* retrieveInterface(void *args) {
     cout << inputArgs->imgurl << "; " << inputArgs->saveurl << endl;
     vector<vector<double>> imgFeatures;
     ASIFT_Ext_Features_Gdal(inputArgs->saveurl, inputArgs->imgurl, imgFeatures);
+    return NULL;
 }
