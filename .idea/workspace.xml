@@ -12,11 +12,7 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="466380a9-75a8-465e-8489-a062e0ee321d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/extract_feature.cpp" afterPath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/extract_feature.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/retrieveserver.cpp" afterPath="$PROJECT_DIR$/source/retrieveserver.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.ice" afterPath="$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.ice" />
-    </list>
+    <list default="true" id="466380a9-75a8-465e-8489-a062e0ee321d" name="Default" comment="" />
     <ignored path="RetrieveServer.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,8 +35,8 @@
       <file leaf-file-name="retrieveserver.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/retrieveserver.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="85" column="38" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="39" />
+            <state relative-caret-position="115">
+              <caret line="73" column="36" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -981,8 +977,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/source/retrieveserver.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="85" column="38" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="39" />
+        <state relative-caret-position="115">
+          <caret line="73" column="36" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="37" />
           <folding />
         </state>
       </provider>
