@@ -554,7 +554,7 @@ IceProxy::RPCImgRecong::ImgRetrieval::end_imgSearchAsync(const ::Ice::AsyncResul
     return __ret;
 }
 
-::RPCImgRecong::ImgRes
+::RPCImgRecong::WordRes
 IceProxy::RPCImgRecong::ImgRetrieval::fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context* __ctx)
 {
     __checkTwowayOnly(__RPCImgRecong__ImgRetrieval__fetchImgSearchResult_name);
@@ -581,7 +581,7 @@ IceProxy::RPCImgRecong::ImgRetrieval::fetchImgSearchResult(const ::RPCImgRecong:
             throw __uue;
         }
     }
-    ::RPCImgRecong::ImgRes __ret;
+    ::RPCImgRecong::WordRes __ret;
     ::IceInternal::BasicStream* __is = __og.startReadParams();
     __is->read(__ret);
     __og.endReadParams();
@@ -611,13 +611,13 @@ IceProxy::RPCImgRecong::ImgRetrieval::begin_fetchImgSearchResult(const ::RPCImgR
 #ifdef ICE_CPP11
 
 ::Ice::AsyncResultPtr
-IceProxy::RPCImgRecong::ImgRetrieval::__begin_fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::ImgRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
+IceProxy::RPCImgRecong::ImgRetrieval::__begin_fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::WordRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
 {
     class Cpp11CB : public ::IceInternal::Cpp11FnCallbackNC
     {
     public:
 
-        Cpp11CB(const ::std::function<void (const ::RPCImgRecong::ImgRes&)>& responseFunc, const ::std::function<void (const ::Ice::Exception&)>& exceptionFunc, const ::std::function<void (bool)>& sentFunc) :
+        Cpp11CB(const ::std::function<void (const ::RPCImgRecong::WordRes&)>& responseFunc, const ::std::function<void (const ::Ice::Exception&)>& exceptionFunc, const ::std::function<void (bool)>& sentFunc) :
             ::IceInternal::Cpp11FnCallbackNC(exceptionFunc, sentFunc),
             _response(responseFunc)
         {
@@ -627,7 +627,7 @@ IceProxy::RPCImgRecong::ImgRetrieval::__begin_fetchImgSearchResult(const ::RPCIm
         virtual void completed(const ::Ice::AsyncResultPtr& __result) const
         {
             ::RPCImgRecong::ImgRetrievalPrx __proxy = ::RPCImgRecong::ImgRetrievalPrx::uncheckedCast(__result->getProxy());
-            ::RPCImgRecong::ImgRes __ret;
+            ::RPCImgRecong::WordRes __ret;
             try
             {
                 __ret = __proxy->end_fetchImgSearchResult(__result);
@@ -645,17 +645,17 @@ IceProxy::RPCImgRecong::ImgRetrieval::__begin_fetchImgSearchResult(const ::RPCIm
     
     private:
         
-        ::std::function<void (const ::RPCImgRecong::ImgRes&)> _response;
+        ::std::function<void (const ::RPCImgRecong::WordRes&)> _response;
     };
     return begin_fetchImgSearchResult(__p_mapArg, __ctx, new Cpp11CB(__response, __exception, __sent));
 }
 #endif
 
-::RPCImgRecong::ImgRes
+::RPCImgRecong::WordRes
 IceProxy::RPCImgRecong::ImgRetrieval::end_fetchImgSearchResult(const ::Ice::AsyncResultPtr& __result)
 {
     ::Ice::AsyncResult::__check(__result, this, __RPCImgRecong__ImgRetrieval__fetchImgSearchResult_name);
-    ::RPCImgRecong::ImgRes __ret;
+    ::RPCImgRecong::WordRes __ret;
     if(!__result->__wait())
     {
         try
@@ -673,7 +673,7 @@ IceProxy::RPCImgRecong::ImgRetrieval::end_fetchImgSearchResult(const ::Ice::Asyn
     return __ret;
 }
 
-::RPCImgRecong::ImgRes
+::RPCImgRecong::WordRes
 IceProxy::RPCImgRecong::ImgRetrieval::imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context* __ctx)
 {
     __checkTwowayOnly(__RPCImgRecong__ImgRetrieval__imgSearchSync_name);
@@ -700,7 +700,7 @@ IceProxy::RPCImgRecong::ImgRetrieval::imgSearchSync(const ::RPCImgRecong::DictSt
             throw __uue;
         }
     }
-    ::RPCImgRecong::ImgRes __ret;
+    ::RPCImgRecong::WordRes __ret;
     ::IceInternal::BasicStream* __is = __og.startReadParams();
     __is->read(__ret);
     __og.endReadParams();
@@ -730,13 +730,13 @@ IceProxy::RPCImgRecong::ImgRetrieval::begin_imgSearchSync(const ::RPCImgRecong::
 #ifdef ICE_CPP11
 
 ::Ice::AsyncResultPtr
-IceProxy::RPCImgRecong::ImgRetrieval::__begin_imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::ImgRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
+IceProxy::RPCImgRecong::ImgRetrieval::__begin_imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::WordRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
 {
     class Cpp11CB : public ::IceInternal::Cpp11FnCallbackNC
     {
     public:
 
-        Cpp11CB(const ::std::function<void (const ::RPCImgRecong::ImgRes&)>& responseFunc, const ::std::function<void (const ::Ice::Exception&)>& exceptionFunc, const ::std::function<void (bool)>& sentFunc) :
+        Cpp11CB(const ::std::function<void (const ::RPCImgRecong::WordRes&)>& responseFunc, const ::std::function<void (const ::Ice::Exception&)>& exceptionFunc, const ::std::function<void (bool)>& sentFunc) :
             ::IceInternal::Cpp11FnCallbackNC(exceptionFunc, sentFunc),
             _response(responseFunc)
         {
@@ -746,7 +746,7 @@ IceProxy::RPCImgRecong::ImgRetrieval::__begin_imgSearchSync(const ::RPCImgRecong
         virtual void completed(const ::Ice::AsyncResultPtr& __result) const
         {
             ::RPCImgRecong::ImgRetrievalPrx __proxy = ::RPCImgRecong::ImgRetrievalPrx::uncheckedCast(__result->getProxy());
-            ::RPCImgRecong::ImgRes __ret;
+            ::RPCImgRecong::WordRes __ret;
             try
             {
                 __ret = __proxy->end_imgSearchSync(__result);
@@ -764,17 +764,17 @@ IceProxy::RPCImgRecong::ImgRetrieval::__begin_imgSearchSync(const ::RPCImgRecong
     
     private:
         
-        ::std::function<void (const ::RPCImgRecong::ImgRes&)> _response;
+        ::std::function<void (const ::RPCImgRecong::WordRes&)> _response;
     };
     return begin_imgSearchSync(__p_mapArg, __ctx, new Cpp11CB(__response, __exception, __sent));
 }
 #endif
 
-::RPCImgRecong::ImgRes
+::RPCImgRecong::WordRes
 IceProxy::RPCImgRecong::ImgRetrieval::end_imgSearchSync(const ::Ice::AsyncResultPtr& __result)
 {
     ::Ice::AsyncResult::__check(__result, this, __RPCImgRecong__ImgRetrieval__imgSearchSync_name);
-    ::RPCImgRecong::ImgRes __ret;
+    ::RPCImgRecong::WordRes __ret;
     if(!__result->__wait())
     {
         try
@@ -913,7 +913,7 @@ RPCImgRecong::ImgRetrieval::___fetchImgSearchResult(::IceInternal::Incoming& __i
     ::RPCImgRecong::DictStr2Str __p_mapArg;
     __is->read(__p_mapArg);
     __inS.endReadParams();
-    ::RPCImgRecong::ImgRes __ret = fetchImgSearchResult(__p_mapArg, __current);
+    ::RPCImgRecong::WordRes __ret = fetchImgSearchResult(__p_mapArg, __current);
     ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
     __os->write(__ret);
     __inS.__endWriteParams(true);
@@ -928,7 +928,7 @@ RPCImgRecong::ImgRetrieval::___imgSearchSync(::IceInternal::Incoming& __inS, con
     ::RPCImgRecong::DictStr2Str __p_mapArg;
     __is->read(__p_mapArg);
     __inS.endReadParams();
-    ::RPCImgRecong::ImgRes __ret = imgSearchSync(__p_mapArg, __current);
+    ::RPCImgRecong::WordRes __ret = imgSearchSync(__p_mapArg, __current);
     ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
     __os->write(__ret);
     __inS.__endWriteParams(true);

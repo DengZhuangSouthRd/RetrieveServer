@@ -41,8 +41,8 @@ module RPCImgRecong {
         "id" : "sdmdsfdsfdk"
         "imgurl" : "/home/data/test/test.jpg"
         */
-        int imgSearchAsync(DictStr2Str mapArg); //通过图像搜索得到图像地址列表, 提交的是异步任务，提交成功返回直 > 0, 提交失败返回直 < 0
-        ImgRes fetchImgSearchResult(DictStr2Str mapArg); // 根据提交的任务ID，取回识别结果
-        ImgRes imgSearchSync(DictStr2Str mapArg); // 通过图像搜索得到图像地址列表，提交的是同步任务
+        int imgSearchAsync(DictStr2Str mapArg); //通过图像搜索得到文字列表, 提交的是异步任务，提交成功返回直 > 0, 提交失败返回直 < 0
+        WordRes fetchImgSearchResult(DictStr2Str mapArg); // 根据提交的任务ID，取回识别结果
+        WordRes imgSearchSync(DictStr2Str mapArg); // 通过图像搜索得到文字列表，提交的是同步任务
     };
 };

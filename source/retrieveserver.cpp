@@ -71,9 +71,9 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
     return obj;
 }
 
-ImgRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Current &) {
+WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Current &) {
     string task_id = mapArg.at("id");
-    ImgRes obj;
+    WordRes obj;
     log_InputParameters(mapArg);
     if(mapArg.count("imgurl") == 0) {
         obj.status = -1;
@@ -86,7 +86,7 @@ ImgRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curre
     bool flag = ASIFT_Ext_Features_Gdal(saveurl, imgurl, imgFeatures);
     if(flag == false) {
         Log::Error("Fetch Fusion Result Struct Failed !");
-        return obj;
+        obj.status = -1;
     }
     return obj;
 }
@@ -96,8 +96,8 @@ int RetrieveServer::imgSearchAsync(const DictStr2Str &mapArg, const Ice::Current
     return status;
 }
 
-ImgRes RetrieveServer::fetchImgSearchResult(const DictStr2Str &mapArg, const Ice::Current &) {
-    ImgRes obj;
+WordRes RetrieveServer::fetchImgSearchResult(const DictStr2Str &mapArg, const Ice::Current &) {
+    WordRes obj;
     obj.status = 1;
     return obj;
 }

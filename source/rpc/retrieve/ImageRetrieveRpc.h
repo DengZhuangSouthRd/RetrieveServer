@@ -602,17 +602,17 @@ private:
     
 public:
 
-    ::RPCImgRecong::ImgRes fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg)
+    ::RPCImgRecong::WordRes fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg)
     {
         return fetchImgSearchResult(__p_mapArg, 0);
     }
-    ::RPCImgRecong::ImgRes fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context& __ctx)
+    ::RPCImgRecong::WordRes fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context& __ctx)
     {
         return fetchImgSearchResult(__p_mapArg, &__ctx);
     }
 #ifdef ICE_CPP11
     ::Ice::AsyncResultPtr
-    begin_fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::IceInternal::Function<void (const ::RPCImgRecong::ImgRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::IceInternal::Function<void (const ::RPCImgRecong::WordRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
         return __begin_fetchImgSearchResult(__p_mapArg, 0, __response, __exception, __sent);
     }
@@ -622,7 +622,7 @@ public:
         return begin_fetchImgSearchResult(__p_mapArg, 0, ::Ice::newCallback(__completed, __sent), 0);
     }
     ::Ice::AsyncResultPtr
-    begin_fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::ImgRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::WordRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
         return __begin_fetchImgSearchResult(__p_mapArg, &__ctx, __response, __exception, __sent);
     }
@@ -634,7 +634,7 @@ public:
     
 private:
 
-    ::Ice::AsyncResultPtr __begin_fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::ImgRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent);
+    ::Ice::AsyncResultPtr __begin_fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::WordRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent);
     
 public:
 #endif
@@ -669,26 +669,26 @@ public:
         return begin_fetchImgSearchResult(__p_mapArg, &__ctx, __del, __cookie);
     }
 
-    ::RPCImgRecong::ImgRes end_fetchImgSearchResult(const ::Ice::AsyncResultPtr&);
+    ::RPCImgRecong::WordRes end_fetchImgSearchResult(const ::Ice::AsyncResultPtr&);
     
 private:
 
-    ::RPCImgRecong::ImgRes fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*);
+    ::RPCImgRecong::WordRes fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*);
     ::Ice::AsyncResultPtr begin_fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
     
 public:
 
-    ::RPCImgRecong::ImgRes imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg)
+    ::RPCImgRecong::WordRes imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg)
     {
         return imgSearchSync(__p_mapArg, 0);
     }
-    ::RPCImgRecong::ImgRes imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context& __ctx)
+    ::RPCImgRecong::WordRes imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context& __ctx)
     {
         return imgSearchSync(__p_mapArg, &__ctx);
     }
 #ifdef ICE_CPP11
     ::Ice::AsyncResultPtr
-    begin_imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::IceInternal::Function<void (const ::RPCImgRecong::ImgRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::IceInternal::Function<void (const ::RPCImgRecong::WordRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
         return __begin_imgSearchSync(__p_mapArg, 0, __response, __exception, __sent);
     }
@@ -698,7 +698,7 @@ public:
         return begin_imgSearchSync(__p_mapArg, 0, ::Ice::newCallback(__completed, __sent), 0);
     }
     ::Ice::AsyncResultPtr
-    begin_imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::ImgRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::WordRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
         return __begin_imgSearchSync(__p_mapArg, &__ctx, __response, __exception, __sent);
     }
@@ -710,7 +710,7 @@ public:
     
 private:
 
-    ::Ice::AsyncResultPtr __begin_imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::ImgRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent);
+    ::Ice::AsyncResultPtr __begin_imgSearchSync(const ::RPCImgRecong::DictStr2Str& __p_mapArg, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::RPCImgRecong::WordRes&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent);
     
 public:
 #endif
@@ -745,11 +745,11 @@ public:
         return begin_imgSearchSync(__p_mapArg, &__ctx, __del, __cookie);
     }
 
-    ::RPCImgRecong::ImgRes end_imgSearchSync(const ::Ice::AsyncResultPtr&);
+    ::RPCImgRecong::WordRes end_imgSearchSync(const ::Ice::AsyncResultPtr&);
     
 private:
 
-    ::RPCImgRecong::ImgRes imgSearchSync(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*);
+    ::RPCImgRecong::WordRes imgSearchSync(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*);
     ::Ice::AsyncResultPtr begin_imgSearchSync(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
     
 public:
@@ -896,10 +896,10 @@ public:
     virtual ::Ice::Int imgSearchAsync(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___imgSearchAsync(::IceInternal::Incoming&, const ::Ice::Current&);
 
-    virtual ::RPCImgRecong::ImgRes fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    virtual ::RPCImgRecong::WordRes fetchImgSearchResult(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___fetchImgSearchResult(::IceInternal::Incoming&, const ::Ice::Current&);
 
-    virtual ::RPCImgRecong::ImgRes imgSearchSync(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    virtual ::RPCImgRecong::WordRes imgSearchSync(const ::RPCImgRecong::DictStr2Str&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___imgSearchSync(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual ::Ice::DispatchStatus __dispatch(::IceInternal::Incoming&, const ::Ice::Current&);
@@ -1351,7 +1351,7 @@ public:
 
     typedef void (T::*Exception)(const ::Ice::Exception&);
     typedef void (T::*Sent)(bool);
-    typedef void (T::*Response)(const ::RPCImgRecong::ImgRes&);
+    typedef void (T::*Response)(const ::RPCImgRecong::WordRes&);
 
     CallbackNC_ImgRetrieval_fetchImgSearchResult(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
         : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), _response(cb)
@@ -1361,7 +1361,7 @@ public:
     virtual void completed(const ::Ice::AsyncResultPtr& __result) const
     {
         ::RPCImgRecong::ImgRetrievalPrx __proxy = ::RPCImgRecong::ImgRetrievalPrx::uncheckedCast(__result->getProxy());
-        ::RPCImgRecong::ImgRes __ret;
+        ::RPCImgRecong::WordRes __ret;
         try
         {
             __ret = __proxy->end_fetchImgSearchResult(__result);
@@ -1383,13 +1383,13 @@ public:
 };
 
 template<class T> Callback_ImgRetrieval_fetchImgSearchResultPtr
-newCallback_ImgRetrieval_fetchImgSearchResult(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RPCImgRecong::ImgRes&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+newCallback_ImgRetrieval_fetchImgSearchResult(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RPCImgRecong::WordRes&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
 {
     return new CallbackNC_ImgRetrieval_fetchImgSearchResult<T>(instance, cb, excb, sentcb);
 }
 
 template<class T> Callback_ImgRetrieval_fetchImgSearchResultPtr
-newCallback_ImgRetrieval_fetchImgSearchResult(T* instance, void (T::*cb)(const ::RPCImgRecong::ImgRes&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+newCallback_ImgRetrieval_fetchImgSearchResult(T* instance, void (T::*cb)(const ::RPCImgRecong::WordRes&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
 {
     return new CallbackNC_ImgRetrieval_fetchImgSearchResult<T>(instance, cb, excb, sentcb);
 }
@@ -1403,7 +1403,7 @@ public:
 
     typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
     typedef void (T::*Sent)(bool , const CT&);
-    typedef void (T::*Response)(const ::RPCImgRecong::ImgRes&, const CT&);
+    typedef void (T::*Response)(const ::RPCImgRecong::WordRes&, const CT&);
 
     Callback_ImgRetrieval_fetchImgSearchResult(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
         : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), _response(cb)
@@ -1413,7 +1413,7 @@ public:
     virtual void completed(const ::Ice::AsyncResultPtr& __result) const
     {
         ::RPCImgRecong::ImgRetrievalPrx __proxy = ::RPCImgRecong::ImgRetrievalPrx::uncheckedCast(__result->getProxy());
-        ::RPCImgRecong::ImgRes __ret;
+        ::RPCImgRecong::WordRes __ret;
         try
         {
             __ret = __proxy->end_fetchImgSearchResult(__result);
@@ -1435,13 +1435,13 @@ public:
 };
 
 template<class T, typename CT> Callback_ImgRetrieval_fetchImgSearchResultPtr
-newCallback_ImgRetrieval_fetchImgSearchResult(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RPCImgRecong::ImgRes&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+newCallback_ImgRetrieval_fetchImgSearchResult(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RPCImgRecong::WordRes&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
     return new Callback_ImgRetrieval_fetchImgSearchResult<T, CT>(instance, cb, excb, sentcb);
 }
 
 template<class T, typename CT> Callback_ImgRetrieval_fetchImgSearchResultPtr
-newCallback_ImgRetrieval_fetchImgSearchResult(T* instance, void (T::*cb)(const ::RPCImgRecong::ImgRes&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+newCallback_ImgRetrieval_fetchImgSearchResult(T* instance, void (T::*cb)(const ::RPCImgRecong::WordRes&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
     return new Callback_ImgRetrieval_fetchImgSearchResult<T, CT>(instance, cb, excb, sentcb);
 }
@@ -1455,7 +1455,7 @@ public:
 
     typedef void (T::*Exception)(const ::Ice::Exception&);
     typedef void (T::*Sent)(bool);
-    typedef void (T::*Response)(const ::RPCImgRecong::ImgRes&);
+    typedef void (T::*Response)(const ::RPCImgRecong::WordRes&);
 
     CallbackNC_ImgRetrieval_imgSearchSync(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
         : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), _response(cb)
@@ -1465,7 +1465,7 @@ public:
     virtual void completed(const ::Ice::AsyncResultPtr& __result) const
     {
         ::RPCImgRecong::ImgRetrievalPrx __proxy = ::RPCImgRecong::ImgRetrievalPrx::uncheckedCast(__result->getProxy());
-        ::RPCImgRecong::ImgRes __ret;
+        ::RPCImgRecong::WordRes __ret;
         try
         {
             __ret = __proxy->end_imgSearchSync(__result);
@@ -1487,13 +1487,13 @@ public:
 };
 
 template<class T> Callback_ImgRetrieval_imgSearchSyncPtr
-newCallback_ImgRetrieval_imgSearchSync(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RPCImgRecong::ImgRes&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+newCallback_ImgRetrieval_imgSearchSync(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RPCImgRecong::WordRes&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
 {
     return new CallbackNC_ImgRetrieval_imgSearchSync<T>(instance, cb, excb, sentcb);
 }
 
 template<class T> Callback_ImgRetrieval_imgSearchSyncPtr
-newCallback_ImgRetrieval_imgSearchSync(T* instance, void (T::*cb)(const ::RPCImgRecong::ImgRes&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+newCallback_ImgRetrieval_imgSearchSync(T* instance, void (T::*cb)(const ::RPCImgRecong::WordRes&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
 {
     return new CallbackNC_ImgRetrieval_imgSearchSync<T>(instance, cb, excb, sentcb);
 }
@@ -1507,7 +1507,7 @@ public:
 
     typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
     typedef void (T::*Sent)(bool , const CT&);
-    typedef void (T::*Response)(const ::RPCImgRecong::ImgRes&, const CT&);
+    typedef void (T::*Response)(const ::RPCImgRecong::WordRes&, const CT&);
 
     Callback_ImgRetrieval_imgSearchSync(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
         : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), _response(cb)
@@ -1517,7 +1517,7 @@ public:
     virtual void completed(const ::Ice::AsyncResultPtr& __result) const
     {
         ::RPCImgRecong::ImgRetrievalPrx __proxy = ::RPCImgRecong::ImgRetrievalPrx::uncheckedCast(__result->getProxy());
-        ::RPCImgRecong::ImgRes __ret;
+        ::RPCImgRecong::WordRes __ret;
         try
         {
             __ret = __proxy->end_imgSearchSync(__result);
@@ -1539,13 +1539,13 @@ public:
 };
 
 template<class T, typename CT> Callback_ImgRetrieval_imgSearchSyncPtr
-newCallback_ImgRetrieval_imgSearchSync(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RPCImgRecong::ImgRes&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+newCallback_ImgRetrieval_imgSearchSync(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::RPCImgRecong::WordRes&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
     return new Callback_ImgRetrieval_imgSearchSync<T, CT>(instance, cb, excb, sentcb);
 }
 
 template<class T, typename CT> Callback_ImgRetrieval_imgSearchSyncPtr
-newCallback_ImgRetrieval_imgSearchSync(T* instance, void (T::*cb)(const ::RPCImgRecong::ImgRes&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+newCallback_ImgRetrieval_imgSearchSync(T* instance, void (T::*cb)(const ::RPCImgRecong::WordRes&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
     return new Callback_ImgRetrieval_imgSearchSync<T, CT>(instance, cb, excb, sentcb);
 }

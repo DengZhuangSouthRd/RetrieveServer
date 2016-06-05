@@ -13,11 +13,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="466380a9-75a8-465e-8489-a062e0ee321d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/configure.json" afterPath="$PROJECT_DIR$/conf/configure.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/configure_duc.json" afterPath="$PROJECT_DIR$/conf/configure_duc.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/utils/retrieveutils.cpp" afterPath="$PROJECT_DIR$/source/algorithm/retrieve/utils/retrieveutils.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/retrieveserver.cpp" afterPath="$PROJECT_DIR$/source/retrieveserver.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/retrieveserver.h" afterPath="$PROJECT_DIR$/source/retrieveserver.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.cpp" afterPath="$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.h" afterPath="$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.ice" afterPath="$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.ice" />
     </list>
     <ignored path="RetrieveServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,11 +38,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="retrieveserver.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="retrieveserver.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/retrieveserver.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="685">
-              <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+            <state relative-caret-position="400">
+              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageRetrieveRpc.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+              <folding>
+                <element signature="e#502#531#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageRetrieveRpc.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -58,11 +80,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="configure.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="configure.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/conf/configure.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
               <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageRetrieveRpc.ice" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.ice">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="45" column="14" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -93,30 +125,10 @@
       <file leaf-file-name="retrieveserver.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/retrieveserver.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="readcsv.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/detect/readcsv.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="basicoperator.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/detect/basicoperator.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="295">
+              <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
+                <element signature="e#116#135#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -132,19 +144,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Eigenvalues" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/Eigenvalues">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding>
-                <element signature="e#558#605#0" expanded="true" />
-                <element signature="e#1108#1252#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -154,7 +153,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/source/imageretrieve.h" />
-        <option value="$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.cpp" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/source/server.h" />
         <option value="$PROJECT_DIR$/source/server.cpp" />
@@ -163,12 +161,13 @@
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/orsa.h" />
         <option value="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/arch/Inverse_SSE.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/source/retrieveserver.h" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/detect/sr.h" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/utils/retrieveutils.cpp" />
-        <option value="$PROJECT_DIR$/source/retrieveserver.cpp" />
         <option value="$PROJECT_DIR$/conf/configure_duc.json" />
         <option value="$PROJECT_DIR$/conf/configure.json" />
+        <option value="$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.cpp" />
+        <option value="$PROJECT_DIR$/source/retrieveserver.h" />
+        <option value="$PROJECT_DIR$/source/retrieveserver.cpp" />
       </list>
     </option>
   </component>
@@ -617,21 +616,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/myredis.h" />
-    <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/LU">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/Determinant.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/FullPivLU.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -792,6 +776,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
           <caret line="66" column="32" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -875,14 +860,14 @@
         <state relative-caret-position="105">
           <caret line="29" column="9" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
           <folding>
-            <element signature="e#31#50#0" expanded="true" />
-            <element signature="e#234#250#0" expanded="true" />
-            <element signature="e#1283#1299#0" expanded="true" />
-            <element signature="e#1373#1389#0" expanded="true" />
-            <element signature="e#1464#1480#0" expanded="true" />
-            <element signature="e#1556#1572#0" expanded="true" />
-            <element signature="e#1660#1676#0" expanded="true" />
-            <element signature="e#1803#1819#0" expanded="true" />
+            <element signature="e#31#50#0" expanded="false" />
+            <element signature="e#234#250#0" expanded="false" />
+            <element signature="e#1283#1299#0" expanded="false" />
+            <element signature="e#1373#1389#0" expanded="false" />
+            <element signature="e#1464#1480#0" expanded="false" />
+            <element signature="e#1556#1572#0" expanded="false" />
+            <element signature="e#1660#1676#0" expanded="false" />
+            <element signature="e#1803#1819#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -916,14 +901,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/retrieveserver.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/utils/retrieveutils.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -950,14 +927,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/retrieveserver.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="685">
-          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/conf/configure_duc.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -970,6 +939,50 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+          <folding>
+            <element signature="e#502#531#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.ice">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="45" column="14" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/retrieveserver.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+          <folding>
+            <element signature="e#116#135#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/retrieveserver.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
           <folding />
         </state>
       </provider>

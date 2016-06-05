@@ -37,8 +37,8 @@ public:
     virtual WordRes wordSearch(const DictStr2Str& mapArg, const Ice::Current&);
     virtual ImgRes wordSearchImg(const DictStr2Str& mapArg, const Ice::Current&);
     virtual int imgSearchAsync(const DictStr2Str& mapArg, const Ice::Current&);
-    virtual ImgRes fetchImgSearchResult(const DictStr2Str& mapArg, const Ice::Current&);
-    virtual ImgRes imgSearchSync(const DictStr2Str& mapArg, const Ice::Current&);
+    virtual WordRes fetchImgSearchResult(const DictStr2Str& mapArg, const Ice::Current&);
+    virtual WordRes imgSearchSync(const DictStr2Str& mapArg, const Ice::Current&);
 
 private:
     ThreadPool* p_threadPool;
