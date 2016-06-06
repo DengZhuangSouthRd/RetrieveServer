@@ -13,6 +13,7 @@ RetrieveServer::RetrieveServer() {
     p_pgdb = new PGDB(pg_con_info);
     if(p_pgdb->is_Working() == false) {
         delete p_pgdb;
+        p_pgdb = NULL;
         throw runtime_error("PG DB Not Working ! Please Check !");
     }
     p_SRClassify = NULL;
@@ -24,12 +25,13 @@ RetrieveServer::RetrieveServer() {
     p_pgdb->pg_fetch_sql(getdic,res);
     
     vector<string> dict_path;
-    for (result::const_iterator c = res.begin(); c != res.end(); ++c) {
-        dict_path.push_back(C[0].as<string>()); //dic path
+    for (result::const_iterator it = res.begin(); it != res.end(); ++it) {
+        dict_path.push_back(it[0].as<string>()); //dic path
     }
     bool flag = p_SRClassify->LoadDic(dict_path);
     if(flag == false) {
         delete p_pgdb;
+        p_pgdb = NULL;
         throw runtime_error("Load Dic Error.");
     }
 }
@@ -37,8 +39,10 @@ RetrieveServer::RetrieveServer() {
 RetrieveServer::~RetrieveServer() {
     p_threadPool->revokeSingleInstance();
     p_threadPool = NULL;
-    delete p_pgdb;
-    delete p_SRClassify;
+    if(p_pgdb)
+        delete p_pgdb;
+    if(p_SRClassify)
+        delete p_SRClassify;
 }
 
 void RetrieveServer::log_InputParameters(const DictStr2Str &mapArg) {
