@@ -13,8 +13,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="466380a9-75a8-465e-8489-a062e0ee321d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/rpcrun.sh" afterPath="$PROJECT_DIR$/conf/rpcrun.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/start_server.sh" afterPath="$PROJECT_DIR$/conf/start_server.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/configure.json" afterPath="$PROJECT_DIR$/conf/configure.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/configure_duc.json" afterPath="$PROJECT_DIR$/conf/configure_duc.json" />
     </list>
     <ignored path="RetrieveServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,7 +65,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="start_server.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="start_server.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/conf/start_server.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
@@ -85,16 +85,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="result.hxx" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/include/pqxx/result.hxx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="80" column="21" selection-start-line="80" selection-start-column="21" selection-end-line="80" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="sr.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/detect/sr.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -107,6 +97,26 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="configure.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/conf/configure.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="23" column="101" selection-start-line="23" selection-start-column="101" selection-end-line="23" selection-end-column="101" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="configure_duc.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conf/configure_duc.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="23" column="66" selection-start-line="23" selection-start-column="66" selection-end-line="23" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="retrieveserver.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/retrieveserver.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -115,16 +125,6 @@
               <folding>
                 <element signature="e#116#135#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="basicoperator.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/detect/basicoperator.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1470">
-              <caret line="101" column="5" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -154,7 +154,6 @@
         <option value="$PROJECT_DIR$/source/threadpool/task.h" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/orsa.h" />
         <option value="$PROJECT_DIR$/source/algorithm/third_party/Eigen/src/LU/arch/Inverse_SSE.h" />
-        <option value="$PROJECT_DIR$/conf/configure_duc.json" />
         <option value="$PROJECT_DIR$/source/server.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/compute_asift_keypoints.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/detect/ReadCsvFile.h" />
@@ -171,13 +170,14 @@
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/library.h" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/extract_feature.cpp" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/detect/SR.h" />
-        <option value="$PROJECT_DIR$/conf/configure.json" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/detect/sr.h" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/detect/readcsv.h" />
         <option value="$PROJECT_DIR$/source/retrieveserver.cpp" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/conf/rpcrun.sh" />
         <option value="$PROJECT_DIR$/conf/start_server.sh" />
+        <option value="$PROJECT_DIR$/conf/configure_duc.json" />
+        <option value="$PROJECT_DIR$/conf/configure.json" />
       </list>
     </option>
   </component>
@@ -705,13 +705,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/configure_duc.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/compute_asift_keypoints.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-290">
@@ -879,14 +872,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/configure.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/include/pqxx/result.hxx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -969,6 +954,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/configure_duc.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="66" selection-start-line="23" selection-start-column="66" selection-end-line="23" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/configure.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="101" selection-start-line="23" selection-start-column="101" selection-end-line="23" selection-end-column="101" />
           <folding />
         </state>
       </provider>

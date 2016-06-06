@@ -20,8 +20,8 @@
         "RETRIEVEREDIS_HOST": "10.2.3.119",
         "RETRIEVEREDIS_PORT": "6379",
         "RETRIEVEREDIS_PASSWD": "csuduc",
-        "RETRIEVESerializePath" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/data/serialize/retrievetask.json",
-        "RETRIEVESerializePathBak" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/data/serialize/retrievetask_backup.json",
+        "RETRIEVESerializePath" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/serialize/retrievetask.json",
+        "RETRIEVESerializePathBak" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/serialize/retrievetask_backup.json",
         "RETRIEVEUSERIMGFEATUREDIR" : "/opt/imgFeatures/userupload/"
     },
     "QUALITY" : {
