@@ -4,14 +4,14 @@
 #include <string>
 using namespace std;
 
-//���������˷�
+//数组与数乘法
 template<class DataType>
 vector<DataType> operator*(vector<DataType> vec, DataType data)
 {
-	/*operator*			�����������
-	*vec				���飨N��
-	*data				��
-	*return��vector<DataType>��N��
+	/*operator*			数组与数相乘
+	*vec				数组（N）
+	*data				数
+	*return：vector<DataType>（N）
 	*author:ys
 	*date:2016.05.05
 	*/
@@ -35,14 +35,14 @@ vector<DataType> operator*(vector<DataType> vec, DataType data)
 	return result;
 }
 
-//�������
+//数组减法
 template<class DataType>
 vector<DataType> operator-(vector<DataType> vec1, vector<DataType> vec2)
 {
-	/*operator-			���������vec1-vec2��
-	*vec1				���飨N��
-	*vec2				���飨N��
-	*return��vector<DataType>��N��
+	/*operator-			数组相减（vec1-vec2）
+	*vec1				数组（N）
+	*vec2				数组（N）
+	*return：vector<DataType>（N）
 	*author:ys
 	*date:2016.05.05
 	*/
@@ -62,14 +62,14 @@ vector<DataType> operator-(vector<DataType> vec1, vector<DataType> vec2)
 	return result;
 }
 
-//����ӷ�
+//数组加法
 template<class DataType>
 vector<DataType> operator+(vector<DataType> vec1, vector<DataType> vec2)
 {
-	/*operator-			���������vec1-vec2��
-	*vec1				���飨N��
-	*vec2				���飨N��
-	*return��vector<DataType>��N��
+	/*operator-			数组相减（vec1-vec2）
+	*vec1				数组（N）
+	*vec2				数组（N）
+	*return：vector<DataType>（N）
 	*author:ys
 	*date:2016.05.05
 	*/
@@ -89,14 +89,14 @@ vector<DataType> operator+(vector<DataType> vec1, vector<DataType> vec2)
 	return result;
 }
 
-//����������˷�
+//矩阵与数组乘法
 template<class DataType>
 vector<DataType> operator*(vector<vector<DataType>> mat, vector<DataType> vec)
 {
-	/*operator*			�������������
-	*mat				����N*M��
-	*vec				���飨N��
-	*return��vector<DataType>��M��
+	/*operator*			矩阵与数组相乘
+	*mat				矩阵（N*M）
+	*vec				数组（N）
+	*return：vector<DataType>（M）
 	*author:ys
 	*date:2016.05.05
 	*/

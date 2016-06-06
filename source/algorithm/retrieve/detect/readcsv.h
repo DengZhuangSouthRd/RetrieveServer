@@ -18,15 +18,24 @@ class ReadCsvFile{
 
 public:
 
+	//按行读取数据
 	bool ReadCsv(const string CsvFilePath, vector<vector<DataType>> &data, int &size);
 
 private:
 
+	//获取文件行数
 	int GetTotalLineCount(FILE *fp);
 };
 
 template<class DataType>
 bool ReadCsvFile<DataType>::ReadCsv(const string CsvFilePath, vector<vector<DataType>> &data, int &size) {
+	/*ReadCsv		按行读csv文件数据
+	*CsvFilePath	csv文件路径
+	*data			存储文件中的数据
+	*return：       csv文件的行数
+	*author:ys
+	*date:2016.05.11
+	*/
 	FILE* fcsv = fopen(CsvFilePath.c_str(), "r");
 	char strline[MAX_LINE_SIZE];
 	if (!fcsv) {
@@ -87,6 +96,12 @@ bool ReadCsvFile<DataType>::ReadCsv(const string CsvFilePath, vector<vector<Data
 
 template<class DataType>
 int ReadCsvFile<DataType>::GetTotalLineCount(FILE *fp) {
+	/*GetTotalLineCount		计算csv文件的行数
+	*fp						文件
+	*return：csv文件的行数
+	*author:ys
+	*date:2016.05.11
+	*/
 	int i = 0;
 	char strline[MAX_LINE_SIZE];
 	fseek(fp, 0, SEEK_SET);
