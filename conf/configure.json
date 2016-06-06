@@ -4,7 +4,7 @@
     "SERIALIZETIME" : "600",
     "LOGPATH": "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/data/log/loginfo.log",
     "FUSION": {
-        "ISUSE": "FALASE",
+        "ISUSE": "FALSE",
         "FUSIONIDENTITY": "WISEFUSION",
         "FUSIONSerializePath" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/data/serialize/fusiontask.json",
         "FUSIONSerializePathBak" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/AlgorithmServer/data/serialize/fusiontask_backup.json"

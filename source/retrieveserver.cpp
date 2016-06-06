@@ -17,6 +17,21 @@ RetrieveServer::RetrieveServer() {
     }
     p_SRClassify = NULL;
     p_SRClassify = new SR<float>();
+    
+    //加载字典
+    string getdic="SELECT dicpath FROM t7dictionary;";
+    result res;
+    p_pgdb->pg_fetch_sql(getdic,res);
+    
+    vector<string> dict_path;
+    for (result::const_iterator c = res.begin(); c != res.end(); ++c) {
+        dict_path.push_back(C[0].as<string>()); //dic path
+    }
+    bool flag = p_SRClassify->LoadDic(dict_path);
+    if(flag == false) {
+        delete p_pgdb;
+        throw runtime_error("Load Dic Error.");
+    }
 }
 
 RetrieveServer::~RetrieveServer() {
@@ -104,14 +119,14 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
         Log::Error("Fetch RetrieveServer Result Struct Failed !");
         obj.status = -1;
     }
-    vector<string> dict_path;
-    dict_path.push_back("/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/dict/13_国家图书馆_f.csv");
-    dict_path.push_back("/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/dict/14_国家大剧院_f.csv");
-    flag = p_SRClassify->LoadDic(dict_path);
-    if(flag == false) {
-        Log::Error("Fetch RetrieveServer Result Struct Failed !");
-        obj.status = -1;
-    }
+    //vector<string> dict_path;
+    //dict_path.push_back("/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/dict/13_国家图书馆_f.csv");
+    //dict_path.push_back("/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/dict/14_国家大剧院_f.csv");
+    //flag = p_SRClassify->LoadDic(dict_path);
+    //if(flag == false) {
+    //    Log::Error("Fetch RetrieveServer Result Struct Failed !");
+    //    obj.status = -1;
+    //}
     int res = p_SRClassify->SRClassify(imgFeatures, 1, 1);
     if(res == -1) {
         Log::Error("Fetch RetrieveServer Result Struct Failed !");
