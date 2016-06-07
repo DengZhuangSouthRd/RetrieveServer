@@ -12,10 +12,7 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="466380a9-75a8-465e-8489-a062e0ee321d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/configure.json" afterPath="$PROJECT_DIR$/conf/configure.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/configure_duc.json" afterPath="$PROJECT_DIR$/conf/configure_duc.json" />
-    </list>
+    <list default="true" id="466380a9-75a8-465e-8489-a062e0ee321d" name="Default" comment="" />
     <ignored path="RetrieveServer.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
