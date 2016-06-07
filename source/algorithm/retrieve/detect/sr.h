@@ -6,9 +6,10 @@
 #include <vector>
 #include <algorithm>
 #include <string>
-#include "Eigen\Dense"
-#include "ReadCsvFile.h"
-#include "Vec.h"
+#include "Eigen/Dense"
+#include "readcsv.h"
+#include "basicoperator.h"
+
 using namespace std;
 using namespace Eigen;
 
