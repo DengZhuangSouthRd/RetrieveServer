@@ -37,8 +37,8 @@ RetrieveServer::RetrieveServer() {
         p_pgdb = NULL;
         throw runtime_error("Load Dic Error.");
     }
-    sparsity = std::atoi( argvMap["RETRIEVESPARSITY"].c_str() );
-    min_residual = std::atof( argvMap["RETRIEVEMINRESIDUAL"].c_str() );
+    sparsity = std::atoi( g_ConfMap["RETRIEVESPARSITY"].c_str() );
+    min_residual = std::atof( g_ConfMap["RETRIEVEMINRESIDUAL"].c_str() );
 }
 
 RetrieveServer::~RetrieveServer() {
