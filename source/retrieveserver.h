@@ -45,6 +45,8 @@ private:
     ThreadPool* p_threadPool;
     PGDB* p_pgdb;
     SR<float> * p_SRClassify;
+    int sparsity;
+    float min_residual;
 };
 
 

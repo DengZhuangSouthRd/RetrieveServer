@@ -37,6 +37,8 @@ RetrieveServer::RetrieveServer() {
         p_pgdb = NULL;
         throw runtime_error("Load Dic Error.");
     }
+    sparsity = std::atoi( argvMap["RETRIEVESPARSITY"].c_str() );
+    min_residual = std::atof( argvMap["RETRIEVEMINRESIDUAL"].c_str() );
 }
 
 RetrieveServer::~RetrieveServer() {
@@ -134,8 +136,6 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
     //    Log::Error("Fetch RetrieveServer Result Struct Failed !");
     //    obj.status = -1;
     //}
-    int sparsity = std::atoi( argvMap["RETRIEVESPARSITY"].c_str() );
-    float min_residual = std::atof( argvMap["RETRIEVEMINRESIDUAL"].c_str() );
     int res = p_SRClassify->SRClassify(imgFeatures, min_residual, sparsity);
     if(res == -1) {
         Log::Error("Fetch RetrieveServer Result Struct Failed !");
