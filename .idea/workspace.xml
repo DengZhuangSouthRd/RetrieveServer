@@ -13,10 +13,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="466380a9-75a8-465e-8489-a062e0ee321d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/rpcrun.sh" afterPath="$PROJECT_DIR$/conf/rpcrun.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/extract_feature.h" afterPath="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/extract_feature.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/retrieveserver.cpp" afterPath="$PROJECT_DIR$/source/retrieveserver.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/retrieveserver.h" afterPath="$PROJECT_DIR$/source/retrieveserver.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
     </list>
     <ignored path="RetrieveServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,8 +37,8 @@
       <file leaf-file-name="retrieveserver.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/retrieveserver.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="40" column="39" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
+            <state relative-caret-position="-465">
+              <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -86,16 +83,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
               <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="configure.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/conf/configure.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -161,7 +148,6 @@
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/utils/retrieveutils.h" />
         <option value="$PROJECT_DIR$/source/utils/utils.h" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/utils/retrieveutils.cpp" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.cpp" />
         <option value="$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.ice" />
         <option value="$PROJECT_DIR$/source/algorithm/retrieve/ASIFT/library.h" />
@@ -178,6 +164,7 @@
         <option value="$PROJECT_DIR$/source/retrieveserver.h" />
         <option value="$PROJECT_DIR$/source/retrieveserver.cpp" />
         <option value="$PROJECT_DIR$/conf/rpcrun.sh" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
       </list>
     </option>
   </component>
@@ -770,13 +757,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/rpc/retrieve/ImageRetrieveRpc.ice">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -936,8 +916,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/source/retrieveserver.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="40" column="39" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
+        <state relative-caret-position="-465">
+          <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="49" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
           <folding />
         </state>
       </provider>
