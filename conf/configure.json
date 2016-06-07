@@ -22,7 +22,7 @@
         "RETRIEVEREDIS_PASSWD": "csuduc",
         "RETRIEVESerializePath" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/serialize/retrievetask.json",
         "RETRIEVESerializePathBak" : "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/serialize/retrievetask_backup.json",
-        "RETRIEVEUSERIMGFEATUREDIR" : "/opt/imgFeatures/userupload/"
+        "RETRIEVEUSERIMGFEATUREDIR" : "/opt/imgFeatures/userupload/",
         "RETRIEVESPARSITY" : "11",
         "RETRIEVEMINRESIDUAL" : "1"
     },

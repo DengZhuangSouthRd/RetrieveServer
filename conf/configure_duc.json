@@ -21,7 +21,9 @@
         "RETRIEVEREDIS_PORT": "6379",
         "RETRIEVEREDIS_PASSWD": "csuduc",
         "RETRIEVESerializePath" : "/home/fighter/RetrieveServer/data/serialize/retrievetask.json",
-        "RETRIEVESerializePathBak" : "/home/fighter/RetrieveServer/data/serialize/retrievetask_backup.json"
+        "RETRIEVESerializePathBak" : "/home/fighter/RetrieveServer/data/serialize/retrievetask_backup.json",
+        "RETRIEVESPARSITY" : "11",
+        "RETRIEVEMINRESIDUAL" : "1"
     },
     "QUALITY" : {
         "ISUSE" : "FALSE",
