@@ -81,6 +81,9 @@ void read_config_Json(string fileName, map<string, string> &argvMap) {
         argvMap["RETRIEVESerializePath"] = root["RETRIEVE"].get("RETRIEVESerializePath", "NULL").asString();
         argvMap["RETRIEVESerializePathBak"] = root["RETRIEVE"].get("RETRIEVESerializePathBak", "NULL").asString();
         argvMap["RETRIEVEUSERIMGFEATUREDIR"] = root["RETRIEVE"].get("RETRIEVEUSERIMGFEATUREDIR", "NULL").asString();
+        
+        argvMap["RETRIEVESPARSITY"] = root["RETRIEVE"].get("RETRIEVESPARSITY", "11").asString();
+        argvMap["RETRIEVEMINRESIDUAL"] = root["RETRIEVE"].get("RETRIEVEMINRESIDUAL", "1").asString();
     }
 
     if(root.isMember("QUALITY") == true) {

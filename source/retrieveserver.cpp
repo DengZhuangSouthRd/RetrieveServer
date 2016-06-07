@@ -21,13 +21,16 @@ RetrieveServer::RetrieveServer() {
     //加载字典
     string getdic="SELECT dicpath FROM t7dictionary;";
     result res;
-    p_pgdb->pg_fetch_sql(getdic,res);
-    
+    bool flag = p_pgdb->pg_fetch_sql(getdic,res);
+    if(flag == false) {
+        delete p_pgdb;
+        throw runtime_error("PG DB Execute Error.");
+    }    
     vector<string> dict_path;
     for (result::const_iterator c = res.begin(); c != res.end(); ++c) {
         dict_path.push_back(C[0].as<string>()); //dic path
     }
-    bool flag = p_SRClassify->LoadDic(dict_path);
+    flag = p_SRClassify->LoadDic(dict_path);
     if(flag == false) {
         delete p_pgdb;
         throw runtime_error("Load Dic Error.");
@@ -110,7 +113,7 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
     }
     string purl(mapArg.at("purl"));
     string filename = purl.substr(purl.find_last_of('/'), purl.find_last_of('.'));
-//    string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
+//  string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
     string saveurl = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/feature/" + filename + ".csv";
     cout << "Save URL ## " << saveurl << endl;
     vector<vector<float>> imgFeatures;
@@ -127,7 +130,9 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
     //    Log::Error("Fetch RetrieveServer Result Struct Failed !");
     //    obj.status = -1;
     //}
-    int res = p_SRClassify->SRClassify(imgFeatures, 1, 1);
+    int sparsity = std::atoi( argvMap["RETRIEVESPARSITY"].c_str() );
+    float min_residual = std::atof( argvMap["RETRIEVEMINRESIDUAL"].c_str() );
+    int res = p_SRClassify->SRClassify(imgFeatures, min_residual, sparsity);
     if(res == -1) {
         Log::Error("Fetch RetrieveServer Result Struct Failed !");
         obj.status = -1;
