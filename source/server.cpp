@@ -54,7 +54,7 @@ void Server::close() {
     }
 }
 
-//#define REALRUN
+#define REALRUN
 
 int main(int argc,char* argv[]) {
 #ifdef REALRUN
