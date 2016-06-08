@@ -399,6 +399,7 @@ bool SR<DataType>::LoadDic(vector<string> DicFilePath){
 			cerr << "file:" << __FILE__ << endl;
 			cerr << "line: " << __LINE__ << endl;
 			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+			return false;
 		}	
 		cout << "the cols of class " << i << " are: " << num << endl;
 		dicclassnum.push_back(num);

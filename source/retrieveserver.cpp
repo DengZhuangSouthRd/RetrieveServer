@@ -119,8 +119,8 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
     }
     string purl(mapArg.at("purl"));
     string filename = purl.substr(purl.find_last_of('/'), purl.find_last_of('.'));
-//  string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
-    string saveurl = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/feature/" + filename + ".csv";
+    string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
+//    string saveurl = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/feature/" + filename + ".csv";
     cout << "Save URL ## " << saveurl << endl;
     vector<vector<float>> imgFeatures;
     bool flag = AsiftFeature(saveurl, purl, imgFeatures);
