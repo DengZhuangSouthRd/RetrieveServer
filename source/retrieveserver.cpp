@@ -19,17 +19,25 @@ RetrieveServer::RetrieveServer() {
     p_SRClassify = NULL;
     p_SRClassify = new SR<float>();
     
-    //加载字典
-    string getdic="SELECT dicpath FROM t7dictionary;";
+    //Load dictionary
+    string getdic = "SELECT dicpath,targetname,targetno FROM t7dictionary;";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getdic,res);
     if(flag == false) {
         delete p_pgdb;
         throw runtime_error("PG DB Execute Error.");
-    }    
+    }
     vector<string> dict_path;
     for (result::const_iterator it = res.begin(); it != res.end(); ++it) {
-        dict_path.push_back(it[0].as<string>()); //dic path
+        if(it[0].as<string>().empty() || it[1].as<string>().empty() || it[2].as<string>().empty()){
+            cerr << "Targetno is"<<it[2].as<string>()<<"Targetname is " << it[1].as<string>() << " Dicpath is" << it[0].as<string>();
+            delete p_pgdb;
+            p_pgdb = NULL;
+            throw runtime_error("PG DB Data Error.");
+        }
+        pair<string, int> tmp = make_pair(it[1].as<string>(), it[2].as<int>());
+        dict_path.push_back(it[0].as<string>()); //字典路径
+        p_targetinf.push_back(tmp);//目标名称、序号
     }
     flag = p_SRClassify->LoadDic(dict_path);
     if(flag == false) {
@@ -37,8 +45,8 @@ RetrieveServer::RetrieveServer() {
         p_pgdb = NULL;
         throw runtime_error("Load Dic Error.");
     }
-    sparsity = std::atoi( argvMap["RETRIEVESPARSITY"].c_str() );
-    min_residual = std::atof( argvMap["RETRIEVEMINRESIDUAL"].c_str() );
+    p_sparsity = std::atoi( argvMap["RETRIEVESPARSITY"].c_str() );
+    p_min_residual = std::atof( argvMap["RETRIEVEMINRESIDUAL"].c_str() );
 }
 
 RetrieveServer::~RetrieveServer() {
@@ -128,19 +136,38 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
         Log::Error("Fetch RetrieveServer Result Struct Failed !");
         obj.status = -1;
     }
-    //vector<string> dict_path;
-    //dict_path.push_back("/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/dict/13_国家图书馆_f.csv");
-    //dict_path.push_back("/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/dict/14_国家大剧院_f.csv");
-    //flag = p_SRClassify->LoadDic(dict_path);
-    //if(flag == false) {
-    //    Log::Error("Fetch RetrieveServer Result Struct Failed !");
-    //    obj.status = -1;
-    //}
-    int res = p_SRClassify->SRClassify(imgFeatures, min_residual, sparsity);
-    if(res == -1) {
+    //Sparse Representation
+    vector<int> srres;
+    flag = p_SRClassify->SRClassify(imgFeatures, p_min_residual, p_sparsity, srres);
+    if(flag == false || srres.size() != p_targetinf.size()) {
         Log::Error("Fetch RetrieveServer Result Struct Failed !");
         obj.status = -1;
     }
+
+    //string res = "";
+    for(vector<int>::iterator it = srres.begin(); it != srres.end(); it++){
+        ImgInfo imginf;
+        imginf.id = p_targetinf[*(it)].second;
+        imginf.name = p_targetinf[*(it)].first;
+        imginf.path = "";
+        obj.keyWords.push_back(imginf);
+        //res = res+to_string(imginf.id)+"|"
+    }
+    //Write result to PGDB
+    //string insert = "INSERT INTO r5_user_search_img+"+\
+    "(imgid, userid, datesearch, res, dateres)VALUES"+" ("\
+    ++""\
+    ++""\
+    ++""\
+    ++""\
+    ++"";
+    
+    //flag = p_pgdb->pg_exec_sql(getdic);
+    //if(flag == false) {        
+    //    Log::Error("PG DB Execute Error.");
+    //    obj.status = -1;
+    //}
+    //string targetname = p_targetname[res];
     log_OutputResult(obj);
     return obj;
 }
