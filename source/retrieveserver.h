@@ -45,6 +45,7 @@ private:
     ThreadPool* p_threadPool;
     PGDB* p_pgdb;
     SR<float> * p_SRClassify;
+    vector<pair<string, int>> p_targetinf;//目标名称、序号
     int p_sparsity;       //稀疏表示：稀疏度
     float p_min_residual; //稀疏表示：最小残差
 };

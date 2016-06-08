@@ -130,6 +130,7 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
     string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
 //    string saveurl = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/feature/" + filename + ".csv";
     cout << "Save URL ## " << saveurl << endl;
+    //ASIFT
     vector<vector<float>> imgFeatures;
     bool flag = AsiftFeature(saveurl, purl, imgFeatures);
     if(flag == false) {
