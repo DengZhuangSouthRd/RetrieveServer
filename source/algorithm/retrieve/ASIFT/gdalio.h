@@ -2,13 +2,18 @@
 #define _IO_H_
 
 #include <gdal_priv.h>
-#include <iostream>
-using namespace std;
+
+#ifndef BuildingNum 
+#define BuildingNum 7
+#endif
 
 #ifndef DATA2D
 #define DATA2D(Matrix,m,n,SizeCol) Matrix[(m)*(SizeCol)+(n)]
 #endif
 
+#include <iostream>
+
+using namespace std;
 
 int ReadImageToBuff(const char* InputFileName, float **pImageBuf, int &height,int &width,int &bandcount) {
 

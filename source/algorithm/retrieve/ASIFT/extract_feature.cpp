@@ -8,24 +8,23 @@
 #include "fproj.h"
 #include "compute_asift_keypoints.h"
 #include "compute_asift_matches.h"
+
+# define IM_X 160
+# define IM_Y 120
+
 using namespace std;
-
-#ifdef _OPENMP
-#include <omp.h>
-#endif
-
 
 bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vector<float>> &features){
 
     int i,j,m,n;
-    float *GrayImg=NULL;  //存储灰度图像
-    float *Img = NULL;    //存储图像
+    float *GrayImg=NULL;  //¥Ê¥¢ª“∂»ÕºœÒœÒÀÿ÷µ
+    float *Img = NULL;    //¥Ê¥¢ÕºœÒœÒÀÿ÷µ
 
-    int height ;		  //图像高度
-    int width ;			  //图像宽度
-    int bandcount;        //图像波段数
+    int height ;		  //¥Ê¥¢ÕºœÒ∏ﬂ∂»
+    int width ;			  //¥Ê¥¢ÕºœÒøÌ∂»
+    int bandcount;        //¥Ê¥¢ÕºœÒ≤®∂Œ ˝
 
-    ofstream fout(Output_FileName.c_str());//将特征保存到文件
+    ofstream fout(Output_FileName.c_str());
     if (!fout)
     {
         cerr << "AsiftFeature:Output File Name Error!" << endl;
@@ -38,7 +37,7 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
     cout<<"Extract Features From£∫"<<Input_FilePath<<endl;
     cout<<"Processing. "<<endl;
 
-    /*读取图像*/
+    /*∂¡»°ª“∂»Õº*/
     ReadImageToBuff(Input_FilePath.c_str(), &Img, height,width,bandcount);
 
     cout<<"image heigh : "<<height<<endl;
@@ -83,9 +82,9 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
         return false;
     }
 
-    //释放内存
+    // Õ∑≈ƒ⁄¥Ê
     delete[] Img;Img = NULL;
-    /*图像归一化*/
+    /*ÕºœÒπÈ“ªªØ*/
     //Normalize(GrayImg, width, height);
 
     vector<float> ipixels(GrayImg, GrayImg + width * height);
@@ -99,15 +98,15 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
 
     float wS;
     float hS;
-    int  flag_resize=0;   // 是否resize
-    //判断是否resize
+    int  flag_resize=0;   // «∑Òresize
+    //≈–∂œ «∑Òresize
     if (width>300)
     {
         wS = 300;
-        hS = floor(height*wS/width); //取整
+        hS = floor(height*wS/width); //»°’˚
         flag_resize=1;//resize
     }
-    //释放内存
+    // Õ∑≈ƒ⁄¥Ê
     delete [] GrayImg;GrayImg=NULL;
 
     float zoom1=0;
@@ -152,7 +151,7 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
         float fproj_y3 = hS1;
 
         /* Anti-aliasing filtering along vertical direction */
-        if ( zoom1 > 1 )		//
+        if ( zoom1 > 1 )		//Àı–°ÕºœÒ
         {
             float sigma_aa = InitSigma_aa * zoom1 / 2;
             GaussianBlur1D(ipixels,width,height,sigma_aa,1);
@@ -180,11 +179,11 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
         zoom1 = 1;
 
     }
-    //释放内存
+    // Õ∑≈ƒ⁄¥Ê
     vector<float>().swap(ipixels);
     //pixels.clear();
 
-    /*特征提取*/
+    /*Ãÿ’˜Ã·»°*/
     // Compute ASIFT keypoints
     // number N of tilts to simulate t = 1, \sqrt{2}, (\sqrt{2})^2, ..., {\sqrt{2}}^(N-1)
 
@@ -202,12 +201,12 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
 
     num_keys = compute_asift_keypoints(ipixels1_zoom, wS1, hS1, num_of_tilts, verb, keys, siftparameters);
 
-    //释放内存
+    // Õ∑≈ƒ⁄¥Ê
     vector<float>().swap(ipixels1_zoom);
     //pixels1_zoom.clear();
 
-    /*将特征保存到文件*/
-    
+    /*Ω´Ãÿ’˜–¥»ÎŒƒº˛*/
+
     int tt,rr,ii;
 
     vector<float> feature(VecLength,0);
