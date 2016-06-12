@@ -23,18 +23,28 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
     ofstream fout(Output_FileName.c_str());
     if (!fout)
     {
-        cerr << "AsiftFeature:Output File Name Error!" << endl;
+        cerr << "AsiftFeature:Output_FileName Error!" << endl;
         cerr<<"file: "<<__FILE__<<endl;
         cerr<<"line: "<<__LINE__<<endl;
         cerr<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
         return false;
     }
 
-    cout<<"Extract Features From£∫"<<Input_FilePath<<endl;
+    cout<<"Extract Features From:"<<Input_FilePath<<endl;
     cout<<"Processing. "<<endl;
 
     /*读图像*/
-    ReadImageToBuff(Input_FilePath.c_str(), &Img, height,width,bandcount);
+    int flag = ReadImageToBuff(Input_FilePath.c_str(), &Img, height,width,bandcount);
+    if(flag < 0){
+        if(Img != NULL){
+            delete[] Img;Img = NULL;
+        }
+        cerr << "AsiftFeature:Input_FilePath Error!" << endl;
+        cerr<<"file: "<<__FILE__<<endl;
+        cerr<<"line: "<<__LINE__<<endl;
+        cerr<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
+        return false;        
+    }
 
     cout<<"image heigh : "<<height<<endl;
     cout<<"image width : "<<width<<endl;
@@ -44,10 +54,11 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
     GrayImg=new(std::nothrow) float[height*width];
     if (NULL == GrayImg)
     {
+        delete[] Img;Img = NULL;
         cerr<<"AsiftFeature:Memory Error."<<endl;
-        cerr<<"file£∫"<<__FILE__<<endl;
-        cerr<<"line£∫"<<__LINE__<<endl;
-        cerr<<"time£∫"<<__DATE__<<" "<<__TIME__<<endl;
+        cerr<<"file:"<<__FILE__<<endl;
+        cerr<<"line:"<<__LINE__<<endl;
+        cerr<<"time:"<<__DATE__<<" "<<__TIME__<<endl;
         return false;
     }
     if (bandcount==3)
@@ -70,9 +81,9 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
     else
     {
         cerr<<"AsiftFeature:Image Band Error."<<endl;
-        cerr<<"file£∫"<<__FILE__<<endl;
-        cerr<<"line£∫"<<__LINE__<<endl;
-        cerr<<"time£∫"<<__DATE__<<" "<<__TIME__<<endl;
+        cerr<<"file:"<<__FILE__<<endl;
+        cerr<<"line:"<<__LINE__<<endl;
+        cerr<<"time:"<<__DATE__<<" "<<__TIME__<<endl;
         delete[] Img;Img = NULL;
         delete[] GrayImg;GrayImg = NULL;
         return false;
@@ -129,7 +140,7 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
 
         float areaS = wS * hS;
 
-        // Resize image 1
+        // Resize image
         float area1 = width * height;
         zoom1 = sqrt(area1/areaS);
 
@@ -156,13 +167,9 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
 
         // simulate a tilt: subsample the image along the vertical axis by a factor of t.
 
-
-
         ipixels1_zoom.resize(wS1*hS1);
         fproj (ipixels, ipixels1_zoom, width, height, &fproj_sx, &fproj_sy, &fproj_bg, &fproj_o, &fproj_p,
                &fproj_i , fproj_x1 , fproj_y1 , fproj_x2 , fproj_y2 , fproj_x3 , fproj_y3, fproj_x4, fproj_y4);
-
-
 
     }
     else

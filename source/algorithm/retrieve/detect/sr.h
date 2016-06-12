@@ -221,7 +221,7 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 	*y					特征
 	*min_residual		最小残差
 	*sparsity			稀疏度
-	*srres              对目标进行排序
+	*srres              排序后的目标索引
 	*return				true|false
 	*author:ys
 	*date:2016.06.02
