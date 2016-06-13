@@ -36,10 +36,10 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
     /*读图像*/
     int flag = ReadImageToBuff(Input_FilePath.c_str(), &Img, height,width,bandcount);
     if(flag < 0){
-        if(Img != NULL){
-            delete[] Img;Img = NULL;
-        }
-        cerr << "AsiftFeature:Input_FilePath Error!" << endl;
+//        if(Img != NULL){
+//            delete[] Img;Img = NULL;
+//        }
+        cerr << "AsiftFeature:ReadImageToBuff Error!" << endl;
         cerr<<"file: "<<__FILE__<<endl;
         cerr<<"line: "<<__LINE__<<endl;
         cerr<<"time: "<<__DATE__<<" "<<__TIME__<<endl;

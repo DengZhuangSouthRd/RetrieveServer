@@ -1,5 +1,5 @@
-#ifndef _IO_H_
-#define _IO_H_
+#ifndef _GDALIO_H_
+#define _GDALIO_H_
 
 #include <gdal_priv.h>
 #include <iostream>
@@ -11,7 +11,7 @@ using namespace std;
 #define DATA2D(Matrix,m,n,SizeCol) Matrix[(m)*(SizeCol)+(n)]
 #endif
 
-bool RegByGeoInf(const char* InputFileName, vector<vector<double>> targetgeo, vector<int> &res){
+int RegByGeoInf(const char* InputFileName, vector<vector<double>> targetgeo, vector<int> &res){
     /*
     * @brief    RegByGeoInf.
     * 根据地理信息识别目标
@@ -19,7 +19,7 @@ bool RegByGeoInf(const char* InputFileName, vector<vector<double>> targetgeo, ve
     * @param    targetgeo           目标地理信息
     * @param    res                 影像中包含的目标索引
     * @exception                    无
-    * @return                       false|true       
+    * @return                       1:正确 0：没有地理信息 -1：错误       
     */
     GDALAllRegister();         //利用GDAL读取图片，先要进行注册
     CPLSetConfigOption("GDAL_FILENAME_IS_UTF8", "NO");   //设置支持中文路径
@@ -30,7 +30,7 @@ bool RegByGeoInf(const char* InputFileName, vector<vector<double>> targetgeo, ve
     double adfGeoTransform[6];
     if(ReadDataSet->GetGeoTransform(adfGeoTransform) != CE_None){
         delete ReadDataSet; ReadDataSet = NULL;
-        return false;
+        return 0;
     }
 
     //Proj4 
@@ -39,15 +39,18 @@ bool RegByGeoInf(const char* InputFileName, vector<vector<double>> targetgeo, ve
 	if(!(pj_utm = pj_init_plus("+proj=utm +zone=50 +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"))){
 		cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;
 		GDALClose(ReadDataSet);ReadDataSet = NULL; //释放内存
-		return false;
+		return -1;
 	}
 	if(!(pj_latlon = pj_init_plus("+proj=longlat +datum=WGS84 +no_defs"))){
 		cerr<<"file："<<__FILE__<<"line："<<__LINE__<<"time："<<__DATE__<<" "<<__TIME__<<endl;		
 		//释放内存		
 		pj_free(pj_utm);pj_utm = NULL;  
 		GDALClose(ReadDataSet);ReadDataSet = NULL; 
-		return false;
+		return -1;
 	}
+    int nXsize= ReadDataSet->GetRasterXSize();
+	int nYsize= ReadDataSet->GetRasterYSize();
+    
     vector<double> x;//经度:左上角，右上角，左下角，右下角
     vector<double> y;//纬度:左上角，右上角，左下角，右下角
 	//左上角
@@ -98,7 +101,7 @@ bool RegByGeoInf(const char* InputFileName, vector<vector<double>> targetgeo, ve
 	pj_free(pj_utm);pj_utm = NULL;
 	pj_free(pj_latlon);pj_latlon = NULL; 
     delete ReadDataSet; ReadDataSet = NULL;
-    return true;
+    return 1;
 
 }
 
@@ -111,7 +114,6 @@ int ReadImageToBuff(const char* InputFileName, float **pImageBuf, int &height,in
     * @param    pImageBuf           内存块指针
     * @exception    无
     * @return   0   成功
-    * @return   1   图像含有地理信息
     * @return   -1  内存分配失败
     * @return   -2  读取数据失败
     */

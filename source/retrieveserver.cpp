@@ -19,8 +19,10 @@ RetrieveServer::RetrieveServer() {
     p_SRClassify = NULL;
     p_SRClassify = new SR<float>();
     
-    //Read target information
-    string getdic = "SELECT dicpath,targetname,targetno FROM t7dictionary;";
+    //读取目标信息
+    string getdic = "SELECT t7.dicpath,t7.targetname,t7.targetno,t3.lu,t3.rd "+\
+                    "FROM t3targetinfo AS t3,t7dictionary AS t7 "+
+                    "WHERE t3.targetno = t7.targetno AND t3.status_ = '1' AND t7.status_ = '1';";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getdic,res);
     if(flag == false) {
@@ -38,8 +40,19 @@ RetrieveServer::RetrieveServer() {
         dict_path.push_back(it[0].as<string>()); //字典路径
         p_targetname.push_back(it[1].as<string>());//目标名称
         p_targetno.push_back(it[2].as<int>());//目标序号
+        vector<double> tmp;
+        string str = it[3].as<string>();       
+        tmp.push_back(std::stod( str.substr(0,str.find_last_of(",")).c_str() ));//左上角经度
+        tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1,str.length()-str.find_last_of(",")-1).c_str() ));//左上角纬度
+        str = it[4].as<string>();       
+        tmp.push_back(std::stod( str.substr(0,str.find_last_of(",")).c_str() ));//右下角经度
+        tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1,str.length()-str.find_last_of(",")-1).c_str() ));//右下角纬度
+
+        p_targetgeo.push_back(tmp);//地理信息
+
     }
-    //Load dictionary
+
+    //加载字典
     flag = p_SRClassify->LoadDic(dict_path);
     if(flag == false) {
         delete p_pgdb;
@@ -113,7 +126,7 @@ WordRes RetrieveServer::wordSearch(const DictStr2Str &mapArg, const Ice::Current
     string pi = mapArg.at("pi");
     string pn = mapArg.at("pn");
     //字符串匹配
-    string getimginf = "SELECT id,targetname FROM t3targetinfo WHERE targetname = '" + word + "' ORDER BY id LIMIT "\
+    string getimginf = "SELECT id,targetname FROM t3targetinfo WHERE targetname = '" + word + "' AND status_ = '1' ORDER BY id LIMIT "\
                        + pn + " OFFSET "+to_string((std::atoi(pi.c_str())-1)*std::atoi(pn.c_str()))+";";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getimginf,res);
@@ -146,7 +159,7 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
     string pi = mapArg.at("pi");
     string pn = mapArg.at("pn");
     //
-    string getimginf = "SELECT id,picname,picpath FROM t4pic WHERE targetname = '" + word + "' ORDER BY id LIMIT "\
+    string getimginf = "SELECT id,picname,picpath FROM t4pic WHERE targetname = '" + word + "' AND status_ = '1' ORDER BY id LIMIT "\
                        + pn + " OFFSET "+to_string((std::atoi(pi.c_str())-1)*std::atoi(pn.c_str()))+";";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getimginf,res);
@@ -169,7 +182,7 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
     }
 
     //
-    getimginf = "SELECT id,capname,cappath FROM t5remotecap WHERE targetname = '" + word + "' ORDER BY id LIMIT "\
+    getimginf = "SELECT id,capname,cappath FROM t5remotecap WHERE targetname = '" + word + "' AND status_ = '1' ORDER BY id LIMIT "\
                 + pn + " OFFSET "+to_string((std::atoi(pi.c_str())-1)*std::atoi(pn.c_str()))+";";
     flag = p_pgdb->pg_fetch_sql(getimginf,res);
     if(flag == false) {
@@ -204,17 +217,21 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
         return obj;
     }
     string purl(mapArg.at("purl"));
-    string filename = purl.substr(purl.find_last_of('/'), purl.find_last_of('.'));
+    string filename = purl.substr(purl.find_last_of('/')+1, purl.find_last_of('.')-purl.find_last_of('/')-1);
     string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
 //    string saveurl = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/feature/" + filename + ".csv";
     cout << "Save URL ## " << saveurl << endl;
     
     /*Recognition：geographic information*/
     vector<int> gires;
-    bool flag;
-    flag = GetGeoInf(purl,gires);
-    if(flag){
-        if(gires.size() != 0){
+    int regflag = RegByGeoInf(purl,gires);
+    if(regflag == -1){
+        obj.status = -1;
+        Log::Error("RegByGeoInf Error !");
+        return obj;        
+    }
+    if(regflag == 1){
+        if(gires.size() != 0){ //地理范围内存在已知目标
             for(vector<int>::iterator it = gires.begin(); it != gires.end(); it++){
                 ImgInfo imginf;
                 imginf.id = p_targetno[*(it)];
@@ -240,36 +257,21 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
     //Sparse Representation
     vector<int> srres;
     flag = p_SRClassify->SRClassify(imgFeatures, p_min_residual, p_sparsity, srres);
-    if(flag == false || srres.size() != p_targetinf.size()) {
+    if(flag == false || srres.size() != p_targetname.size()) {
         Log::Error("Fetch RetrieveServer Result Struct Failed !");
         obj.status = -1;
         return obj;
     }
 
-    //string res = "";
     for(vector<int>::iterator it = srres.begin(); it != srres.end(); it++){
         ImgInfo imginf;
         imginf.id = p_targetno[*(it)];
         imginf.name = p_targetname[*(it)];
         imginf.path = "";
         obj.keyWords.push_back(imginf);
-        //res = res+to_string(imginf.id)+"|"
+
     }
-    //Write result to PGDB
-    //string insert = "INSERT INTO r5_user_search_img"+\
-    "(imgid, userid, datesearch, res, dateres) VALUES"+" ("\
-    ++""\
-    ++""\
-    ++""\
-    ++""\
-    ++"";
-    
-    //flag = p_pgdb->pg_exec_sql(getdic);
-    //if(flag == false) {        
-    //    Log::Error("PG DB Execute Error.");
-    //    obj.status = -1;
-    //}
-    //string targetname = p_targetname[res];
+
     log_OutputResult(obj);
     return obj;
 }
