@@ -6,9 +6,11 @@
 #include <iostream>
 #include <vector>
 
-#include <libiomp/omp.h>
+#include <omp.h>
+
 
 using namespace std;
+
 
 bool AsiftFeature(const string Output_FileName,string Input_FilePath, vector<vector<float>>& features);
 

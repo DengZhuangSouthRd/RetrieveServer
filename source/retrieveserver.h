@@ -16,7 +16,7 @@
 #include "threadpool/threadpool.h"
 #include "algorithm/retrieve/utils/retrieveutils.h"
 #include "utils/pgdb.h"
-#include "algorithm/retrieve/detect/SR.h"
+#include "algorithm/retrieve/detect/sr.h"
 
 using namespace std;
 using namespace RPCImgRecong;

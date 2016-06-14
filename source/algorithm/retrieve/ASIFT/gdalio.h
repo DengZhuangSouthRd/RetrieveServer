@@ -5,6 +5,7 @@
 #include <iostream>
 #include <proj_api.h> //proj4
 #include <vector>
+#include <string>
 using namespace std;
 
 #ifndef DATA2D
@@ -101,6 +102,7 @@ int RegByGeoInf(const char* InputFileName, vector<vector<double>> targetgeo, vec
 	pj_free(pj_utm);pj_utm = NULL;
 	pj_free(pj_latlon);pj_latlon = NULL; 
     delete ReadDataSet; ReadDataSet = NULL;
+
     return 1;
 
 }

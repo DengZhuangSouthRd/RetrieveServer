@@ -20,9 +20,7 @@ RetrieveServer::RetrieveServer() {
     p_SRClassify = new SR<float>();
     
     //读取目标信息
-    string getdic = "SELECT t7.dicpath,t7.targetname,t7.targetno,t3.lu,t3.rd "+\
-                    "FROM t3targetinfo AS t3,t7dictionary AS t7 "+
-                    "WHERE t3.targetno = t7.targetno AND t3.status_ = '1' AND t7.status_ = '1';";
+    string getdic = "SELECT t7.dicpath,t7.targetname,t7.targetno,t3.lu,t3.rd FROM t3targetinfo AS t3,t7dictionary AS t7 WHERE t3.targetno = t7.targetno AND t3.status_ = '1' AND t7.status_ = '1';";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getdic,res);
     if(flag == false) {
@@ -31,8 +29,9 @@ RetrieveServer::RetrieveServer() {
     }
     vector<string> dict_path;
     for (result::const_iterator it = res.begin(); it != res.end(); ++it) {
-        if(it[0].as<string>().empty() || it[1].as<string>().empty() || it[2].as<string>().empty()){
-            cerr << "Targetno is "<<it[2].as<string>()<<"Targetname is " << it[1].as<string>() << " Dicpath is " << it[0].as<string>();
+        if(it[0].as<string>().empty() || it[1].as<string>().empty() || it[2].as<string>().empty() || it[3].as<string>().empty() ||it[4].as<string>().empty() ){
+            cerr << "Targetno is " << it[2].as<string>() << ", Targetname is " << it[1].as<string>() << ", Dicpath is " << it[0].as<string>();
+            cerr << ", Geoinf is" << it[3].as<string>().empty() << " " <<it[4].as<string>().empty()<<endl;
             delete p_pgdb;
             p_pgdb = NULL;
             throw runtime_error("PG DB Data Error.");
@@ -41,10 +40,10 @@ RetrieveServer::RetrieveServer() {
         p_targetname.push_back(it[1].as<string>());//目标名称
         p_targetno.push_back(it[2].as<int>());//目标序号
         vector<double> tmp;
-        string str = it[3].as<string>();       
+        string str = it[3].as<string>(); //以","分割     
         tmp.push_back(std::stod( str.substr(0,str.find_last_of(",")).c_str() ));//左上角经度
         tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1,str.length()-str.find_last_of(",")-1).c_str() ));//左上角纬度
-        str = it[4].as<string>();       
+        str = it[4].as<string>();        //以","分割   
         tmp.push_back(std::stod( str.substr(0,str.find_last_of(",")).c_str() ));//右下角经度
         tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1,str.length()-str.find_last_of(",")-1).c_str() ));//右下角纬度
 
@@ -59,8 +58,8 @@ RetrieveServer::RetrieveServer() {
         p_pgdb = NULL;
         throw runtime_error("Load Dic Error.");
     }
-    p_sparsity = std::atoi( argvMap["RETRIEVESPARSITY"].c_str() );
-    p_min_residual = std::atof( argvMap["RETRIEVEMINRESIDUAL"].c_str() );
+    p_sparsity = std::atoi( g_ConfMap["RETRIEVESPARSITY"].c_str() );
+    p_min_residual = std::atof( g_ConfMap["RETRIEVEMINRESIDUAL"].c_str() );
 }
 
 RetrieveServer::~RetrieveServer() {
@@ -142,10 +141,10 @@ WordRes RetrieveServer::wordSearch(const DictStr2Str &mapArg, const Ice::Current
             obj.status = -1;
         }
         ImgInfo imginf;
-        imginf.id = it[0].as<string>();
+        imginf.id = it[0].as<int>();
         imginf.name = it[1].as<string>();
         imginf.path = "";
-        obj.imgPic.push_back(ImgInfo);
+        obj.keyWords.push_back(imginf);
     }
     log_OutputResult(obj);        
     return obj;
@@ -175,10 +174,10 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
             obj.status = -1;
         }
         ImgInfo imginf;
-        imginf.id = it[0].as<string>();
+        imginf.id = it[0].as<int>();
         imginf.name = it[1].as<string>();
         imginf.path = it[2].as<string>();
-        obj.imgPic.push_back(ImgInfo);
+        obj.imgPic.push_back(imginf);
     }
 
     //
@@ -197,10 +196,10 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
             obj.status = -1;
         }
         ImgInfo imginf;
-        imginf.id = it[0].as<string>();
+        imginf.id = it[0].as<int>();
         imginf.name = it[1].as<string>();
         imginf.path = it[2].as<string>();
-        obj.imgRemote.push_back(ImgInfo);
+        obj.imgRemote.push_back(imginf);
     }
     log_OutputResult(obj);
     return obj;
@@ -224,7 +223,7 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
     
     /*Recognition：geographic information*/
     vector<int> gires;
-    int regflag = RegByGeoInf(purl,gires);
+    int regflag = RegByGeoInf(purl.c_str(),p_targetgeo,gires);
     if(regflag == -1){
         obj.status = -1;
         Log::Error("RegByGeoInf Error !");
