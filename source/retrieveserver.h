@@ -17,6 +17,7 @@
 #include "algorithm/retrieve/utils/retrieveutils.h"
 #include "utils/pgdb.h"
 #include "algorithm/retrieve/detect/sr.h"
+#include "algorithm/retrieve/detect/regbygeoinf.h"
 
 using namespace std;
 using namespace RPCImgRecong;

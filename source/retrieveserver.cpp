@@ -223,7 +223,7 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
     
     /*Recognition：geographic information*/
     vector<int> gires;
-    int regflag = RegByGeoInf(purl.c_str(),p_targetgeo,gires);
+    int regflag = RegByGeoInf(purl,p_targetgeo,gires);
     if(regflag == -1){
         obj.status = -1;
         Log::Error("RegByGeoInf Error !");
