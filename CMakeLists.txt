@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(RetrieveServer)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-stack-protector -Wc++11-narrowing -Wmacro-redefined")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 include_directories("/usr/local/include")
 include_directories("source/algorithm/third_party/")
@@ -36,7 +36,7 @@ set(SOURCE_FILES
         source/algorithm/retrieve/detect/basicoperator.h
         source/algorithm/retrieve/detect/readcsv.h
         source/algorithm/retrieve/detect/sr.h
-	source/algorithm/retrieve/detect/regbygeoinf.h
+		source/algorithm/retrieve/detect/regbygeoinf.h
         source/algorithm/retrieve/ASIFT/compute_asift_keypoints.cpp
         source/algorithm/retrieve/ASIFT/compute_asift_keypoints.h
         source/algorithm/retrieve/ASIFT/compute_asift_matches.cpp

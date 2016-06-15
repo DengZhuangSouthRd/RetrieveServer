@@ -6,11 +6,13 @@
 #include <iostream>
 #include <vector>
 
+#if defined(__clang__)
+#include <libiomp/omp.h>
+#elif defined(__GNUG__) || defined(__GNUC__)
 #include <omp.h>
-
+#endif
 
 using namespace std;
-
 
 bool AsiftFeature(const string Output_FileName,string Input_FilePath, vector<vector<float>>& features);
 
