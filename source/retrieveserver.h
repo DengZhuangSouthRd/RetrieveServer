@@ -17,6 +17,7 @@
 #include "algorithm/retrieve/utils/retrieveutils.h"
 #include "utils/pgdb.h"
 #include "algorithm/retrieve/detect/sr.h"
+#include "algorithm/retrieve/detect/regbygeoinf.h"
 
 using namespace std;
 using namespace RPCImgRecong;
@@ -45,8 +46,11 @@ private:
     ThreadPool* p_threadPool;
     PGDB* p_pgdb;
     SR<float> * p_SRClassify;
-    int sparsity;
-    float min_residual;
+    vector<string> p_targetname;//目标名称
+    vector<int> p_targetno;//目标序号
+    vector<vector<double>> p_targetgeo;//目标地理坐标，依次为左上角经度、左上角纬度、右下角经度、右下角纬度
+    int p_sparsity;       //稀疏表示：稀疏度
+    float p_min_residual; //稀疏表示：最小残差
 };
 
 

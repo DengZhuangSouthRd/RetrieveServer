@@ -1,30 +1,26 @@
-#ifndef _IO_H_
-#define _IO_H_
+#ifndef _GDALIO_H_
+#define _GDALIO_H_
 
 #include <gdal_priv.h>
-
-#ifndef BuildingNum 
-#define BuildingNum 7
-#endif
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
 
 #ifndef DATA2D
 #define DATA2D(Matrix,m,n,SizeCol) Matrix[(m)*(SizeCol)+(n)]
 #endif
 
-#include <iostream>
-
-using namespace std;
 
 int ReadImageToBuff(const char* InputFileName, float **pImageBuf, int &height,int &width,int &bandcount) {
 
     /*
     * @brief    ReadImageToBuff.
     * 把影像读入到内存空间
-    * @param    inputFileName       输入文件路径
+    * @param    InputFileName       输入文件路径
     * @param    pImageBuf           内存块指针
     * @exception    无
     * @return   0   成功
-    * @return   1   图像含有地理信息
     * @return   -1  内存分配失败
     * @return   -2  读取数据失败
     */
@@ -34,12 +30,12 @@ int ReadImageToBuff(const char* InputFileName, float **pImageBuf, int &height,in
 
     //准备读取图片
     GDALDataset *ReadDataSet = (GDALDataset*)GDALOpen(InputFileName, GA_ReadOnly);
+    
     //输出图像的坐标和分辨率信息
-    double adfGeoTransform[6];
-    if(ReadDataSet->GetGeoTransform(adfGeoTransform)==CE_None){
-        return 1;
-    }
-
+    //double adfGeoTransform[6];
+    //if(ReadDataSet->GetGeoTransform(adfGeoTransform)==CE_None){
+    //    return 1;
+    //}
     width  = ReadDataSet->GetRasterXSize();
     height = ReadDataSet->GetRasterYSize();
     bandcount = ReadDataSet->GetRasterCount();
