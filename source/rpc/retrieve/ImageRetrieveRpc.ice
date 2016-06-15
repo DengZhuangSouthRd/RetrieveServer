@@ -11,7 +11,7 @@ module RPCImgRecong {
 	struct ImgInfo {
         int id; //关键字
         string path; //文件路径 /a/b/c/d/
-        string name; //文件名
+        string name; //文件名 用于WordRes时 只存储关键词
     };
     sequence<ImgInfo> ListString;
     dictionary<string, string> DictStr2Str;
@@ -22,7 +22,7 @@ module RPCImgRecong {
         ListString imgPic;
     };
     struct WordRes {
-	    int status;
+	    int status; //-1:错误 0:没有目标 1:正常
         ListString keyWords;
     };
     

@@ -1,3 +1,6 @@
+#ifndef _BASICOPERATOR_H_
+#define _BASICOPERATOR_H_
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -129,3 +132,5 @@ vector<DataType> operator*(vector<vector<DataType>> mat, vector<DataType> vec)
 	}
 	return result;
 }
+
+#endif

@@ -29,8 +29,7 @@ public:
 	int SRClassify(vector<DataType>& y, DataType min_residual, int sparsity);
 
 	//稀疏表示分类（多组特征）
-	int SRClassify(vector<vector<DataType>>& y, DataType min_residual, int sparsity);
-
+	bool SRClassify(vector<vector<DataType>>& y, DataType min_residual, int sparsity, vector<int> &srres);
 	//析构函数
 	~SR();
 
@@ -217,16 +216,17 @@ int SR<DataType>::SRClassify(vector<DataType>& y, DataType min_residual, int spa
 
 //稀疏表示分类（多组特征）
 template<class DataType>
-int SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual, int sparsity){
+bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual, int sparsity, vector<int> &srres){
 	/*SRClassify		稀疏表示识别
 	*y					特征
 	*min_residual		最小残差
 	*sparsity			稀疏度
-	*return：类别:（0, 1，2，3，...） -1：错误
+	*srres              排序后的目标索引
+	*return				true|false
 	*author:ys
 	*date:2016.06.02
 	*/
-	int i;
+	int i,j;
 	int size = y.size();
 	vector<int> result(this->classnum, 0);
 	for (i = 0; i < size; i++)
@@ -240,11 +240,27 @@ int SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual,
 			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
 			vector<int>().swap(result);//释放内存
 			//result.clear();//释放内存
-			return -1;
+			return false;
 		}
 		result[tmp]++;
 	}
-	
+
+	//对目标进行排序(递减)
+	for(i = 0; i < this->classnum; i++){
+		int index = i;
+		for(j = i; j < this->classnum; j++){
+			if(result[index] < result[j]){
+				index = j;
+			}
+		}
+		srres.push_back(index);
+		int tmp = result[index];
+		result[index] = result[i];
+		result[i] = tmp;
+	}
+		
+
+	/*
 	int maxindex;
 	try
 	{
@@ -260,13 +276,13 @@ int SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual,
 		cerr << "file:" << __FILE__ << endl;
 		cerr << "line: " << __LINE__ << endl;
 		cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
-		return -1;
+		return false;
 
 	}
 	vector<int>().swap(result);//释放内存
 	//result.clear();//释放内存
-
-	return maxindex;
+	*/
+	return true;
 }
 
 //析构函数
@@ -399,6 +415,7 @@ bool SR<DataType>::LoadDic(vector<string> DicFilePath){
 			cerr << "file:" << __FILE__ << endl;
 			cerr << "line: " << __LINE__ << endl;
 			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
+			return false;
 		}	
 		cout << "the cols of class " << i << " are: " << num << endl;
 		dicclassnum.push_back(num);
