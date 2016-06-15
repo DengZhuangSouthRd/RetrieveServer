@@ -19,6 +19,8 @@
 #include "algorithm/retrieve/detect/sr.h"
 #include "algorithm/retrieve/detect/regbygeoinf.h"
 
+#define _OPENMP
+
 using namespace std;
 using namespace RPCImgRecong;
 using namespace Ice;

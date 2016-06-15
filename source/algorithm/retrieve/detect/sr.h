@@ -10,6 +10,16 @@
 #include "readcsv.h"
 #include "basicoperator.h"
 
+#ifdef _OPENMP
+
+#if defined(__clang__)
+#include <libiomp/omp.h>
+#elif defined(__GNUG__) || defined(__GNUC__)
+#include <omp.h>
+#endif
+
+#endif
+
 using namespace std;
 using namespace Eigen;
 
@@ -189,20 +199,26 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 	int i,j;
 	int size = y.size();
 	vector<int> result(this->classnum, 0);
+
+	vector<int> results(size,0);
+	
+#pragma omp parallel for shared(results)
 	for (i = 0; i < size; i++)
 	{
-		int tmp = SRClassify(y[i], min_residual, sparsity);
-		if (tmp < 0)
+		results[i] = SRClassify(y[i], min_residual, sparsity);
+	}
+
+	for (i = 0; i < size; i++)
+	{
+		if (result[i] < 0)
 		{
 			cerr << "SRClassify:error." << endl;
 			cerr << "file:" << __FILE__ << endl;
 			cerr << "line: " << __LINE__ << endl;
 			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
-			vector<int>().swap(result);//释放内存
-			//result.clear();//释放内存
 			return false;
 		}
-		result[tmp]++;
+		result[result[i]]++;
 	}
 
 	//对目标进行排序(递减)

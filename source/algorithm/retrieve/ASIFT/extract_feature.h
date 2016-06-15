@@ -6,9 +6,6 @@
 #include <iostream>
 #include <vector>
 
-#define _OPENMP
-
-
 using namespace std;
 
 bool AsiftFeature(const string Output_FileName,string Input_FilePath, vector<vector<float>>& features);
