@@ -43,6 +43,7 @@
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/ASIFT/compute_asift_matches.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/detect/basicoperator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/detect/sr.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/detect/regbygeoinf.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/detect/readcsv.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/utils/retrieveutils.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/source/algorithm/retrieve/utils/retrieveutils.h" isTestSource="false" />

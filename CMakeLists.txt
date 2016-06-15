@@ -36,7 +36,7 @@ set(SOURCE_FILES
         source/algorithm/retrieve/detect/basicoperator.h
         source/algorithm/retrieve/detect/readcsv.h
         source/algorithm/retrieve/detect/sr.h
-	source/algorithm/retrieve/detect/regbygeoinf.h
+		source/algorithm/retrieve/detect/regbygeoinf.h
         source/algorithm/retrieve/ASIFT/compute_asift_keypoints.cpp
         source/algorithm/retrieve/ASIFT/compute_asift_keypoints.h
         source/algorithm/retrieve/ASIFT/compute_asift_matches.cpp
