@@ -150,51 +150,11 @@ int SR<DataType>::SRClassify(vector<DataType>& y, DataType min_residual, int spa
 		{
 			if (x[j] != 0.0)
 			{
-				try
-				{
-					tmp = tmp + dic[j] * x[j];
-				}
-				catch (runtime_error &e)
-				{
-					vector<DataType>().swap(tmp);//释放内存
-					//tmp.clear();//释放内存
-
-					vector<DataType>().swap(x);//释放内存
-					//x.clear();//释放内存
-
-					cerr << "SRClassify:error." << endl;
-					cerr << e.what() << endl;
-					cerr << "file:" << __FILE__ << endl;
-					cerr << "line: " << __LINE__ << endl;
-					cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
-					return -1;
-
-				}
-				
+				tmp = tmp + dic[j] * x[j];		
 			}
 
 		}
-		DataType dist;
-		try
-		{
-			dist = Norm(y - tmp);
-		}
-		catch (runtime_error &e)
-		{
-			vector<DataType>().swap(tmp);//释放内存
-			//tmp.clear();//释放内存
-
-			vector<DataType>().swap(x);//释放内存
-			//x.clear();//释放内存
-
-			cerr << "SRClassify:error." << endl;
-			cerr << e.what() << endl;
-			cerr << "file:" << __FILE__ << endl;
-			cerr << "line: " << __LINE__ << endl;
-			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
-			return -1;
-
-		}
+		DataType dist = Norm(y - tmp);
 
 		vector<DataType>().swap(tmp);//释放内存
 		//tmp.clear();//释放内存
@@ -536,25 +496,9 @@ bool SR<DataType>::OrthMatchPursuit(vector<DataType>& y, DataType min_residual, 
 		for (i = 0; i < dcol; i++)
 		{
 			DataType coefficient;
-			try
-			{
-				coefficient = (DataType)Dot(dic[i], residual);
-			}
-			catch (runtime_error &e)
-			{
-				vector<DataType>().swap(residual);//释放内存
-				//residual.clear();//释放内存
-				for (i = 0; i < phi.size(); i++) vector<DataType>().swap(phi[i]);
-				vector<vector<DataType>>().swap(phi);
-				//phi.clear();//释放内存
-				cerr << "OrthMatchPursuit:error." << endl;
-				cerr << e.what() << endl;
-				cerr << "file:" << __FILE__ << endl;
-				cerr << "line: " << __LINE__ << endl;
-				cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
-				return false;
 
-			}
+			coefficient = (DataType)Dot(dic[i], residual);
+
 			if (fabs(coefficient) > fabs(max_coefficient))
 			{
 				max_coefficient = coefficient;
@@ -582,28 +526,8 @@ bool SR<DataType>::OrthMatchPursuit(vector<DataType>& y, DataType min_residual, 
 			return false;
 		}
 
-		DataType res_norm;
-		try
-		{
-			residual = y - phi *x;
-			res_norm = (DataType)Norm(residual);
-		}
-		catch (runtime_error &e)
-		{
-			vector<DataType>().swap(residual);//释放内存
-			//residual.clear();//释放内存
-			for (i = 0; i < phi.size(); i++) vector<DataType>().swap(phi[i]);
-			vector<vector<DataType>>().swap(phi);
-			//phi.clear();//释放内存
-			cerr << "OrthMatchPursuit:error." << endl;
-			cerr << e.what() << endl;			
-			cerr << "file:" << __FILE__ << endl;
-			cerr << "line: " << __LINE__ << endl;
-			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
-			return false;
-
-		}
-		
+		residual = y - phi *x;
+		DataType res_norm = (DataType)Norm(residual);
 
 		//if (x.size() >= sparsity || res_norm <= min_residual) //根据稀疏个数和残差作为终止条件
 		if (x.size() >= sparsity)
