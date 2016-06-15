@@ -82,17 +82,18 @@ inline int RegByGeoInf(const string InputFileName, vector<vector<double>> target
 	
     int i;
     for(i = 0; i < targetgeo.size(); i++){
-        if ((x[0]-0.001<=targetgeo[i][0]&&targetgeo[i][0]<=x[1]+0.001)&&(y[1]-0.001<=targetgeo[i][1]&&targetgeo[i][1]<=y[0]+0.001)||
-			(x[0]-0.001<=targetgeo[i][0]&&targetgeo[i][0]<=x[1]+0.001)&&(y[1]-0.001<=targetgeo[i][3]&&targetgeo[i][1]<=y[0]+0.001)||
-			(x[0]-0.001<=targetgeo[i][0]&&targetgeo[i][2]<=x[1]+0.001)&&(y[1]-0.001<=targetgeo[i][1]&&targetgeo[i][1]<=y[0]+0.001)||
-			(x[0]-0.001<=targetgeo[i][0]&&targetgeo[i][2]<=x[1]+0.001)&&(y[1]-0.001<=targetgeo[i][3]&&targetgeo[i][1]<=y[0]+0.001)||
-			(targetgeo[i][0]-0.001<=x[0]&&x[0]<=targetgeo[i][2]+0.001)&&(targetgeo[i][3]-0.001<=y[0]&&y[0]<=targetgeo[i][1]+0.001)||
-			(targetgeo[i][0]-0.001<=x[0]&&x[0]<=targetgeo[i][2]+0.001)&&(targetgeo[i][3]-0.001<=y[1]&&y[1]<=targetgeo[i][1]+0.001)||
-			(targetgeo[i][0]-0.001<=x[1]&&x[1]<=targetgeo[i][2]+0.001)&&(targetgeo[i][3]-0.001<=y[0]&&y[0]<=targetgeo[i][1]+0.001)||
-			(targetgeo[i][0]-0.001<=x[1]&&x[1]<=targetgeo[i][2]+0.001)&&(targetgeo[i][3]-0.001<=y[1]&&y[1]<=targetgeo[i][1]+0.001)){
+        if (
+				((x[0]-0.001<=targetgeo[i][0]&&targetgeo[i][0]<=x[1]+0.001)&&(y[1]-0.001<=targetgeo[i][1]&&targetgeo[i][1]<=y[0]+0.001)) ||
+				((x[0]-0.001<=targetgeo[i][0]&&targetgeo[i][0]<=x[1]+0.001)&&(y[1]-0.001<=targetgeo[i][3]&&targetgeo[i][1]<=y[0]+0.001)) ||
+				((x[0]-0.001<=targetgeo[i][0]&&targetgeo[i][2]<=x[1]+0.001)&&(y[1]-0.001<=targetgeo[i][1]&&targetgeo[i][1]<=y[0]+0.001)) ||
+				((x[0]-0.001<=targetgeo[i][0]&&targetgeo[i][2]<=x[1]+0.001)&&(y[1]-0.001<=targetgeo[i][3]&&targetgeo[i][1]<=y[0]+0.001)) ||
+				((targetgeo[i][0]-0.001<=x[0]&&x[0]<=targetgeo[i][2]+0.001)&&(targetgeo[i][3]-0.001<=y[0]&&y[0]<=targetgeo[i][1]+0.001)) ||
+				((targetgeo[i][0]-0.001<=x[0]&&x[0]<=targetgeo[i][2]+0.001)&&(targetgeo[i][3]-0.001<=y[1]&&y[1]<=targetgeo[i][1]+0.001)) ||
+				((targetgeo[i][0]-0.001<=x[1]&&x[1]<=targetgeo[i][2]+0.001)&&(targetgeo[i][3]-0.001<=y[0]&&y[0]<=targetgeo[i][1]+0.001)) ||
+				((targetgeo[i][0]-0.001<=x[1]&&x[1]<=targetgeo[i][2]+0.001)&&(targetgeo[i][3]-0.001<=y[1]&&y[1]<=targetgeo[i][1]+0.001))
+				){
             res.push_back(i);
         }
-
     }
 
 	//释放内存
