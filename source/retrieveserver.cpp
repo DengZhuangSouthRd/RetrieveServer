@@ -229,7 +229,7 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
         Log::Error("RegByGeoInf Error !");
         return obj;        
     }
-    if(regflag == 1){
+    if(regflag == 1){ //图像包含地理信息
         if(gires.size() != 0){ //地理范围内存在已知目标
             for(vector<int>::iterator it = gires.begin(); it != gires.end(); it++){
                 ImgInfo imginf;
@@ -241,6 +241,7 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
         }
         else{
             Log::Warn(purl+" This target can not be recognized.");
+            obj.status = 0; //没有找到目标
         }
         return obj;
     }

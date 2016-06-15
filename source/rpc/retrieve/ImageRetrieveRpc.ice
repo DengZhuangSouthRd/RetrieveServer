@@ -22,7 +22,7 @@ module RPCImgRecong {
         ListString imgPic;
     };
     struct WordRes {
-	    int status;
+	    int status; //-1:错误 0:没有目标 1:正常
         ListString keyWords;
     };
     
