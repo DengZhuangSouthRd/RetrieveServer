@@ -48,8 +48,13 @@
 #include "compute_asift_keypoints.h"
 
 #ifdef _OPENMP
-//#include <omp.h>
-#include <>
+
+#if defined(__clang__)
+#include <libiomp/omp.h>
+#elif defined(__GNUG__) || defined(__GNUC__)
+#include <omp.h>
+#endif
+
 #endif
 
 
