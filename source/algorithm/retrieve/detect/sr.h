@@ -205,12 +205,13 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 #pragma omp parallel for shared(results)
 	for (i = 0; i < size; i++)
 	{
+		cout << "processing " << i << endl;
 		results[i] = SRClassify(y[i], min_residual, sparsity);
 	}
 
 	for (i = 0; i < size; i++)
 	{
-		if (result[i] < 0)
+		if (results[i] < 0)
 		{
 			cerr << "SRClassify:error." << endl;
 			cerr << "file:" << __FILE__ << endl;
@@ -218,7 +219,7 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
 			return false;
 		}
-		result[result[i]]++;
+		result[results[i]]++;
 	}
 
 	//对目标进行排序(递减)
