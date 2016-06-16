@@ -8,6 +8,8 @@
 #include "fproj.h"
 #include "compute_asift_keypoints.h"
 #include "compute_asift_matches.h"
+
+
 using namespace std;
 
 bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vector<float>> &features){
@@ -108,9 +110,9 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
     float hS;
     int  flag_resize=0;   // 是否resize
     //判断是否resize
-    if (width>300)
+    if (width>200)
     {
-        wS = 300;
+        wS = 200;
         hS = floor(height*wS/width); //
         flag_resize=1;//resize
     }
