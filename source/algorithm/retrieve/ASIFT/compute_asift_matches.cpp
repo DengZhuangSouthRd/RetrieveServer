@@ -47,7 +47,13 @@
 #include <time.h>
 
 #ifdef _OPENMP
+
+#if defined(__clang__)
+#include <libiomp/omp.h>
+#elif defined(__GNUG__) || defined(__GNUC__)
 #include <omp.h>
+#endif
+
 #endif
 
 #include "compute_asift_matches.h"
