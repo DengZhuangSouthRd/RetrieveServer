@@ -64,6 +64,7 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
     if (bandcount==3)
     {
         //GrayImg=Gdal_rgb2gray(Img,height,width,bandcount);
+#pragma omp parallel for
         for(i=0;i<height*width;i++)
         {
             GrayImg[i] = 0.212671 * Img[i] + 0.715160 * Img[i+height*width] + 0.072169 * Img[i+height*width*2];
@@ -72,7 +73,7 @@ bool AsiftFeature(const string Output_FileName,string Input_FilePath,vector<vect
     else if(bandcount==1)
     {
 
-
+#pragma omp parallel for
         for(i=0;i<height*width;i++)
         {
             GrayImg[i]=Img[i];
