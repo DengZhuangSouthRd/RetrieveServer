@@ -3,3 +3,4 @@ data/img/retrieve/feature/*
 data/log/*
 data/serialize/*
 data/retrieve/*
+.idea
