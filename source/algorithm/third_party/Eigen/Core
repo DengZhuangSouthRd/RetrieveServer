@@ -207,7 +207,13 @@
 #endif
 
 #ifdef EIGEN_HAS_OPENMP
+//#include <omp.h>
+#if defined(__clang__)
+#include <libiomp/omp.h>
+#elif defined(__GNUG__) || defined(__GNUC__)
 #include <omp.h>
+#endif
+
 #endif
 
 // MSVC for windows mobile does not have the errno.h file
