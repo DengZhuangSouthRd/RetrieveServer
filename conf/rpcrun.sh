@@ -5,5 +5,7 @@ slice2cpp ImageRetrieveRpc.ice
 sed -i '/<ImageRetrieveRpc.h>/s/<ImageRetrieveRpc.h>/"ImageRetrieveRpc.h"/g' ImageRetrieveRpc.cpp
 
 cd ../../../
-cmake .
+mkdir build
+cd build
+cmake ../
 make
