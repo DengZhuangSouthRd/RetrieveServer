@@ -224,15 +224,21 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 
 	srres.resize(this->classnum);
 	for(i = 0; i < this->classnum; i++){
-		cout << result[i] << endl;
-		srres[i] = i;
+			srres[i] = i;		
 	}
 
+	for(i = 0; i < this->classnum; i++){ //将识别后为0的类别删除
+		if(result[i] == 0){
+			result.erase(result.begin() + i);
+			srres.erase(srres.begin() + i);
+		}
+	}
 	
+	int resnum = result.size(); //识别结果个数
 	//对目标进行排序(递减)
-	for(i = 0; i < this->classnum; i++){
+	for(i = 0; i < resnum - 1; i++){
 		int index = i;
-		for(j = i; j < this->classnum; j++){
+		for(j = i + 1; j < resnum; j++){
 			if(result[index] < result[j]){
 				index = j;
 			}
@@ -245,7 +251,7 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 		srres[index] = srres[i];
 		srres[i] = tmp;
 	}
-		
+	
 
 	/*
 	int maxindex;

@@ -276,7 +276,7 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
     cout << "Sparse Representation Start." << endl;
     vector<int> srres;
     flag = p_SRClassify->SRClassify(imgFeatures, p_min_residual, p_sparsity, srres);
-    if(flag == false || srres.size() != p_targetname.size()) {
+    if(flag == false ) { //|| srres.size() != p_targetname.size()
         Log::Error("Fetch RetrieveServer Result Struct Failed !");
         obj.status = -1;
         return obj;

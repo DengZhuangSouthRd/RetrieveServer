@@ -61,7 +61,6 @@ vector<DataType> operator-(vector<DataType> vec1, vector<DataType> vec2)
 		result.push_back(vec1[i] - vec2[i]);
 	}
 
-
 	return result;
 }
 
@@ -87,7 +86,6 @@ vector<DataType> operator+(vector<DataType> vec1, vector<DataType> vec2)
 	{
 		result.push_back(vec1[i] + vec2[i]);
 	}
-
 
 	return result;
 }
