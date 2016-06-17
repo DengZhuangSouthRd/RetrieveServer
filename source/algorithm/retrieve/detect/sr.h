@@ -33,7 +33,7 @@ public:
 	SR(vector<string> DicFilePath);
 
 	//加载字典 第0类字典对应DicFilePath[0]
-	bool LoadDic(vector<string> DicFilePath);
+	bool LoadDic(vector<string>& DicFilePath);
 
 	//稀疏表示分类（一组特征）
 	int SRClassify(vector<DataType>& y, DataType min_residual, int sparsity);
@@ -52,16 +52,16 @@ private:
 
 private:
 	//两个数组内积
-	DataType Dot(vector<DataType> vec1, vector<DataType> vec2);
+	DataType Dot(vector<DataType>& vec1, vector<DataType>& vec2);
 
 	//数组2范数
-	DataType Norm(vector<DataType> vec);
+	DataType Norm(vector<DataType>& vec);
 
 	//数组的最大值
-	int Max(vector<int> vec);
+	int Max(vector<int>& vec);
 
 	//求解最小二乘问题
-	bool solve(vector<vector<DataType>> phi, vector<DataType>& y, vector<DataType>& x);
+	bool solve(vector<vector<DataType>>& phi, vector<DataType>& y, vector<DataType>& x);
 
 	//OMP算法
 	bool OrthMatchPursuit(vector<DataType>& y, DataType min_residual, int sparsity, vector<DataType>& x, vector<int>& patch_indices);
@@ -137,7 +137,7 @@ int SR<DataType>::SRClassify(vector<DataType>& y, DataType min_residual, int spa
 	}
 
 	vector<DataType> x(dcol, 0.0); //稀疏解
-	for (i = 0; i < patch_indices.size(); i++)
+	for (i = 0; i < patch_indices.size(); ++i)
 	{
 		//cout << coefficient[i] << "  ";
 		x[patch_indices[i]] = coefficient[i];
@@ -153,10 +153,10 @@ int SR<DataType>::SRClassify(vector<DataType>& y, DataType min_residual, int spa
 
 	int start = 0;//某一类开始位置
 	DataType mindist = 100000000;
-	for (i = 0; i < classnum; i++)
+	for (i = 0; i < classnum; ++i)
 	{
 		vector<DataType> tmp(fsize, 0.0);
-		for (j = start; j < dicclassnum[i]; j++)
+		for (j = start; j < dicclassnum[i]; ++j)
 		{
 			if (x[j] != 0.0)
 			{
@@ -203,13 +203,13 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 	vector<int> results(size,0);
 	
 #pragma omp parallel for shared(results)
-	for (i = 0; i < size; i++)
+	for (i = 0; i < size; ++i)
 	{
 		cout << "processing " << i << endl;
 		results[i] = SRClassify(y[i], min_residual, sparsity);
 	}
 
-	for (i = 0; i < size; i++)
+	for (i = 0; i < size; ++i)
 	{
 		if (results[i] < 0)
 		{
@@ -223,11 +223,11 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 	}
 
 	srres.resize(this->classnum);
-	for(i = 0; i < this->classnum; i++){
-			srres[i] = i;		
+	for(i = 0; i < this->classnum; ++i){
+			srres[i] = i;
 	}
 
-	for(i = 0; i < this->classnum; i++){ //将识别后为0的类别删除
+	for(i = this->classnum-1; i >= 0; --i){ //将识别后为0的类别删除
 		if(result[i] == 0){
 			result.erase(result.begin() + i);
 			srres.erase(srres.begin() + i);
@@ -236,9 +236,9 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 	
 	int resnum = result.size(); //识别结果个数
 	//对目标进行排序(递减)
-	for(i = 0; i < resnum - 1; i++){
+	for(i = 0; i < resnum - 1; ++i){
 		int index = i;
-		for(j = i + 1; j < resnum; j++){
+		for(j = i + 1; j < resnum; ++j){
 			if(result[index] < result[j]){
 				index = j;
 			}
@@ -284,7 +284,7 @@ SR<DataType>::~SR(){
 	//释放字典内存
 	int i;
 	int size = dic.size();
-	for (i = 0; i < size; i++) 
+	for (i = 0; i < size; ++i) 
 	{
 		vector<DataType>().swap(dic[i]);
 		//dic[i].clear();
@@ -296,7 +296,7 @@ SR<DataType>::~SR(){
 
 //两个数组内积
 template<class DataType>
-DataType SR<DataType>::Dot(vector<DataType> vec1, vector<DataType> vec2)
+DataType SR<DataType>::Dot(vector<DataType>& vec1, vector<DataType>& vec2)
 {
 	/*Norm				求两个数组的内积
 	*vec1				数组（N）
@@ -312,7 +312,7 @@ DataType SR<DataType>::Dot(vector<DataType> vec1, vector<DataType> vec2)
 	DataType sum = 0;
 	int i;
 	int len = vec1.size();
-	for (i = 0; i < len; i++)
+	for (i = 0; i < len; ++i)
 	{
 		sum += vec1[i] * vec2[i];
 	}
@@ -322,7 +322,7 @@ DataType SR<DataType>::Dot(vector<DataType> vec1, vector<DataType> vec2)
 
 //数组2范数
 template<class DataType>
-DataType SR<DataType>::Norm(vector<DataType> vec)
+DataType SR<DataType>::Norm(vector<DataType>& vec)
 {
 	/*Norm				求数组的2范数
 	*vec				数组（N）
@@ -337,7 +337,7 @@ DataType SR<DataType>::Norm(vector<DataType> vec)
 	DataType norm = 0;
 	int i;
 	int len = vec.size();
-	for (i = 0; i < len; i++)
+	for (i = 0; i < len; ++i)
 	{
 		norm += vec[i] * vec[i];
 	}
@@ -347,7 +347,7 @@ DataType SR<DataType>::Norm(vector<DataType> vec)
 
 //数组的最大值
 template<class DataType>
-int SR<DataType>::Max(vector<int> vec){
+int SR<DataType>::Max(vector<int>& vec){
 	/*Max				求数组的最大值
 	*vec				数组（N）
 	*return：下标
@@ -361,7 +361,7 @@ int SR<DataType>::Max(vector<int> vec){
 	int index = 0;
 	int i;
 	int len = vec.size();
-	for (i = 1; i < len; i++)
+	for (i = 1; i < len; ++i)
 	{
 		if (vec[1] > vec[index])
 		{
@@ -374,7 +374,7 @@ int SR<DataType>::Max(vector<int> vec){
 
 //加载字典 第0类字典对应DicFilePath[0]
 template<class DataType>
-bool SR<DataType>::LoadDic(vector<string> DicFilePath){
+bool SR<DataType>::LoadDic(vector<string>& DicFilePath){
 
 	/*LoadDic				按0，1，2，...，n类依次加载字典，并记录每类字典的列数
 	*DicFilePath			每类对应的字典
@@ -399,7 +399,7 @@ bool SR<DataType>::LoadDic(vector<string> DicFilePath){
 	ReadCsvFile<DataType> readcsv;
 	int i;
 	int num;
-	for (i = 0; i < this->classnum; i++)
+	for (i = 0; i < this->classnum; ++i)
 	{
 		cout << "loading " << DicFilePath[i] << ". ";
 		if (!readcsv.ReadCsv(DicFilePath[i], this->dic, num))
@@ -419,13 +419,13 @@ bool SR<DataType>::LoadDic(vector<string> DicFilePath){
 
 //求解最小二乘问题
 template<class DataType>
-bool SR<DataType>::solve(vector<vector<DataType>> phi, vector<DataType>& y, vector<DataType>& x)
+bool SR<DataType>::solve(vector<vector<DataType>>& phi, vector<DataType>& y, vector<DataType>& x)
 {
 	/*solve				求解最小二乘问题
 	*phi				矩阵（列*行）
 	*y					特征
 	*x					求解系数
-	*return					true|false
+	*return				true|false
 	*author:ys
 	*date:2016.05.05
 	*/
@@ -450,10 +450,10 @@ bool SR<DataType>::solve(vector<vector<DataType>> phi, vector<DataType>& y, vect
 	MatrixXd A(row, col);
 	VectorXd b(row);
 	int i, j;
-	for (i = 0; i < row; i++)
+	for (i = 0; i < row; ++i)
 	{
 		b(i) = y[i];
-		for (j = 0; j < col; j++)
+		for (j = 0; j < col; ++j)
 			A(i, j) = phi[j][i];
 	}
 	//jacobiSvd 方式:Slow (but fast for small matrices)
@@ -462,7 +462,7 @@ bool SR<DataType>::solve(vector<vector<DataType>> phi, vector<DataType>& y, vect
 	//colPivHouseholderQr方法:fast
 	//std::cout << "The least-squares solution is:\n"<< A.colPivHouseholderQr().solve(b) << std::endl;
 	//VectorXd result = A.colPivHouseholderQr().solve(b);
-	for (i = 0; i < col; i++)
+	for (i = 0; i < col; ++i)
 	{
 		x[i] = result(i);
 	}
@@ -528,7 +528,7 @@ bool SR<DataType>::OrthMatchPursuit(vector<DataType>& y, DataType min_residual, 
 	{
 		max_coefficient = 0;
 		/*
-		for (i = 0; i < dcol; i++)
+		for (i = 0; i < dcol; ++i)
 		{
 			DataType coefficient;
 
@@ -542,12 +542,12 @@ bool SR<DataType>::OrthMatchPursuit(vector<DataType>& y, DataType min_residual, 
 		}
 		*/
 #pragma omp parallel for shared(coefficient)
-		for (i = 0; i < dcol; i++)
+		for (i = 0; i < dcol; ++i)
 		{
 			coefficient[i] = (DataType)Dot(dic[i], residual);
 		}
 
-		for (i = 0; i < dcol; i++)
+		for (i = 0; i < dcol; ++i)
 		{
 			if (fabs(coefficient[i]) > fabs(max_coefficient))
 			{
@@ -570,7 +570,7 @@ bool SR<DataType>::OrthMatchPursuit(vector<DataType>& y, DataType min_residual, 
 			cerr << "time: " << __DATE__ << " " << __TIME__ << endl;
 			vector<DataType>().swap(residual);//释放内存
 			//residual.clear();//释放内存
-			for (i = 0; i < phi.size(); i++) vector<DataType>().swap(phi[i]);
+			for (i = 0; i < phi.size(); ++i) vector<DataType>().swap(phi[i]);
 			vector<vector<DataType>>().swap(phi);
 			//phi.clear();//释放内存
 			return false;
@@ -586,7 +586,7 @@ bool SR<DataType>::OrthMatchPursuit(vector<DataType>& y, DataType min_residual, 
 
 	vector<DataType>().swap(residual);//释放内存
 	//residual.clear();//释放内存
-	for (i = 0; i < phi.size(); i++) vector<DataType>().swap(phi[i]);
+	for (i = 0; i < phi.size(); ++i) vector<DataType>().swap(phi[i]);
 	vector<vector<DataType>>().swap(phi);
 	//phi.clear();//释放内存
 
