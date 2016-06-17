@@ -222,20 +222,36 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 		result[results[i]]++;
 	}
 
-	//对目标进行排序(递减)
+	srres.resize(this->classnum);
 	for(i = 0; i < this->classnum; i++){
+			srres[i] = i;		
+	}
+
+	for(i = 0; i < this->classnum; i++){ //将识别后为0的类别删除
+		if(result[i] == 0){
+			result.erase(result.begin() + i);
+			srres.erase(srres.begin() + i);
+		}
+	}
+	
+	int resnum = result.size(); //识别结果个数
+	//对目标进行排序(递减)
+	for(i = 0; i < resnum - 1; i++){
 		int index = i;
-		for(j = i; j < this->classnum; j++){
+		for(j = i + 1; j < resnum; j++){
 			if(result[index] < result[j]){
 				index = j;
 			}
 		}
-		srres.push_back(index);
 		int tmp = result[index];
 		result[index] = result[i];
 		result[i] = tmp;
+
+		tmp = srres[index];
+		srres[index] = srres[i];
+		srres[i] = tmp;
 	}
-		
+	
 
 	/*
 	int maxindex;
@@ -442,10 +458,10 @@ bool SR<DataType>::solve(vector<vector<DataType>> phi, vector<DataType>& y, vect
 	}
 	//jacobiSvd 方式:Slow (but fast for small matrices)
 	//cout << "The least-squares solution is:\n"<< A.jacobiSvd(ComputeThinU | ComputeThinV).solve(b) << std::endl;
+	VectorXd result = A.jacobiSvd(ComputeThinU | ComputeThinV).solve(b);
 	//colPivHouseholderQr方法:fast
 	//std::cout << "The least-squares solution is:\n"<< A.colPivHouseholderQr().solve(b) << std::endl;
-
-	VectorXd result = A.colPivHouseholderQr().solve(b);
+	//VectorXd result = A.colPivHouseholderQr().solve(b);
 	for (i = 0; i < col; i++)
 	{
 		x[i] = result(i);
@@ -506,10 +522,12 @@ bool SR<DataType>::OrthMatchPursuit(vector<DataType>& y, DataType min_residual, 
 	DataType max_coefficient;
 	unsigned int patch_index;
 	int i;
-
+	vector<DataType> coefficient(dcol,0);
+	
 	for (;;)
 	{
 		max_coefficient = 0;
+		/*
 		for (i = 0; i < dcol; i++)
 		{
 			DataType coefficient;
@@ -522,6 +540,21 @@ bool SR<DataType>::OrthMatchPursuit(vector<DataType>& y, DataType min_residual, 
 				patch_index = i;
 			}
 		}
+		*/
+#pragma omp parallel for shared(coefficient)
+		for (i = 0; i < dcol; i++)
+		{
+			coefficient[i] = (DataType)Dot(dic[i], residual);
+		}
+
+		for (i = 0; i < dcol; i++)
+		{
+			if (fabs(coefficient[i]) > fabs(max_coefficient))
+			{
+				max_coefficient = coefficient[i];
+				patch_index = i;
+			}
+		}		
 
 		patch_indices.push_back(patch_index);
 

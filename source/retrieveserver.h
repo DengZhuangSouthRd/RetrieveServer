@@ -10,6 +10,7 @@
 #include <map>
 #include <vector>
 #include <Ice/Ice.h>
+#include <time.h>
 
 #include "rpc/retrieve/ImageRetrieveRpc.h"
 #include "utils/log.h"

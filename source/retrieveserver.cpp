@@ -89,23 +89,28 @@ void RetrieveServer::log_OutputResult(const WordWiki &wiki) {
 
 void RetrieveServer::log_OutputResult(const WordRes &wordres) {
     string str = "RetrieveServer ## ";
-    str += ("status " + to_string(wordres.status));
-    for(auto it=wordres.keyWords.begin(); it!=wordres.keyWords.end(); it++) {
-        str += (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
-    }
+    str = ("status " + to_string(wordres.status));
     Log::Info(str);
+    for(auto it=wordres.keyWords.begin(); it!=wordres.keyWords.end(); it++) {
+        str = (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
+        Log::Info(str);
+    }
+
 }
 
 void RetrieveServer::log_OutputResult(const ImgRes &imgres) {
     string str = "RetrieveServer ## ";
-    str += ("status " + to_string(imgres.status));
+    str = ("status " + to_string(imgres.status));
+    Log::Info(str);
     for(auto it=imgres.imgRemote.begin(); it!=imgres.imgRemote.end(); it++) {
-        str += (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
+        str = (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
+        Log::Info(str);
     }
     for(auto it=imgres.imgPic.begin(); it!=imgres.imgPic.end(); it++) {
-        str += (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
+        str = (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
+        Log::Info(str);
     }
-    Log::Info(str);
+    
 }
 
 WordWiki RetrieveServer::wordGetKnowledge(const string &word, const Ice::Current &) {
@@ -246,7 +251,13 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
         return obj;
     }
     /*Recognition：ASIFT and Sparse Representation*/
+    time_t now;
+    struct tm * timenow;
     //ASIFT
+    time(&now);
+    timenow = localtime(&now);
+    time_t start = mktime(timenow);
+    cout << "ASIFT Start." << endl;
     vector<vector<float>> imgFeatures;
     bool flag = AsiftFeature(saveurl, purl, imgFeatures);
     if(flag == false) {
@@ -254,14 +265,26 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
         obj.status = -1;
         return obj;
     }
+    time(&now);
+    timenow = localtime(&now);
+    time_t end = mktime(timenow);
+    cout << "ASIFT Done. Running time:" << difftime(end,start) << endl;
     //Sparse Representation
+    time(&now);
+    timenow = localtime(&now);
+    start = mktime(timenow);
+    cout << "Sparse Representation Start." << endl;
     vector<int> srres;
     flag = p_SRClassify->SRClassify(imgFeatures, p_min_residual, p_sparsity, srres);
-    if(flag == false || srres.size() != p_targetname.size()) {
+    if(flag == false ) { //|| srres.size() != p_targetname.size()
         Log::Error("Fetch RetrieveServer Result Struct Failed !");
         obj.status = -1;
         return obj;
     }
+    time(&now);
+    timenow = localtime(&now);
+    end = mktime(timenow);
+    cout << "Sparse Representation Done. Running time:" << difftime(end,start) << endl;
 
     for(vector<int>::iterator it = srres.begin(); it != srres.end(); it++){
         ImgInfo imginf;
