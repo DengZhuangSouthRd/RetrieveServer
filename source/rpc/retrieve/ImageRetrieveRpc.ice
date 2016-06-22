@@ -43,8 +43,7 @@ module RPCImgRecong {
 
         /*
         "id" : "sdmdsfdsfdk"
-        "ppath" : "/home/data/test/"
-        "pname" : "test.jpg"
+        "purl" : "/home/data/test/test.jpg"
         "upleftx" : ""
         "uplefty" : ""
         "height"  : ""

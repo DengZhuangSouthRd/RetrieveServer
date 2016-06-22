@@ -18,8 +18,7 @@ using namespace std;
 using namespace RPCImgRecong;
 
 typedef struct _InputInterface{
-    string imgurl;
-    string saveurl;
+
     string uuid;
     vector<string> p_targetname;
     vector<int> p_targetno;
@@ -31,6 +30,9 @@ typedef struct _InputInterface{
     int uplefty;
     int height;
     int width;
+    string imgurl;
+    string saveurl;
+    string featureurl;
     PGDB* p_pgdb;
 }InputInterface;
 
