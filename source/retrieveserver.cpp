@@ -212,6 +212,7 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
 
 WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Current &) {
     string task_id = mapArg.at("uuid");
+    
     WordRes obj;
     obj.status = 1;
     log_InputParameters(mapArg);
@@ -220,15 +221,29 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
         Log::Error("RetrieveServer ## imgSearchSync, Parameters Error !");
         return obj;
     }
-    string purl(mapArg.at("purl"));
-    string filename = purl.substr(purl.find_last_of('/')+1, purl.find_last_of('.')-purl.find_last_of('/')-1);
-    string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
-//    string saveurl = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/feature/" + filename + ".csv";
-    cout << "Save URL ## " << saveurl << endl;
+    string purl(mapArg.at("purl")); //原图像地址
+    string imgsaveurl = mapArg.at("saveurl");//裁剪后地址
+    int upleftx = std::atoi(mapArg.at("upleftx"));//裁剪x坐标
+    int uplefty = std::atoi(mapArg.at("uplefty"));//裁剪y坐标
+    int height  = std::atoi(mapArg.at("height")); //裁剪高度
+    int width   = std::atoi(mapArg.at("width"));  //裁剪宽度
+    bool flag;
+    time_t now;
+    struct tm * timenow;
+    //裁剪图像
+    flag = imgcap(purl,upleftx,uplefty,height,width,imgsaveurl);
+    if(regflag == -1){
+        obj.status = -1;
+        Log::Error("ImgCap Error !");
+        return obj;        
+    }
+       
+    string insert;   //将裁剪后的图像写入数据库
+    string filename = imgsaveurl.substr(imgsaveurl.find_last_of('/')+1, imgsaveurl.find_last_of('.')-imgsaveurl.find_last_of('/')-1);
     
     /*Recognition：geographic information*/
     vector<int> gires;
-    int regflag = RegByGeoInf(purl,p_targetgeo,gires);
+    int regflag = RegByGeoInf(imgsaveurl,p_targetgeo,gires);
     if(regflag == -1){
         obj.status = -1;
         Log::Error("RegByGeoInf Error !");
@@ -241,60 +256,88 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
                 imginf.id = p_targetno[*(it)];
                 imginf.name = p_targetname[*(it)];
                 imginf.path = "";
-                obj.keyWords.push_back(imginf);
-            }
+                obj.keyWords.push_back(imginf); 
+            } 
+            time(&now);
+            timenow = localtime(&now);
+            insert = "INSERT INTO t5remotecap(cappath, capname, imgpath, timeadd, imgpixelscale, isusercap)VALUES ('"
+                    +imgsaveurl.substr(0,imgsaveurl.find_last_of('/'))+"','"
+                    +filename+"','"
+                    +purl.substr(0,imgsaveurl.find_last_of('/'))+"','"
+                    +asctime(timenow)+"','"
+                    +mapArg.at("upleftx")+","+mapArg.at("uplefty")+","+to_string(upleftx+width)+","+to_string(uplefty+height)+"',"
+                    +"'1');"; 
         }
         else{
-            Log::Warn(purl+" This target can not be recognized.");
+            Log::Warn(imgsaveurl+" This target can not be recognized.");
             obj.status = 0; //没有找到目标
+            return obj;
+        } 
+    }
+    else{
+        /*Recognition：ASIFT and Sparse Representation*/
+   
+        //ASIFT
+        time(&now);
+        timenow = localtime(&now);
+        time_t start = mktime(timenow);
+        cout << "ASIFT Start." << endl;
+        string featuresaveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
+        cout << "Feature Save URL ## " << featuresaveurl << endl;
+        vector<vector<float>> imgFeatures;
+        flag = AsiftFeature(featuresaveurl, imgsaveurl, imgFeatures);
+        if(flag == false) {
+            Log::Error("Fetch RetrieveServer Result Struct Failed !");
+            obj.status = -1;
+            return obj;
         }
-        return obj;
+        time(&now);
+        timenow = localtime(&now);
+        time_t end = mktime(timenow);
+        cout << "ASIFT Done. Running time:" << difftime(end,start) << endl;
+
+        //Sparse Representation
+        time(&now);
+        timenow = localtime(&now);
+        start = mktime(timenow);
+        cout << "Sparse Representation Start." << endl;
+        vector<int> srres;
+        flag = p_SRClassify->SRClassify(imgFeatures, p_min_residual, p_sparsity, srres);
+        if(flag == false ) { //|| srres.size() != p_targetname.size()
+            Log::Error("Fetch RetrieveServer Result Struct Failed !");
+            obj.status = -1;
+            return obj;
+        }
+        time(&now);
+        timenow = localtime(&now);
+        end = mktime(timenow);
+        cout << "Sparse Representation Done. Running time:" << difftime(end,start) << endl;
+
+        for(vector<int>::iterator it = srres.begin(); it != srres.end(); it++){
+            ImgInfo imginf;
+           imginf.id = p_targetno[*(it)];
+           imginf.name = p_targetname[*(it)];
+           imginf.path = "";
+           obj.keyWords.push_back(imginf);
+        }
+
+        insert = "INSERT INTO t5remotecap(cappath, capname, imgpath, timeadd, imgpixelscale, isusercap)VALUES ('"
+                +imgsaveurl.substr(0,imgsaveurl.find_last_of('/'))+"','"
+                +filename+"','"
+                +purl.substr(0,imgsaveurl.find_last_of('/'))+"','"
+                +featuresaveurl+"','"
+                +asctime(timenow)+"','"
+                +mapArg.at("upleftx")+","+mapArg.at("uplefty")+","+to_string(upleftx+width)+","+to_string(uplefty+height)+"',"
+                +"'1');"; 
     }
-    /*Recognition：ASIFT and Sparse Representation*/
-    time_t now;
-    struct tm * timenow;
-    //ASIFT
-    time(&now);
-    timenow = localtime(&now);
-    time_t start = mktime(timenow);
-    cout << "ASIFT Start." << endl;
-    vector<vector<float>> imgFeatures;
-    bool flag = AsiftFeature(saveurl, purl, imgFeatures);
+
+    //写入数据库
+    flag = p_pgdb->pg_exec_sql(insert);
     if(flag == false) {
-        Log::Error("Fetch RetrieveServer Result Struct Failed !");
+        Log::Error("Insert Img Failed !");
         obj.status = -1;
         return obj;
     }
-    time(&now);
-    timenow = localtime(&now);
-    time_t end = mktime(timenow);
-    cout << "ASIFT Done. Running time:" << difftime(end,start) << endl;
-    //Sparse Representation
-    time(&now);
-    timenow = localtime(&now);
-    start = mktime(timenow);
-    cout << "Sparse Representation Start." << endl;
-    vector<int> srres;
-    flag = p_SRClassify->SRClassify(imgFeatures, p_min_residual, p_sparsity, srres);
-    if(flag == false ) { //|| srres.size() != p_targetname.size()
-        Log::Error("Fetch RetrieveServer Result Struct Failed !");
-        obj.status = -1;
-        return obj;
-    }
-    time(&now);
-    timenow = localtime(&now);
-    end = mktime(timenow);
-    cout << "Sparse Representation Done. Running time:" << difftime(end,start) << endl;
-
-    for(vector<int>::iterator it = srres.begin(); it != srres.end(); it++){
-        ImgInfo imginf;
-        imginf.id = p_targetno[*(it)];
-        imginf.name = p_targetname[*(it)];
-        imginf.path = "";
-        obj.keyWords.push_back(imginf);
-
-    }
-
     log_OutputResult(obj);
     return obj;
 }

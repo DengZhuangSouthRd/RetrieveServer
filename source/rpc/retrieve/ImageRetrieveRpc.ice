@@ -44,6 +44,11 @@ module RPCImgRecong {
         /*
         "id" : "sdmdsfdsfdk"
         "purl" : "/home/data/test/test.jpg"
+        "upleftx" : ""
+        "uplefty" : ""
+        "height"  : ""
+        "width"   : ""
+        "saveurl" : ""  //前端传地址，后台写入数据库
         */
         int imgSearchAsync(DictStr2Str mapArg); //通过图像搜索得到文字列表, 提交的是异步任务，提交成功返回直 > 0, 提交失败返回直 < 0
         WordRes fetchImgSearchResult(DictStr2Str mapArg); // 根据提交的任务ID，取回识别结果
