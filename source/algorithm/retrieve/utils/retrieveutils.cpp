@@ -77,3 +77,10 @@ void* retrieveInterface(void *args) {
     pObj->status = 1;
     return (void*)pObj;
 }
+
+void deepCopyWordRes(WordRes* src, WordRes& dest) {
+    dest.status = src->status;
+    for(vector<ImgInfo>::iterator it=src->keyWords.begin(); it != src->keyWords.end(); ++it) {
+        dest.keyWords.push_back(*it);
+    }
+}

@@ -295,6 +295,29 @@ int RetrieveServer::imgSearchAsync(const DictStr2Str &mapArg, const Ice::Current
 
 WordRes RetrieveServer::fetchImgSearchResult(const DictStr2Str &mapArg, const Ice::Current &) {
     WordRes obj;
-    obj.status = 1;
+    obj.status = 0;
+    log_InputParameters(mapArg);
+    if(mapArg.count("uuid") == 0) {
+        obj.status = -1;
+        Log::Error("fetchImgSearchResult ## Input Parameter InValid !");
+        return obj;
+    }
+    string task_id = mapArg.at("uuid");
+
+    TaskPackStruct tmp;
+    int flag = p_threadPool->fetchResultByTaskID(task_id, tmp);
+    if(flag == -1) {
+        obj.status = -1;
+        Log::Error("fetchImgSearchResult ## fetch task id %s result Failed !", task_id.c_str());
+    } else if(flag == 1){
+        InputInterface* input = (InputInterface*)(tmp.input);
+        delete input;
+        deepCopyWordRes((WordRes*)tmp.output, obj);
+        WordRes* out = (WordRes*)tmp.output;
+        delete out;
+    } else if(flag == 0) {
+        obj.status = 0;
+        Log::Info("fetchImgSearchResult ## fetch task id %s Running !", task_id.c_str());
+    }
     return obj;
 }

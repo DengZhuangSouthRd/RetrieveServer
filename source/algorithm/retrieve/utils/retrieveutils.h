@@ -28,5 +28,6 @@ typedef struct _InputInterface{
 
 
 void* retrieveInterface(void* args);
+void deepCopyWordRes(WordRes* src, WordRes& dest);
 
 #endif // RETRIEVEUTILS_H
