@@ -127,7 +127,12 @@ WordRes RetrieveServer::wordSearch(const DictStr2Str &mapArg, const Ice::Current
     WordRes obj;
     obj.status = 1;
     log_InputParameters(mapArg);
-    string word = mapArg.at("w");
+    if(mapArg.count("id") == 0 || mapArg.count("word") == 0 || mapArg.count("pi") == 0 || mapArg.count("pn") == 0) {
+        Log::Info("Input parameres shortage !");
+        return obj;
+    }
+    string task_id = mapArg.at("id");
+    string word = mapArg.at("word");
     string pi = mapArg.at("pi");
     string pn = mapArg.at("pn");
     //字符串匹配
@@ -160,11 +165,16 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
     ImgRes obj;
     obj.status = 1;
     log_InputParameters(mapArg);
-    string word = mapArg.at("w");
+    if(mapArg.count("id") == 0 || mapArg.count("word") == 0 || mapArg.count("pi") == 0 || mapArg.count("pn") == 0) {
+        Log::Info("Input parameres shortage !");
+        return obj;
+    }
+    string task_id = mapArg.at("id");
+    string word = mapArg.at("word");
     string pi = mapArg.at("pi");
     string pn = mapArg.at("pn");
     //
-    string getimginf = "SELECT id,picname,picpath FROM t4pic WHERE targetname like '%" + word + "%' AND status_ = '1' ORDER BY id LIMIT "\
+    string getimginf = "SELECT id,capname,cappath FROM t4_1piccap WHERE targetname like '%" + word + "%' AND status_ = '1' ORDER BY id LIMIT "\
                        + pn + " OFFSET "+to_string((std::atoi(pi.c_str())-1)*std::atoi(pn.c_str()))+";";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getimginf,res);
@@ -215,7 +225,7 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
     WordRes obj;
     obj.status = -1;
 
-    string task_id = mapArg.at("uuid");
+    string task_id = mapArg.at("id");
     log_InputParameters(mapArg);
     if(mapArg.count("purl") == 0 ||
        mapArg.count("upleftx") == 0 ||
@@ -244,7 +254,7 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
 
 int RetrieveServer::imgSearchAsync(const DictStr2Str &mapArg, const Ice::Current &) {
     int status = -1;
-    string task_id = mapArg.at("uuid");
+    string task_id = mapArg.at("id");
     log_InputParameters(mapArg);
     if(mapArg.count("purl") == 0 ||
        mapArg.count("upleftx") == 0 ||
@@ -286,12 +296,12 @@ WordRes RetrieveServer::fetchImgSearchResult(const DictStr2Str &mapArg, const Ic
     WordRes obj;
     obj.status = 0;
     log_InputParameters(mapArg);
-    if(mapArg.count("uuid") == 0) {
+    if(mapArg.count("id") == 0) {
         obj.status = -1;
         Log::Error("fetchImgSearchResult ## Input Parameter InValid !");
         return obj;
     }
-    string task_id = mapArg.at("uuid");
+    string task_id = mapArg.at("id");
 
     TaskPackStruct tmp;
     int flag = p_threadPool->fetchResultByTaskID(task_id, tmp);
@@ -317,12 +327,12 @@ void RetrieveServer::createTaskInterfaceParam(const DictStr2Str& mapArg, InputIn
     //string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
     //Log::Info("imgSearchSync Save URL ## %s", saveurl.c_str());
 
-    inputArgs->uuid.assign(mapArg.at("uuid"));
+    inputArgs->uuid.assign(mapArg.at("id"));
     inputArgs->upleftx = stoi(mapArg.at("upleftx"));
     inputArgs->uplefty = stoi(mapArg.at("uplefty"));
     inputArgs->height = stoi(mapArg.at("height"));
     inputArgs->width = stoi(mapArg.at("width"));
-    inputArgs->imgurl.assign(mapArg.at("purl")); 
+    inputArgs->imgurl.assign(mapArg.at("purl"));
     inputArgs->saveurl.assign(mapArg.at("saveurl"));
     inputArgs->featureurl.assign(mapArg.at("featureurl"));
     inputArgs->p_min_residual = p_min_residual;

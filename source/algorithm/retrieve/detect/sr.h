@@ -156,7 +156,7 @@ int SR<DataType>::SRClassify(vector<DataType>& y, DataType min_residual, int spa
 	for (i = 0; i < classnum; ++i)
 	{
 		vector<DataType> tmp(fsize, 0.0);
-		for (j = start; j < dicclassnum[i]; ++j)
+		for (j = start; j < start + dicclassnum[i]; ++j)
 		{
 			if (x[j] != 0.0)
 			{
@@ -202,10 +202,8 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 
 	vector<int> results(size,0);
 	
-#pragma omp parallel for shared(results)
-	for (i = 0; i < size; ++i)
-	{
-		cout << "processing " << i << endl;
+#pragma omp parallel for
+	for (i = 0; i < size; ++i) {
 		results[i] = SRClassify(y[i], min_residual, sparsity);
 	}
 
@@ -224,7 +222,8 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 
 	srres.resize(this->classnum);
 	for(i = 0; i < this->classnum; ++i){
-			srres[i] = i;
+		srres[i] = i;
+//		cout << result[i] << endl;
 	}
 
 	for(i = this->classnum-1; i >= 0; --i){ //将识别后为0的类别删除

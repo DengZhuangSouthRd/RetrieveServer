@@ -27,8 +27,7 @@ void* retrieveInterface(void *args) {
         pObj->status = -1;
         Log::Error("RegByGeoInf Error !");
         return (void*)pObj;
-    }
-    else if(regflag == 1){ //图像包含地理信息
+    } else if(regflag == 1){ //图像包含地理信息
         if(gires.size() != 0){ //地理范围内存在已知目标
             for(vector<int>::iterator it = gires.begin(); it != gires.end(); it++){
                 ImgInfo imginf;
@@ -57,6 +56,7 @@ void* retrieveInterface(void *args) {
         cout << "Feature Save URL ## " << featuresaveurl << endl;
         vector<vector<float>> imgFeatures;
         flag = AsiftFeature(featuresaveurl, imgsaveurl, imgFeatures);
+//        flag = AsiftFeature(featuresaveurl, purl, imgFeatures);
         if(flag == false) {
             Log::Error("Fetch RetrieveServer Result Struct Failed !");
             pObj->status = -1;
