@@ -234,7 +234,10 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
 
     createTaskInterfaceParam(mapArg, inputArgs);
 
-    obj = *((WordRes*)retrieveInterface(inputArgs));
+    WordRes *tmp = (WordRes*)retrieveInterface(inputArgs);
+    delete inputArgs;
+    deepCopyWordRes(tmp, obj);
+    delete tmp;
     log_OutputResult(obj);
     return obj;
 }
