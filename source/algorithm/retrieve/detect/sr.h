@@ -227,12 +227,12 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 			srres[i] = i;		
 	}
 
-	for(i = 0; i < this->classnum; i++){ //将识别后为0的类别删除
-		if(result[i] == 0){
-			result.erase(result.begin() + i);
-			srres.erase(srres.begin() + i);
-		}
-	}
+//	for(i = 0; i < this->classnum; i++){ //将识别后为0的类别删除
+//		if(result[i] == 0){
+//			result.erase(result.begin() + i);
+//			srres.erase(srres.begin() + i);
+//		}
+//	}
 	
 	int resnum = result.size(); //识别结果个数
 	//对目标进行排序(递减)

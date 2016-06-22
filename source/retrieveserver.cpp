@@ -130,7 +130,7 @@ WordRes RetrieveServer::wordSearch(const DictStr2Str &mapArg, const Ice::Current
     string pi = mapArg.at("pi");
     string pn = mapArg.at("pn");
     //字符串匹配
-    string getimginf = "SELECT id,targetname FROM t3targetinfo WHERE targetname = '" + word + "' AND status_ = '1' ORDER BY id LIMIT "\
+    string getimginf = "SELECT id,targetname FROM t3targetinfo WHERE targetname like '%" + word + "%' AND status_ = '1' ORDER BY id LIMIT "\
                        + pn + " OFFSET "+to_string((std::atoi(pi.c_str())-1)*std::atoi(pn.c_str()))+";";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getimginf,res);
@@ -163,7 +163,7 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
     string pi = mapArg.at("pi");
     string pn = mapArg.at("pn");
     //
-    string getimginf = "SELECT id,picname,picpath FROM t4pic WHERE targetname = '" + word + "' AND status_ = '1' ORDER BY id LIMIT "\
+    string getimginf = "SELECT id,picname,picpath FROM t4pic WHERE targetname like '%" + word + "%' AND status_ = '1' ORDER BY id LIMIT "\
                        + pn + " OFFSET "+to_string((std::atoi(pi.c_str())-1)*std::atoi(pn.c_str()))+";";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getimginf,res);
@@ -186,7 +186,7 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
     }
 
     //
-    getimginf = "SELECT id,capname,cappath FROM t5remotecap WHERE targetname = '" + word + "' AND status_ = '1' ORDER BY id LIMIT "\
+    getimginf = "SELECT id,capname,cappath FROM t5remotecap WHERE targetname like '%" + word + "%' AND status_ = '1' ORDER BY id LIMIT "\
                 + pn + " OFFSET "+to_string((std::atoi(pi.c_str())-1)*std::atoi(pn.c_str()))+";";
     flag = p_pgdb->pg_fetch_sql(getimginf,res);
     if(flag == false) {
@@ -276,7 +276,8 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
     cout << "Sparse Representation Start." << endl;
     vector<int> srres;
     flag = p_SRClassify->SRClassify(imgFeatures, p_min_residual, p_sparsity, srres);
-    if(flag == false ) { //|| srres.size() != p_targetname.size()
+    if(flag == false ) {
+        //|| srres.size() != p_targetname.size()
         Log::Error("Fetch RetrieveServer Result Struct Failed !");
         obj.status = -1;
         return obj;
