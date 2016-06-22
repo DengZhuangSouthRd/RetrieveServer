@@ -39,6 +39,8 @@ set(SOURCE_FILES
         source/threadpool/threadpool.h
         source/rpc/retrieve/ImageRetrieveRpc.h
         source/rpc/retrieve/ImageRetrieveRpc.cpp
+        source/algorithm/imgcap/imgcap.cpp
+        source/algorithm/imgcap/imgcap.h
         source/algorithm/thumb/imagethumb.cpp
         source/algorithm/thumb/imagethumb.h
         source/algorithm/retrieve/utils/retrieveutils.h

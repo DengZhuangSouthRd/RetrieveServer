@@ -19,6 +19,7 @@
 #include "utils/pgdb.h"
 #include "algorithm/retrieve/detect/sr.h"
 #include "algorithm/retrieve/detect/regbygeoinf.h"
+#include "algorithm/imgcap/imgcap.h"
 
 #define _OPENMP
 
