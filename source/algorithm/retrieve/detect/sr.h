@@ -55,7 +55,7 @@ private:
 	DataType Dot(vector<DataType>& vec1, vector<DataType>& vec2);
 
 	//数组2范数
-	DataType Norm(vector<DataType>& vec);
+	DataType Norm(vector<DataType> vec);
 
 	//数组的最大值
 	int Max(vector<int>& vec);
@@ -322,7 +322,7 @@ DataType SR<DataType>::Dot(vector<DataType>& vec1, vector<DataType>& vec2)
 
 //数组2范数
 template<class DataType>
-DataType SR<DataType>::Norm(vector<DataType>& vec)
+DataType SR<DataType>::Norm(vector<DataType> vec)
 {
 	/*Norm				求数组的2范数
 	*vec				数组（N）

@@ -1,17 +1,21 @@
 #include "imgcap.h"
 
-char* findImageTypeGDAL( char *pDstImgFileName)  
-{  
-    char *dstExtension = strlwr(strrchr(pDstImgFileName,'.') + 1);  
-    char *Gtype = NULL;  
-    if      (0 == strcmp(dstExtension,"bmp")) Gtype = "BMP";  
-    else if (0 == strcmp(dstExtension,"jpg")) Gtype = "JPEG";  
-    else if (0 == strcmp(dstExtension,"png")) Gtype = "PNG";  
-    else if (0 == strcmp(dstExtension,"tif")) Gtype = "GTiff";   
-    else Gtype = NULL;  
-  
-    return Gtype;  
-} 
+string findImageTypeGDAL(string pDstImgFileName) {
+    size_t ind = pDstImgFileName.rfind('.');
+    if(ind == string::npos) {
+        return NULL;
+    }
+    string dstExtension = pDstImgFileName.substr(ind+1);
+    std::transform(dstExtension.begin(), dstExtension.end(), dstExtension.begin(), ::tolower);
+    string Gtype;
+    if      (0 == strcmp(dstExtension.c_str(),"bmp")) Gtype = "BMP";
+    else if (0 == strcmp(dstExtension.c_str(),"jpg")) Gtype = "JPEG";
+    else if (0 == strcmp(dstExtension.c_str(),"png")) Gtype = "PNG";
+    else if (0 == strcmp(dstExtension.c_str(),"tif")) Gtype = "GTiff";
+
+    return Gtype;
+}
+
 bool imgcap(const string imgurl, int upleftx, int uplefty, int height, int width, const string saveurl)
 {
     /*imgcap	    图像裁剪
@@ -28,8 +32,8 @@ bool imgcap(const string imgurl, int upleftx, int uplefty, int height, int width
     GDALAllRegister();
     CPLSetConfigOption("GDAL_FILENAME_IS_UTF8","NO");
     
-    GDALDataset *ReadDataset = (GDALDataset *) GDALOpen( imgurl.c_str(), GA_ReadOnly );
-    if( NULL == ReadDataset )
+    GDALDataset *ReadDataSet = (GDALDataset *) GDALOpen( imgurl.c_str(), GA_ReadOnly );
+    if( NULL == ReadDataSet )
     {
         cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
         return false;
@@ -42,26 +46,18 @@ bool imgcap(const string imgurl, int upleftx, int uplefty, int height, int width
     if (ReadDataSet->GetGeoTransform(adfGeoTransform) == CE_None){ 
         flag = true; //包含地理信息
 	}
-	if (x + width > imgwidth || y + height > imgheight)
+	if (upleftx + width > imgwidth || uplefty + height > imgheight)
 	{
 		cerr<<"Param Error."<<endl;
         cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
 		return false;
 	}
 
-    ushort imgdata = new(std::nothrow) ushort(height*width*imgbandcount);
-	if (NULL == imgdata)
-	{
-		GDALClose(ReadDataSet); ReadDataSet = NULL;
-		cerr<<"Memory Error.\n";
-        cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
-		return false;
-	}
+    ushort imgdata[height*width*imgbandcount];
     //读数据
-	if (ReadDataSet->RasterIO(GF_Read, x, y, width, height, imgdata, width, height, GDT_Uint16, imgbandcount, NULL, 0, 0, 0) == CE_Failure)
+	if (ReadDataSet->RasterIO(GF_Read, upleftx, uplefty, width, height, imgdata, width, height, GDT_UInt16, imgbandcount, NULL, 0, 0, 0) == CE_Failure)
 	{
 		GDALClose(ReadDataSet); ReadDataSet = NULL;
-		delete[] imgdata; imgdata = NULL;
         cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
 		return false;
 	}
@@ -69,12 +65,10 @@ bool imgcap(const string imgurl, int upleftx, int uplefty, int height, int width
 
 
     //保存数据
-    char *GType = NULL;  
-    GType = findImageTypeGDAL(saveurl.c_str());  
-    if (GType == NULL)
-    {
-        delete[] imgdata; imgdata = NULL;
-        cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl; 
+    string GType;
+    GType = findImageTypeGDAL(saveurl);
+    if (GType.empty()) {
+        cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
         return false; 
     }  
   
@@ -82,63 +76,56 @@ bool imgcap(const string imgurl, int upleftx, int uplefty, int height, int width
     pMemDriver = GetGDALDriverManager()->GetDriverByName("MEM");  
     if( pMemDriver == NULL )
     {
-        delete[] imgdata; imgdata = NULL;
         cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
         return false; 
     }  
   
-    GDALDataset * pMemDataSet = pMemDriver->Create("",width,height,imgbandcount,GDT_Uint16,NULL);
+    GDALDataset * pMemDataSet = pMemDriver->Create("",width,height,imgbandcount,GDT_UInt16,NULL);
 	if (NULL == pMemDataSet)
     {
-        delete[] imgdata; imgdata = NULL;
         pMemDriver = NULL;
         cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
 		return false; 
 	}
 
-    if (pMemDataSet->RasterIO(GF_Write, 0, 0, width, height, imgdata, width, height, GDT_Uint16, imgbandcount, NULL, 0, 0, 0) == CE_Failure)
+    if (pMemDataSet->RasterIO(GF_Write, 0, 0, width, height, imgdata, width, height, GDT_UInt16, imgbandcount, NULL, 0, 0, 0) == CE_Failure)
     {
 		GDALClose(pMemDataSet); pMemDataSet = NULL;
         pMemDriver = NULL;
         cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
-		delete[] imgdata; imgdata = NULL;
 		return false;
 	}
 
-    delete[] imgdata; imgdata = NULL;//释放内存
     pMemDriver = NULL;
 
     GDALDriver *pDstDriver = NULL;  
-    pDstDriver = (GDALDriver *)GDALGetDriverByName(GType);  
+    pDstDriver = (GDALDriver *)GDALGetDriverByName(GType.c_str());
     if (pDstDriver == NULL) {
         cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
         return false; 
     }
       
-    pDstDriver->CreateCopy(saveurl.c_str(),pMemDataSet,FALSE, NULL, NULL, NULL);
-	
 	//如果存在地理信息则写入
-    if(flag)
-    {
+    if(flag) {
 	    char *WKT = NULL;
 	    OGRSpatialReference oSRS;
 	    oSRS.SetWellKnownGeogCS("WGS84");
 	    oSRS.SetUTM(50,TRUE);
-	    oSRS.exportToWkt(&WKT); 
-	    pDstDataSet->SetProjection(WKT);
+	    oSRS.exportToWkt(&WKT);
+        pMemDataSet->SetProjection(WKT);
 	    CPLFree(WKT);WKT = NULL;
-        adfGeoTransform[3] = adfGeoTransform[3] + x * adfGeoTransform[4] + y * adfGeoTransform[5]; //纬度
-	    adfGeoTransform[0] = adfGeoTransform[0] + x * adfGeoTransform[1] + y * adfGeoTransform[2]; //经度
-	    pDstDataSet->SetGeoTransform(adfGeoTransform);
+        adfGeoTransform[3] = adfGeoTransform[3] + upleftx * adfGeoTransform[4] + uplefty * adfGeoTransform[5]; //纬度
+	    adfGeoTransform[0] = adfGeoTransform[0] + upleftx * adfGeoTransform[1] + uplefty * adfGeoTransform[2]; //经度
+        pMemDataSet->SetGeoTransform(adfGeoTransform);
     }
 
-	//delete pDstDriver;
-	pDstDriver = NULL;
+    //  delete pDstDriver;
+    //	pDstDriver = NULL;
+
+    if(pDstDriver->CreateCopy(saveurl.c_str(),pMemDataSet,FALSE, NULL, NULL, NULL) == NULL) {
+        GDALClose(pMemDataSet); pMemDataSet = NULL;
+        return false;
+    }
     GDALClose(pMemDataSet); pMemDataSet = NULL;
-	GDALClose(pDstDataSet); pDstDataSet=NULL;
-
     return true;
-    
-
-    
 }

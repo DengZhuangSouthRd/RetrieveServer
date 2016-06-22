@@ -40,6 +40,7 @@ public:
     void log_OutputResult(const WordWiki& wiki);
     void log_OutputResult(const WordRes& wordres);
     void log_OutputResult(const ImgRes& imgres);
+    void createTaskInterfaceParam(const DictStr2Str& mapArg, InputInterface* inputArgs);
 
 public:
     virtual WordWiki wordGetKnowledge(const string& word, const Ice::Current&);

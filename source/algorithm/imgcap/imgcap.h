@@ -3,9 +3,10 @@
 
 #include <gdal_priv.h>
 #include <gdalwarper.h>
-#include <org_spatialref.h>
+#include <ogr_spatialref.h>
 #include <string>
 #include <iostream>
+
 using namespace std;
 
 typedef unsigned short int ushort;
