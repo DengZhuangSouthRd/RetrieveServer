@@ -309,18 +309,19 @@ WordRes RetrieveServer::fetchImgSearchResult(const DictStr2Str &mapArg, const Ic
 }
 
 void RetrieveServer::createTaskInterfaceParam(const DictStr2Str& mapArg, InputInterface* inputArgs) {
-    string purl(mapArg.at("purl"));
-    string filename = purl.substr(purl.find_last_of('/')+1, purl.find_last_of('.')-purl.find_last_of('/')-1);
-    string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
-    Log::Info("imgSearchSync Save URL ## %s", saveurl.c_str());
+    //string purl(mapArg.at("purl"));
+    //string filename = purl.substr(purl.find_last_of('/')+1, purl.find_last_of('.')-purl.find_last_of('/')-1);
+    //string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
+    //Log::Info("imgSearchSync Save URL ## %s", saveurl.c_str());
 
     inputArgs->uuid.assign(mapArg.at("uuid"));
-    inputArgs->imgurl.assign(purl);
-    inputArgs->saveurl.assign(saveurl);
     inputArgs->upleftx = stoi(mapArg.at("upleftx"));
     inputArgs->uplefty = stoi(mapArg.at("uplefty"));
     inputArgs->height = stoi(mapArg.at("height"));
     inputArgs->width = stoi(mapArg.at("width"));
+    inputArgs->imgurl.assign(mapArg.at("purl")); 
+    inputArgs->saveurl.assign(mapArg.at("saveurl"));
+    inputArgs->featureurl.assign(mapArg.at("featureurl"));
     inputArgs->p_min_residual = p_min_residual;
     inputArgs->p_sparsity = p_sparsity;
     inputArgs->p_targetname.assign(p_targetname.begin(), p_targetname.end());

@@ -5,6 +5,7 @@ extern  map<string, string> g_ConfMap;
 void* retrieveInterface(void *args) {
     InputInterface* inputArgs= (InputInterface*)args;
     string purl = inputArgs->imgurl, imgsaveurl = inputArgs->saveurl;
+    
     int upleftx = inputArgs->upleftx, uplefty = inputArgs->uplefty, height = inputArgs->height, width = inputArgs->width;
     WordRes* pObj = new(std::nothrow) WordRes;
     pObj->status = 0;
@@ -19,9 +20,6 @@ void* retrieveInterface(void *args) {
         return (void*)pObj;
     }
 
-    string insert;   //将裁剪后的图像写入数据库
-    string filename = imgsaveurl.substr(imgsaveurl.find_last_of('/')+1, imgsaveurl.find_last_of('.')-imgsaveurl.find_last_of('/')-1);
-
     /*Recognition：geographic information*/
     vector<int> gires;
     int regflag = RegByGeoInf(imgsaveurl,*(inputArgs->p_targetgeo),gires);
@@ -30,7 +28,7 @@ void* retrieveInterface(void *args) {
         Log::Error("RegByGeoInf Error !");
         return (void*)pObj;
     }
-    if(regflag == 1){ //图像包含地理信息
+    else if(regflag == 1){ //图像包含地理信息
         if(gires.size() != 0){ //地理范围内存在已知目标
             for(vector<int>::iterator it = gires.begin(); it != gires.end(); it++){
                 ImgInfo imginf;
@@ -39,15 +37,7 @@ void* retrieveInterface(void *args) {
                 imginf.path = "";
                 pObj->keyWords.push_back(imginf);
             }
-            time(&now);
-            timenow = localtime(&now);
-            insert = "INSERT INTO t5remotecap(cappath, capname, imgpath, timeadd, imgpixelscale, isusercap)VALUES ('"
-                     +imgsaveurl.substr(0,imgsaveurl.find_last_of('/'))+"','"
-                     +filename+"','"
-                     +purl.substr(0,imgsaveurl.find_last_of('/'))+"','"
-                     +asctime(timenow)+"','"
-                     +to_string(upleftx)+","+to_string(uplefty)+","+to_string(upleftx+width)+","+to_string(uplefty+height)+"',"
-                     +"'1');";
+            pObj->status = 2; //正常-遥感图像
         }
         else{
             Log::Warn(imgsaveurl+" This target can not be recognized.");
@@ -63,7 +53,7 @@ void* retrieveInterface(void *args) {
         timenow = localtime(&now);
         time_t start = mktime(timenow);
         cout << "ASIFT Start." << endl;
-        string featuresaveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
+        string featuresaveurl = inputArgs->featureurl;
         cout << "Feature Save URL ## " << featuresaveurl << endl;
         vector<vector<float>> imgFeatures;
         flag = AsiftFeature(featuresaveurl, imgsaveurl, imgFeatures);
@@ -103,25 +93,9 @@ void* retrieveInterface(void *args) {
             imginf.path = "";
             pObj->keyWords.push_back(imginf);
         }
-
-        insert = "INSERT INTO t5remotecap(cappath, capname, imgpath, timeadd, imgpixelscale, isusercap)VALUES ('"
-                 +imgsaveurl.substr(0,imgsaveurl.find_last_of('/'))+"','"
-                 +filename+"','"
-                 +purl.substr(0,imgsaveurl.find_last_of('/'))+"','"
-                 +featuresaveurl+"','"
-                 +asctime(timenow)+"','"
-                 +to_string(upleftx)+","+to_string(uplefty)+","+to_string(upleftx+width)+","+to_string(uplefty+height)+"',"
-                 +"'1');";
+        pObj->status = 1; //正常-普通图像
     }
 
-    //写入数据库
-    flag = inputArgs->p_pgdb->pg_exec_sql(insert);
-    if(flag == false) {
-        Log::Error("Insert Img Failed !");
-        pObj->status = -1;
-        return (void*)pObj;
-    }
-    pObj->status = 1;
     return (void*)pObj;
 }
 
