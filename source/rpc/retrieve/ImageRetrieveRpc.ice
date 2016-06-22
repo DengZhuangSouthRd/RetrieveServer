@@ -9,7 +9,7 @@ module RPCImgRecong {
         string descr; //描述信息
     };
 	struct ImgInfo {
-        int id; //关键字
+        int id; //数据库id
         string path; //文件路径 /a/b/c/d/
         string name; //文件名 用于WordRes时 只存储关键词
     };
@@ -22,7 +22,7 @@ module RPCImgRecong {
         ListString imgPic;
     };
     struct WordRes {
-	    int status; //-1:错误 0:没有目标 1:正常
+	    int status; //-1:错误 0:没有目标 1:正常-普通图像 2：正常-遥感图像
         ListString keyWords;
     };
     
@@ -43,12 +43,14 @@ module RPCImgRecong {
 
         /*
         "id" : "sdmdsfdsfdk"
-        "purl" : "/home/data/test/test.jpg"
+        "ppath" : "/home/data/test/"
+        "pname" : "test.jpg"
         "upleftx" : ""
         "uplefty" : ""
         "height"  : ""
         "width"   : ""
-        "saveurl" : ""  //前端传地址，后台写入数据库
+        "saveurl" : "" 路径+名称  后缀同源文件
+        "featureurl" : "" 路径+名称	.csv
         */
         int imgSearchAsync(DictStr2Str mapArg); //通过图像搜索得到文字列表, 提交的是异步任务，提交成功返回直 > 0, 提交失败返回直 < 0
         WordRes fetchImgSearchResult(DictStr2Str mapArg); // 根据提交的任务ID，取回识别结果
