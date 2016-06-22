@@ -102,7 +102,6 @@ inline int RegByGeoInf(const string InputFileName, vector<vector<double>> target
     delete ReadDataSet; ReadDataSet = NULL;
 
     return 1;
-
 }
 
 
