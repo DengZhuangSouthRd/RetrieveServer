@@ -18,7 +18,20 @@ RetrieveServer::RetrieveServer() {
     }
     p_SRClassify = NULL;
     p_SRClassify = new SR<float>();
-    
+
+    init();
+}
+
+RetrieveServer::~RetrieveServer() {
+    p_threadPool->revokeSingleInstance();
+    p_threadPool = NULL;
+    if(p_pgdb)
+        delete p_pgdb;
+    if(p_SRClassify)
+        delete p_SRClassify;
+}
+
+void RetrieveServer::init() {
     //读取目标信息
     string getdic = "SELECT t7.dicpath,t7.targetname,t7.targetno,t3.lu,t3.rd FROM t3targetinfo AS t3,t7dictionary AS t7 WHERE t3.targetno = t7.targetno AND t3.status_ = '1' AND t7.status_ = '1';";
     result res;
@@ -40,15 +53,14 @@ RetrieveServer::RetrieveServer() {
         p_targetname.push_back(it[1].as<string>());//目标名称
         p_targetno.push_back(it[2].as<int>());//目标序号
         vector<double> tmp;
-        string str = it[3].as<string>(); //以","分割     
+        string str = it[3].as<string>(); //以","分割
         tmp.push_back(std::stod( str.substr(0,str.find_last_of(",")).c_str() ));//左上角经度
         tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1,str.length()-str.find_last_of(",")-1).c_str() ));//左上角纬度
-        str = it[4].as<string>();        //以","分割   
+        str = it[4].as<string>();        //以","分割
         tmp.push_back(std::stod( str.substr(0,str.find_last_of(",")).c_str() ));//右下角经度
         tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1,str.length()-str.find_last_of(",")-1).c_str() ));//右下角纬度
 
         p_targetgeo.push_back(tmp);//地理信息
-
     }
 
     //加载字典
@@ -60,15 +72,6 @@ RetrieveServer::RetrieveServer() {
     }
     p_sparsity = std::atoi( g_ConfMap["RETRIEVESPARSITY"].c_str() );
     p_min_residual = std::atof( g_ConfMap["RETRIEVEMINRESIDUAL"].c_str() );
-}
-
-RetrieveServer::~RetrieveServer() {
-    p_threadPool->revokeSingleInstance();
-    p_threadPool = NULL;
-    if(p_pgdb)
-        delete p_pgdb;
-    if(p_SRClassify)
-        delete p_SRClassify;
 }
 
 void RetrieveServer::log_InputParameters(const DictStr2Str &mapArg) {
@@ -95,7 +98,6 @@ void RetrieveServer::log_OutputResult(const WordRes &wordres) {
         str = (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
         Log::Info(str);
     }
-
 }
 
 void RetrieveServer::log_OutputResult(const ImgRes &imgres) {
@@ -110,7 +112,6 @@ void RetrieveServer::log_OutputResult(const ImgRes &imgres) {
         str = (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
         Log::Info(str);
     }
-    
 }
 
 WordWiki RetrieveServer::wordGetKnowledge(const string &word, const Ice::Current &) {
@@ -211,97 +212,84 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
 }
 
 WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Current &) {
-    string task_id = mapArg.at("uuid");
     WordRes obj;
-    obj.status = 1;
+    obj.status = -1;
+    string task_id = mapArg.at("uuid");
     log_InputParameters(mapArg);
     if(mapArg.count("purl") == 0) {
-        obj.status = -1;
         Log::Error("RetrieveServer ## imgSearchSync, Parameters Error !");
         return obj;
     }
+
     string purl(mapArg.at("purl"));
     string filename = purl.substr(purl.find_last_of('/')+1, purl.find_last_of('.')-purl.find_last_of('/')-1);
     string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
-//    string saveurl = "/Users/liuguiyang/Documents/CodeProj/ConsoleProj/RetrieveServer/data/retrieve/feature/" + filename + ".csv";
-    cout << "Save URL ## " << saveurl << endl;
-    
-    /*Recognition：geographic information*/
-    vector<int> gires;
-    int regflag = RegByGeoInf(purl,p_targetgeo,gires);
-    if(regflag == -1){
-        obj.status = -1;
-        Log::Error("RegByGeoInf Error !");
-        return obj;        
-    }
-    if(regflag == 1){ //图像包含地理信息
-        if(gires.size() != 0){ //地理范围内存在已知目标
-            for(vector<int>::iterator it = gires.begin(); it != gires.end(); it++){
-                ImgInfo imginf;
-                imginf.id = p_targetno[*(it)];
-                imginf.name = p_targetname[*(it)];
-                imginf.path = "";
-                obj.keyWords.push_back(imginf);
-            }
-        }
-        else{
-            Log::Warn(purl+" This target can not be recognized.");
-            obj.status = 0; //没有找到目标
-        }
+    Log::Info("imgSearchSync Save URL ## %s", saveurl.c_str());
+
+    InputInterface* inputArgs = new(std::nothrow) InputInterface;
+    if(NULL == inputArgs) {
+        Log::Error("RetrieveServer ## imgSearchAsync New  InputInterface Failed !");
         return obj;
     }
-    /*Recognition：ASIFT and Sparse Representation*/
-    time_t now;
-    struct tm * timenow;
-    //ASIFT
-    time(&now);
-    timenow = localtime(&now);
-    time_t start = mktime(timenow);
-    cout << "ASIFT Start." << endl;
-    vector<vector<float>> imgFeatures;
-    bool flag = AsiftFeature(saveurl, purl, imgFeatures);
-    if(flag == false) {
-        Log::Error("Fetch RetrieveServer Result Struct Failed !");
-        obj.status = -1;
-        return obj;
-    }
-    time(&now);
-    timenow = localtime(&now);
-    time_t end = mktime(timenow);
-    cout << "ASIFT Done. Running time:" << difftime(end,start) << endl;
-    //Sparse Representation
-    time(&now);
-    timenow = localtime(&now);
-    start = mktime(timenow);
-    cout << "Sparse Representation Start." << endl;
-    vector<int> srres;
-    flag = p_SRClassify->SRClassify(imgFeatures, p_min_residual, p_sparsity, srres);
-    if(flag == false ) {
-        //|| srres.size() != p_targetname.size()
-        Log::Error("Fetch RetrieveServer Result Struct Failed !");
-        obj.status = -1;
-        return obj;
-    }
-    time(&now);
-    timenow = localtime(&now);
-    end = mktime(timenow);
-    cout << "Sparse Representation Done. Running time:" << difftime(end,start) << endl;
 
-    for(vector<int>::iterator it = srres.begin(); it != srres.end(); it++){
-        ImgInfo imginf;
-        imginf.id = p_targetno[*(it)];
-        imginf.name = p_targetname[*(it)];
-        imginf.path = "";
-        obj.keyWords.push_back(imginf);
+    inputArgs->uuid.assign(task_id);
+    inputArgs->imgurl.assign(purl);
+    inputArgs->saveurl.assign(saveurl);
+    inputArgs->p_min_residual = p_min_residual;
+    inputArgs->p_sparsity = p_sparsity;
+    inputArgs->p_targetname.assign(p_targetname.begin(), p_targetname.end());
+    inputArgs->p_targetno.assign(p_targetno.begin(), p_targetno.end());
+    inputArgs->p_SRClassify = p_SRClassify;
 
-    }
-
+    obj = *((WordRes*)retrieveInterface((void*)inputArgs));
     log_OutputResult(obj);
     return obj;
 }
 
 int RetrieveServer::imgSearchAsync(const DictStr2Str &mapArg, const Ice::Current &) {
-    int status = 2;
+    int status = -1;
+    string task_id = mapArg.at("uuid");
+    log_InputParameters(mapArg);
+    if(mapArg.count("purl") == 0) {
+        Log::Error("RetrieveServer ## imgSearchSync, Parameters Error !");
+        return status;
+    }
+
+    string purl(mapArg.at("purl"));
+    string filename = purl.substr(purl.find_last_of('/')+1, purl.find_last_of('.')-purl.find_last_of('/')-1);
+    string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
+    Log::Info("imgSearchSync Save URL ## %s", saveurl.c_str());
+
+    InputInterface* inputArgs = new(std::nothrow) InputInterface;
+    if(NULL == inputArgs) {
+        Log::Error("RetrieveServer ## imgSearchAsync New  InputInterface Failed !");
+        return status;
+    }
+
+    inputArgs->uuid.assign(task_id);
+    inputArgs->imgurl.assign(purl);
+    inputArgs->saveurl.assign(saveurl);
+    inputArgs->p_min_residual = p_min_residual;
+    inputArgs->p_sparsity = p_sparsity;
+    inputArgs->p_targetname.assign(p_targetname.begin(), p_targetname.end());
+    inputArgs->p_targetno.assign(p_targetno.begin(), p_targetno.end());
+    inputArgs->p_SRClassify = p_SRClassify;
+
+    Task* task = new(std::nothrow) Task(&retrieveInterface, (void*)inputArgs);
+    if(task == NULL) {
+        delete inputArgs;
+        Log::Error("imgSearchSync ## new Task Failed !");
+        return status;
+    }
+
+    task->setTaskID(task_id);
+    if(p_threadPool->add_task(task, task_id) != 0) {
+        Log::Error("fuseAsyn ## thread Pool add Task Failed !");
+        delete inputArgs;
+        delete task;
+        return status; // Means For Add Task Failed !
+    }
+    status = 30;
     return status;
 }
 
