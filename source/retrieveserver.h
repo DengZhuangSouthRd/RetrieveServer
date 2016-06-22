@@ -33,6 +33,9 @@ public:
     ~RetrieveServer();
 
 public:
+    void init();
+
+public:
     void log_InputParameters(const DictStr2Str& mapArg);
     void log_OutputResult(const WordWiki& wiki);
     void log_OutputResult(const WordRes& wordres);

@@ -233,7 +233,7 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 			srres.erase(srres.begin() + i);
 		}
 	}
-	
+
 	int resnum = result.size(); //识别结果个数
 	//对目标进行排序(递减)
 	for(i = 0; i < resnum - 1; ++i){

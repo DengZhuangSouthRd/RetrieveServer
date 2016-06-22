@@ -18,7 +18,20 @@ RetrieveServer::RetrieveServer() {
     }
     p_SRClassify = NULL;
     p_SRClassify = new SR<float>();
-    
+
+    init();
+}
+
+RetrieveServer::~RetrieveServer() {
+    p_threadPool->revokeSingleInstance();
+    p_threadPool = NULL;
+    if(p_pgdb)
+        delete p_pgdb;
+    if(p_SRClassify)
+        delete p_SRClassify;
+}
+
+void RetrieveServer::init() {
     //读取目标信息
     string getdic = "SELECT t7.dicpath,t7.targetname,t7.targetno,t3.lu,t3.rd FROM t3targetinfo AS t3,t7dictionary AS t7 WHERE t3.targetno = t7.targetno AND t3.status_ = '1' AND t7.status_ = '1';";
     result res;
@@ -40,15 +53,14 @@ RetrieveServer::RetrieveServer() {
         p_targetname.push_back(it[1].as<string>());//目标名称
         p_targetno.push_back(it[2].as<int>());//目标序号
         vector<double> tmp;
-        string str = it[3].as<string>(); //以","分割     
+        string str = it[3].as<string>(); //以","分割
         tmp.push_back(std::stod( str.substr(0,str.find_last_of(",")).c_str() ));//左上角经度
         tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1,str.length()-str.find_last_of(",")-1).c_str() ));//左上角纬度
-        str = it[4].as<string>();        //以","分割   
+        str = it[4].as<string>();        //以","分割
         tmp.push_back(std::stod( str.substr(0,str.find_last_of(",")).c_str() ));//右下角经度
         tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1,str.length()-str.find_last_of(",")-1).c_str() ));//右下角纬度
 
         p_targetgeo.push_back(tmp);//地理信息
-
     }
 
     //加载字典
@@ -60,15 +72,6 @@ RetrieveServer::RetrieveServer() {
     }
     p_sparsity = std::atoi( g_ConfMap["RETRIEVESPARSITY"].c_str() );
     p_min_residual = std::atof( g_ConfMap["RETRIEVEMINRESIDUAL"].c_str() );
-}
-
-RetrieveServer::~RetrieveServer() {
-    p_threadPool->revokeSingleInstance();
-    p_threadPool = NULL;
-    if(p_pgdb)
-        delete p_pgdb;
-    if(p_SRClassify)
-        delete p_SRClassify;
 }
 
 void RetrieveServer::log_InputParameters(const DictStr2Str &mapArg) {
@@ -95,7 +98,6 @@ void RetrieveServer::log_OutputResult(const WordRes &wordres) {
         str = (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
         Log::Info(str);
     }
-
 }
 
 void RetrieveServer::log_OutputResult(const ImgRes &imgres) {
@@ -110,7 +112,6 @@ void RetrieveServer::log_OutputResult(const ImgRes &imgres) {
         str = (" id:" + to_string((*it).id) + " path:" + (*it).path + " name:" + (*it).name);
         Log::Info(str);
     }
-    
 }
 
 WordWiki RetrieveServer::wordGetKnowledge(const string &word, const Ice::Current &) {
@@ -130,7 +131,7 @@ WordRes RetrieveServer::wordSearch(const DictStr2Str &mapArg, const Ice::Current
     string pi = mapArg.at("pi");
     string pn = mapArg.at("pn");
     //字符串匹配
-    string getimginf = "SELECT id,targetname FROM t3targetinfo WHERE targetname = '" + word + "' AND status_ = '1' ORDER BY id LIMIT "\
+    string getimginf = "SELECT id,targetname FROM t3targetinfo WHERE targetname like '%" + word + "%' AND status_ = '1' ORDER BY id LIMIT "\
                        + pn + " OFFSET "+to_string((std::atoi(pi.c_str())-1)*std::atoi(pn.c_str()))+";";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getimginf,res);
@@ -163,7 +164,7 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
     string pi = mapArg.at("pi");
     string pn = mapArg.at("pn");
     //
-    string getimginf = "SELECT id,picname,picpath FROM t4pic WHERE targetname = '" + word + "' AND status_ = '1' ORDER BY id LIMIT "\
+    string getimginf = "SELECT id,picname,picpath FROM t4pic WHERE targetname like '%" + word + "%' AND status_ = '1' ORDER BY id LIMIT "\
                        + pn + " OFFSET "+to_string((std::atoi(pi.c_str())-1)*std::atoi(pn.c_str()))+";";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getimginf,res);
@@ -186,7 +187,7 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
     }
 
     //
-    getimginf = "SELECT id,capname,cappath FROM t5remotecap WHERE targetname = '" + word + "' AND status_ = '1' ORDER BY id LIMIT "\
+    getimginf = "SELECT id,capname,cappath FROM t5remotecap WHERE targetname like '%" + word + "%' AND status_ = '1' ORDER BY id LIMIT "\
                 + pn + " OFFSET "+to_string((std::atoi(pi.c_str())-1)*std::atoi(pn.c_str()))+";";
     flag = p_pgdb->pg_fetch_sql(getimginf,res);
     if(flag == false) {
@@ -211,28 +212,26 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
 }
 
 WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Current &) {
-    string task_id = mapArg.at("uuid");
-    
     WordRes obj;
-    obj.status = 1;
+    obj.status = -1;
+    string task_id = mapArg.at("uuid");
     log_InputParameters(mapArg);
     if(mapArg.count("purl") == 0) {
-        obj.status = -1;
         Log::Error("RetrieveServer ## imgSearchSync, Parameters Error !");
         return obj;
     }
     string purl(mapArg.at("purl")); //原图像地址
     string imgsaveurl = mapArg.at("saveurl");//裁剪后地址
-    int upleftx = std::atoi(mapArg.at("upleftx"));//裁剪x坐标
-    int uplefty = std::atoi(mapArg.at("uplefty"));//裁剪y坐标
-    int height  = std::atoi(mapArg.at("height")); //裁剪高度
-    int width   = std::atoi(mapArg.at("width"));  //裁剪宽度
+    int upleftx = std::stoi(mapArg.at("upleftx"));//裁剪x坐标
+    int uplefty = std::stoi(mapArg.at("uplefty"));//裁剪y坐标
+    int height  = std::stoi(mapArg.at("height")); //裁剪高度
+    int width   = std::stoi(mapArg.at("width"));  //裁剪宽度
     bool flag;
     time_t now;
     struct tm * timenow;
     //裁剪图像
     flag = imgcap(purl,upleftx,uplefty,height,width,imgsaveurl);
-    if(regflag == -1){
+    if(flag == -1){
         obj.status = -1;
         Log::Error("ImgCap Error !");
         return obj;        
@@ -343,12 +342,77 @@ WordRes RetrieveServer::imgSearchSync(const DictStr2Str &mapArg, const Ice::Curr
 }
 
 int RetrieveServer::imgSearchAsync(const DictStr2Str &mapArg, const Ice::Current &) {
-    int status = 2;
+    int status = -1;
+    string task_id = mapArg.at("uuid");
+    log_InputParameters(mapArg);
+    if(mapArg.count("purl") == 0) {
+        Log::Error("RetrieveServer ## imgSearchSync, Parameters Error !");
+        return status;
+    }
+
+    string purl(mapArg.at("purl"));
+    string filename = purl.substr(purl.find_last_of('/')+1, purl.find_last_of('.')-purl.find_last_of('/')-1);
+    string saveurl = g_ConfMap["RETRIEVEUSERIMGFEATUREDIR"] + filename + ".csv";
+    Log::Info("imgSearchSync Save URL ## %s", saveurl.c_str());
+
+    InputInterface* inputArgs = new(std::nothrow) InputInterface;
+    if(NULL == inputArgs) {
+        Log::Error("RetrieveServer ## imgSearchAsync New  InputInterface Failed !");
+        return status;
+    }
+
+    inputArgs->uuid.assign(task_id);
+    inputArgs->imgurl.assign(purl);
+    inputArgs->saveurl.assign(saveurl);
+    inputArgs->p_min_residual = p_min_residual;
+    inputArgs->p_sparsity = p_sparsity;
+    inputArgs->p_targetname.assign(p_targetname.begin(), p_targetname.end());
+    inputArgs->p_targetno.assign(p_targetno.begin(), p_targetno.end());
+    inputArgs->p_SRClassify = p_SRClassify;
+
+    Task* task = new(std::nothrow) Task(&retrieveInterface, (void*)inputArgs);
+    if(task == NULL) {
+        delete inputArgs;
+        Log::Error("imgSearchSync ## new Task Failed !");
+        return status;
+    }
+
+    task->setTaskID(task_id);
+    if(p_threadPool->add_task(task, task_id) != 0) {
+        Log::Error("fuseAsyn ## thread Pool add Task Failed !");
+        delete inputArgs;
+        delete task;
+        return status; // Means For Add Task Failed !
+    }
+    status = 30;
     return status;
 }
 
 WordRes RetrieveServer::fetchImgSearchResult(const DictStr2Str &mapArg, const Ice::Current &) {
     WordRes obj;
-    obj.status = 1;
+    obj.status = 0;
+    log_InputParameters(mapArg);
+    if(mapArg.count("uuid") == 0) {
+        obj.status = -1;
+        Log::Error("fetchImgSearchResult ## Input Parameter InValid !");
+        return obj;
+    }
+    string task_id = mapArg.at("uuid");
+
+    TaskPackStruct tmp;
+    int flag = p_threadPool->fetchResultByTaskID(task_id, tmp);
+    if(flag == -1) {
+        obj.status = -1;
+        Log::Error("fetchImgSearchResult ## fetch task id %s result Failed !", task_id.c_str());
+    } else if(flag == 1){
+        InputInterface* input = (InputInterface*)(tmp.input);
+        delete input;
+        deepCopyWordRes((WordRes*)tmp.output, obj);
+        WordRes* out = (WordRes*)tmp.output;
+        delete out;
+    } else if(flag == 0) {
+        obj.status = 0;
+        Log::Info("fetchImgSearchResult ## fetch task id %s Running !", task_id.c_str());
+    }
     return obj;
 }
