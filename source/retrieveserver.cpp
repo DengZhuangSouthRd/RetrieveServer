@@ -61,7 +61,12 @@ void RetrieveServer::init() {
         tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1,str.length()-str.find_last_of(",")-1).c_str() ));//右下角纬度
         p_targetgeo.push_back(tmp);//地理信息
 
-        p_targetgeomark.push_back(it[5].as<string>());
+        if(it[5].as<string>().empty()) {
+            string mark = to_string((tmp[0] + tmp[2])/2.0) + "," + to_string((tmp[1] + tmp[3])/2.0);
+            p_targetgeomark.push_back(mark);
+        } else {
+            p_targetgeomark.push_back(it[5].as<string>());
+        }
     }
 
     //加载字典
