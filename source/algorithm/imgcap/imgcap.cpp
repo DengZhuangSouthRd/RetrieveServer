@@ -46,7 +46,15 @@ bool imgcap(const string imgurl, int upleftx, int uplefty, int height, int width
     if (ReadDataSet->GetGeoTransform(adfGeoTransform) == CE_None){ 
         flag = true; //包含地理信息
 	}
-	if (upleftx + width > imgwidth || uplefty + height > imgheight)
+
+    cout << "imgwidth is " << imgwidth << ", imgheight is " << imgheight << endl;
+    width = (int)(imgwidth/ 604.0 * width);
+	height = (int)(imgheight / 403.0 * height);
+    upleftx = (int)(imgwidth / 604.0 * upleftx);
+    uplefty = (int)(imgheight / 403.0 * uplefty);
+    cout << "width is " << width << "height is " << height << "upleftx is " << upleftx << "uplefty is " << uplefty << endl;
+
+    if (upleftx + width > imgwidth || uplefty + height > imgheight)
 	{
 		cerr<<"Param Error."<<endl;
         cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;

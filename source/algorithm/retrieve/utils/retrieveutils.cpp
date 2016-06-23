@@ -27,14 +27,13 @@ void* retrieveInterface(void *args) {
         pObj->status = -1;
         Log::Error("RegByGeoInf Error !");
         return (void*)pObj;
-    }
-    else if(regflag == 1){ //图像包含地理信息
+    } else if(regflag == 1){ //图像包含地理信息
         if(gires.size() != 0){ //地理范围内存在已知目标
             for(vector<int>::iterator it = gires.begin(); it != gires.end(); it++){
                 ImgInfo imginf;
                 imginf.id = inputArgs->p_targetno[*(it)];
                 imginf.name = inputArgs->p_targetname[*(it)];
-                imginf.path = "";
+                imginf.path = inputArgs->p_targetgeomark[*(it)];
                 pObj->keyWords.push_back(imginf);
             }
             pObj->status = 2; //正常-遥感图像
@@ -57,6 +56,7 @@ void* retrieveInterface(void *args) {
         cout << "Feature Save URL ## " << featuresaveurl << endl;
         vector<vector<float>> imgFeatures;
         flag = AsiftFeature(featuresaveurl, imgsaveurl, imgFeatures);
+//        flag = AsiftFeature(featuresaveurl, purl, imgFeatures);
         if(flag == false) {
             Log::Error("Fetch RetrieveServer Result Struct Failed !");
             pObj->status = -1;
@@ -90,7 +90,7 @@ void* retrieveInterface(void *args) {
             ImgInfo imginf;
             imginf.id = inputArgs->p_targetno[*(it)];
             imginf.name = inputArgs->p_targetname[*(it)];
-            imginf.path = "";
+            imginf.path = inputArgs->p_targetgeomark[*(it)];
             pObj->keyWords.push_back(imginf);
         }
         pObj->status = 1; //正常-普通图像
