@@ -33,7 +33,7 @@ void* retrieveInterface(void *args) {
                 ImgInfo imginf;
                 imginf.id = inputArgs->p_targetno[*(it)];
                 imginf.name = inputArgs->p_targetname[*(it)];
-                imginf.path = "";
+                imginf.path = inputArgs->p_targetgeomark[*(it)];
                 pObj->keyWords.push_back(imginf);
             }
             pObj->status = 2; //正常-遥感图像
@@ -90,7 +90,7 @@ void* retrieveInterface(void *args) {
             ImgInfo imginf;
             imginf.id = inputArgs->p_targetno[*(it)];
             imginf.name = inputArgs->p_targetname[*(it)];
-            imginf.path = "";
+            imginf.path = inputArgs->p_targetgeomark[*(it)];
             pObj->keyWords.push_back(imginf);
         }
         pObj->status = 1; //正常-普通图像

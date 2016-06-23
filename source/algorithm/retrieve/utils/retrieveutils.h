@@ -22,6 +22,7 @@ typedef struct _InputInterface{
     string uuid;
     vector<string> p_targetname;
     vector<int> p_targetno;
+    vector<string> p_targetgeomark;
     vector<vector<double>>* p_targetgeo;
     int p_sparsity;
     float p_min_residual;

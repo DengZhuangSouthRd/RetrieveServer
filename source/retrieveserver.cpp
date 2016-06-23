@@ -33,7 +33,7 @@ RetrieveServer::~RetrieveServer() {
 
 void RetrieveServer::init() {
     //读取目标信息
-    string getdic = "SELECT t7.dicpath,t7.targetname,t7.targetno,t3.lu,t3.rd FROM t3targetinfo AS t3,t7dictionary AS t7 WHERE t3.targetno = t7.targetno AND t3.status_ = '1' AND t7.status_ = '1';";
+    string getdic = "SELECT t7.dicpath,t7.targetname,t7.targetno,t3.lu,t3.rd,t3.geomark FROM t3targetinfo AS t3,t7dictionary AS t7 WHERE t3.targetno = t7.targetno AND t3.status_ = '1' AND t7.status_ = '1';";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getdic,res);
     if(flag == false) {
@@ -59,8 +59,9 @@ void RetrieveServer::init() {
         str = it[4].as<string>();        //以","分割
         tmp.push_back(std::stod( str.substr(0,str.find_last_of(",")).c_str() ));//右下角经度
         tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1,str.length()-str.find_last_of(",")-1).c_str() ));//右下角纬度
-
         p_targetgeo.push_back(tmp);//地理信息
+
+        p_targetgeomark.push_back(it[5].as<string>());
     }
 
     //加载字典
@@ -136,7 +137,7 @@ WordRes RetrieveServer::wordSearch(const DictStr2Str &mapArg, const Ice::Current
     string pi = mapArg.at("pi");
     string pn = mapArg.at("pn");
     //字符串匹配
-    string getimginf = "SELECT id,targetname FROM t3targetinfo WHERE targetname like '%" + word + "%' AND status_ = '1' ORDER BY id LIMIT "\
+    string getimginf = "SELECT id,targetname,geomark FROM t3targetinfo WHERE targetname like '%" + word + "%' AND status_ = '1' ORDER BY id LIMIT "\
                        + pn + " OFFSET "+to_string((std::atoi(pi.c_str())-1)*std::atoi(pn.c_str()))+";";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getimginf,res);
@@ -154,7 +155,7 @@ WordRes RetrieveServer::wordSearch(const DictStr2Str &mapArg, const Ice::Current
         ImgInfo imginf;
         imginf.id = it[0].as<int>();
         imginf.name = it[1].as<string>();
-        imginf.path = "";
+        imginf.path = it[2].as<string>();
         obj.keyWords.push_back(imginf);
     }
     log_OutputResult(obj);        
@@ -342,4 +343,5 @@ void RetrieveServer::createTaskInterfaceParam(const DictStr2Str& mapArg, InputIn
     inputArgs->p_SRClassify = p_SRClassify;
     inputArgs->p_pgdb = p_pgdb;
     inputArgs->p_targetgeo = &p_targetgeo;
+    inputArgs->p_targetgeomark.assign(p_targetgeomark.begin(), p_targetgeomark.end());
 }
