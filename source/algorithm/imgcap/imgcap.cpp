@@ -9,7 +9,7 @@ string findImageTypeGDAL(string pDstImgFileName) {
     std::transform(dstExtension.begin(), dstExtension.end(), dstExtension.begin(), ::tolower);
     string Gtype;
     if      (0 == strcmp(dstExtension.c_str(),"bmp")) Gtype = "BMP";
-    else if (0 == strcmp(dstExtension.c_str(),"jpg")) Gtype = "JPEG";
+    else if (0 == strcmp(dstExtension.c_str(),"jpg") ||0 == strcmp(dstExtension.c_str(),"jpeg")||0 == strcmp(dstExtension.c_str(),"JPG") ||0 == strcmp(dstExtension.c_str(),"JEPG")) Gtype = "JPEG";
     else if (0 == strcmp(dstExtension.c_str(),"png")) Gtype = "PNG";
     else if (0 == strcmp(dstExtension.c_str(),"tif")) Gtype = "GTiff";
 
@@ -61,9 +61,9 @@ bool imgcap(const string imgurl, int upleftx, int uplefty, int height, int width
 		return false;
 	}
 
-    ushort imgdata[height*width*imgbandcount];
+    unsigned char imgdata[height*width*imgbandcount];
     //读数据
-	if (ReadDataSet->RasterIO(GF_Read, upleftx, uplefty, width, height, imgdata, width, height, GDT_UInt16, imgbandcount, NULL, 0, 0, 0) == CE_Failure)
+	if (ReadDataSet->RasterIO(GF_Read, upleftx, uplefty, width, height, imgdata, width, height, GDT_Byte, imgbandcount, NULL, 0, 0, 0) == CE_Failure)
 	{
 		GDALClose(ReadDataSet); ReadDataSet = NULL;
         cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
@@ -88,15 +88,15 @@ bool imgcap(const string imgurl, int upleftx, int uplefty, int height, int width
         return false; 
     }  
   
-    GDALDataset * pMemDataSet = pMemDriver->Create("",width,height,imgbandcount,GDT_UInt16,NULL);
+    GDALDataset * pMemDataSet = pMemDriver->Create("",width,height,imgbandcount,GDT_Byte,NULL);
 	if (NULL == pMemDataSet)
     {
         pMemDriver = NULL;
         cerr<<"file: "<<__FILE__<<"line: "<<__LINE__<<"time: "<<__DATE__<<" "<<__TIME__<<endl;
 		return false; 
 	}
-
-    if (pMemDataSet->RasterIO(GF_Write, 0, 0, width, height, imgdata, width, height, GDT_UInt16, imgbandcount, NULL, 0, 0, 0) == CE_Failure)
+ 
+    if (pMemDataSet->RasterIO(GF_Write, 0, 0, width, height, imgdata, width, height, GDT_Byte, imgbandcount, NULL, 0, 0, 0) == CE_Failure)
     {
 		GDALClose(pMemDataSet); pMemDataSet = NULL;
         pMemDriver = NULL;
