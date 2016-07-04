@@ -61,7 +61,13 @@ bool imgcap(const string imgurl, int upleftx, int uplefty, int height, int width
 		return false;
 	}
 
+    //待修改-------------根据图像数据类型定义数组
+    //
+    //
+    //
     unsigned char imgdata[height*width*imgbandcount];
+    //-----------------------------------------
+    
     //读数据
 	if (ReadDataSet->RasterIO(GF_Read, upleftx, uplefty, width, height, imgdata, width, height, GDT_Byte, imgbandcount, NULL, 0, 0, 0) == CE_Failure)
 	{

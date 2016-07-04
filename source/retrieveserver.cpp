@@ -142,7 +142,7 @@ WordRes RetrieveServer::wordSearch(const DictStr2Str &mapArg, const Ice::Current
     string pi = mapArg.at("pi");
     string pn = mapArg.at("pn");
     //字符串匹配
-    string getimginf = "SELECT id,targetname,geomark FROM t3targetinfo WHERE targetname like '%" + word + "%' AND status_ = '1' ORDER BY id LIMIT "\
+    string getimginf = "SELECT DISTINCT ON (targetname) id,targetname,geomark FROM t3targetinfo WHERE targetname like '%" + word + "%' AND status_ = '1' ORDER BY targetname LIMIT "\
                        + pn + " OFFSET "+to_string((std::atoi(pi.c_str())-1)*std::atoi(pn.c_str()))+";";
     result res;
     bool flag = p_pgdb->pg_fetch_sql(getimginf,res);
