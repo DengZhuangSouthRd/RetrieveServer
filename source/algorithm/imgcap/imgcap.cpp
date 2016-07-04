@@ -62,6 +62,7 @@ bool imgcap(const string imgurl, int upleftx, int uplefty, int height, int width
 	}
 
     //待修改-------------根据图像数据类型定义数组
+    //char* DataType = GDALGetDataTypeName(ReadDataSet->GetRasterBand(1)->GetRasterDataType);//获取图像数据类型
     //
     //
     //
