@@ -11,7 +11,7 @@ module RPCImgRecong {
 	struct ImgInfo {
         int id; //数据库id
         string path; //文件路径 /a/b/c/d/
-        string name; //文件名 用于WordRes时 只存储关键词
+        string name; //文件名 用于WordRes时，若为图像识别为关键词_概率，若为地理信息识别为关键词
     };
     sequence<ImgInfo> ListString;
     dictionary<string, string> DictStr2Str;
@@ -22,7 +22,7 @@ module RPCImgRecong {
         ListString imgPic;
     };
     struct WordRes {
-	    int status; //-1:错误 0:没有目标 1:正常-普通图像 2：正常-遥感图像
+	    int status; //-1:错误 0:没有目标 1:正常-普通图像(图像识别) 2：正常-遥感图像(根据地理信息识别)
         ListString keyWords;
     };
     

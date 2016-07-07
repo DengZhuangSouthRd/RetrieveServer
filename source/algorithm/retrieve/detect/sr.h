@@ -39,7 +39,7 @@ public:
 	int SRClassify(vector<DataType>& y, DataType min_residual, int sparsity);
 
 	//稀疏表示分类（多组特征）
-	bool SRClassify(vector<vector<DataType>>& y, DataType min_residual, int sparsity, vector<int> &srres, vector<float> &srprob);
+	bool SRClassify(vector<vector<DataType>>& y, DataType min_residual, int sparsity, vector<int> &srres, vector<int> &srprob);
 	//析构函数
 	~SR();
 
@@ -186,7 +186,7 @@ int SR<DataType>::SRClassify(vector<DataType>& y, DataType min_residual, int spa
 
 //稀疏表示分类（多组特征）
 template<class DataType>
-bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual, int sparsity, vector<int> &srres, vector<float> &srprob){
+bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual, int sparsity, vector<int> &srres, vector<int> &srprob){
 	/*SRClassify		稀疏表示识别
 	*y					特征
 	*min_residual		最小残差
@@ -251,8 +251,9 @@ bool SR<DataType>::SRClassify(vector<vector<DataType>>& y, DataType min_residual
 		tmp = srres[index];
 		srres[index] = srres[i];
 		srres[i] = tmp;
+		//保留两位
+		srprob[i] = 0.5+(100.0*result[i])/size;
 
-		srprob[i] = 1.0*result[i]/size;
 	}
 	
 

@@ -177,6 +177,7 @@ ImgRes RetrieveServer::wordSearchImg(const DictStr2Str &mapArg, const Ice::Curre
     }
     string task_id = mapArg.at("id");
     string word = mapArg.at("word");
+    word = word.substr(0,word.find_first_of("(")); //将目标名称中的(遥感)去除
     string pi = mapArg.at("pi");
     string pn = mapArg.at("pn");
     //
