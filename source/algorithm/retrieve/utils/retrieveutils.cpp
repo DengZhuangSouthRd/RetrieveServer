@@ -33,7 +33,7 @@ void* retrieveInterface(void *args) {
         if(gires.size() != 0){ //地理范围内存在已知目标
             for(vector<int>::iterator it = gires.begin(); it != gires.end(); it++){
                 ImgInfo imginf;
-               imginf.id = inputArgs->p_targetno[*(it)];
+                imginf.id = inputArgs->p_targetno[*(it)];
                 imginf.name = inputArgs->p_targetname[*(it)];
                 imginf.path = inputArgs->p_targetgeomark[*(it)];
                 pObj->keyWords.push_back(imginf);

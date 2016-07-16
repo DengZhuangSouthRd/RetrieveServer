@@ -55,10 +55,10 @@ void RetrieveServer::init() {
         vector<double> tmp;
         string str = it[3].as<string>(); //以","分割
         tmp.push_back(std::stod( str.substr(0,str.find_last_of(",")).c_str() ));//左上角经度
-        tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1,str.length()-str.find_last_of(",")-1).c_str() ));//左上角纬度
+        tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1) ));//左上角纬度
         str = it[4].as<string>();        //以","分割
         tmp.push_back(std::stod( str.substr(0,str.find_last_of(",")).c_str() ));//右下角经度
-        tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1,str.length()-str.find_last_of(",")-1).c_str() ));//右下角纬度
+        tmp.push_back(std::stod( str.substr(str.find_last_of(",")+1) ));//右下角纬度
         p_targetgeo.push_back(tmp);//地理信息
 
         if(it[5].as<string>().empty()) {
