@@ -1,4 +1,4 @@
-﻿#include "ImageThumb.h"
+﻿#include "imagethumb.h"
 
 #define ThumbWidth 200
 

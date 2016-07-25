@@ -15,7 +15,6 @@
 #include "ogr_spatialref.h"
 #include "gdal_pam.h"
 #include "gdalwarper.h"
-#include <io.h>
 #include <string>
 #include <sstream>
 #include <iostream>
